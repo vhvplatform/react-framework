@@ -5,3 +5,7 @@ export * from './array';
 export * from './validation';
 export * from './format';
 export * from './storage';
+export * from './url';
+export * from './number';
+export * from './color';
+export * from './file';

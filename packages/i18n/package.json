@@ -1,0 +1,26 @@
+{
+  "name": "@longvhv/i18n",
+  "version": "1.0.0",
+  "description": "Internationalization (i18n) support for SaaS Framework React",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch"
+  },
+  "keywords": [
+    "i18n",
+    "internationalization",
+    "translation",
+    "multi-language"
+  ],
+  "author": "longvhv",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "typescript": "^5.3.0"
+  }
+}

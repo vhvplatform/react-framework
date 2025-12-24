@@ -633,3 +633,362 @@ Sử dụng shared library giúp:
 - 🔧 Dễ bảo trì
 - 🎨 Consistent codebase
 - 📦 Bundle size tối ưu
+
+### useClickOutside
+
+Phát hiện click bên ngoài element:
+
+```tsx
+import { useClickOutside } from '@longvhv/shared/hooks';
+import { useRef } from 'react';
+
+function Dropdown() {
+  const ref = useRef(null);
+  const [isOpen, setIsOpen] = useState(false);
+
+  useClickOutside(ref, () => setIsOpen(false));
+
+  return (
+    <div ref={ref}>
+      <button onClick={() => setIsOpen(true)}>Open</button>
+      {isOpen && <div>Dropdown Content</div>}
+    </div>
+  );
+}
+```
+
+### useWindowSize
+
+Track kích thước cửa sổ:
+
+```tsx
+import { useWindowSize } from '@longvhv/shared/hooks';
+
+function WindowInfo() {
+  const { width, height } = useWindowSize();
+
+  return <div>Window: {width}x{height}</div>;
+}
+```
+
+### useInterval
+
+Declarative interval hook:
+
+```tsx
+import { useInterval } from '@longvhv/shared/hooks';
+
+function Clock() {
+  const [time, setTime] = useState(new Date());
+
+  useInterval(() => {
+    setTime(new Date());
+  }, 1000); // Update every second
+
+  return <div>{time.toLocaleTimeString()}</div>;
+}
+```
+
+### usePrevious
+
+Lưu giá trị trước đó:
+
+```tsx
+import { usePrevious } from '@longvhv/shared/hooks';
+
+function Counter() {
+  const [count, setCount] = useState(0);
+  const prevCount = usePrevious(count);
+
+  return (
+    <div>
+      <p>Current: {count}</p>
+      <p>Previous: {prevCount}</p>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+    </div>
+  );
+}
+```
+
+### useCopyToClipboard
+
+Copy text vào clipboard:
+
+```tsx
+import { useCopyToClipboard } from '@longvhv/shared/hooks';
+
+function CopyButton({ text }: { text: string }) {
+  const { copy, copied, error } = useCopyToClipboard();
+
+  return (
+    <button onClick={() => copy(text)}>
+      {copied ? 'Copied!' : 'Copy'}
+    </button>
+  );
+}
+```
+
+### useOnlineStatus
+
+Theo dõi trạng thái online/offline:
+
+```tsx
+import { useOnlineStatus } from '@longvhv/shared/hooks';
+
+function NetworkStatus() {
+  const isOnline = useOnlineStatus();
+
+  return (
+    <div>
+      Status: {isOnline ? '🟢 Online' : '🔴 Offline'}
+    </div>
+  );
+}
+```
+
+## 🔧 Utils Bổ sung
+
+### URL Utils
+
+Xử lý URL và query strings:
+
+```tsx
+import { 
+  buildUrl, 
+  parseQueryString, 
+  objectToQueryString,
+  getDomain,
+  isAbsoluteUrl,
+  joinUrl 
+} from '@longvhv/shared/utils';
+
+// Build URL with params
+const url = buildUrl('https://api.example.com/users', { page: 1, limit: 10 });
+// "https://api.example.com/users?page=1&limit=10"
+
+// Parse query string
+const params = parseQueryString('?page=1&limit=10');
+// { page: '1', limit: '10' }
+
+// Object to query string
+const qs = objectToQueryString({ page: 1, limit: 10 });
+// "page=1&limit=10"
+
+// Get domain
+getDomain('https://example.com/path');  // "example.com"
+
+// Check absolute URL
+isAbsoluteUrl('https://example.com');  // true
+isAbsoluteUrl('/path');                // false
+
+// Join URL paths
+joinUrl('https://api.com', 'v1', 'users');  // "https://api.com/v1/users"
+```
+
+### Number Utils
+
+Xử lý số học:
+
+```tsx
+import { 
+  clamp, 
+  randomInt, 
+  roundToDecimal, 
+  toFixed,
+  inRange,
+  toPercentage,
+  lerp,
+  isEven,
+  isOdd,
+  sum,
+  average 
+} from '@longvhv/shared/utils';
+
+// Clamp value
+clamp(150, 0, 100);           // 100
+
+// Random integer
+randomInt(1, 10);             // Random 1-10
+
+// Round to decimal
+roundToDecimal(3.14159, 2);   // 3.14
+
+// Fixed decimals (string)
+toFixed(3.14159, 2);          // "3.14"
+
+// Check range
+inRange(5, 1, 10);            // true
+
+// Percentage
+toPercentage(50, 200);        // 25
+
+// Linear interpolation
+lerp(0, 100, 0.5);           // 50
+
+// Even/Odd
+isEven(4);                    // true
+isOdd(5);                     // true
+
+// Sum/Average
+sum([1, 2, 3, 4, 5]);        // 15
+average([1, 2, 3, 4, 5]);    // 3
+```
+
+### Color Utils
+
+Xử lý màu sắc:
+
+```tsx
+import { 
+  hexToRgb, 
+  rgbToHex, 
+  isValidHexColor,
+  lightenColor,
+  darkenColor,
+  randomColor,
+  getContrastColor 
+} from '@longvhv/shared/utils';
+
+// Hex to RGB
+hexToRgb('#ff5733');          // { r: 255, g: 87, b: 51 }
+
+// RGB to Hex
+rgbToHex(255, 87, 51);        // "#ff5733"
+
+// Validate hex color
+isValidHexColor('#ff5733');   // true
+
+// Lighten color
+lightenColor('#ff5733', 20);  // Lighter shade
+
+// Darken color
+darkenColor('#ff5733', 20);   // Darker shade
+
+// Random color
+randomColor();                // "#a3c5e7"
+
+// Get contrast color (black or white)
+getContrastColor('#ff5733');  // "#ffffff"
+```
+
+### File Utils
+
+Xử lý files:
+
+```tsx
+import { 
+  downloadFile,
+  readFileAsText,
+  readFileAsDataURL,
+  getFileExtension,
+  getFileNameWithoutExtension,
+  isImageFile,
+  isVideoFile,
+  isAudioFile,
+  formatFileSize 
+} from '@longvhv/shared/utils';
+
+// Download file
+downloadFile(blob, 'report.pdf');
+downloadFile('https://example.com/file.pdf', 'file.pdf');
+
+// Read file as text
+const text = await readFileAsText(file);
+
+// Read file as data URL (for images)
+const dataUrl = await readFileAsDataURL(imageFile);
+
+// Get file extension
+getFileExtension('document.pdf');  // "pdf"
+
+// Get name without extension
+getFileNameWithoutExtension('doc.pdf');  // "doc"
+
+// Check file types
+isImageFile('photo.jpg');     // true
+isVideoFile('movie.mp4');     // true
+isAudioFile('song.mp3');      // true
+
+// Format file size
+formatFileSize(1024);         // "1 KB"
+formatFileSize(1048576);      // "1 MB"
+```
+
+## 📊 Tổng kết Tính năng
+
+### Utils (70+ functions)
+- ✅ String: 9 functions
+- ✅ Date: 8 functions
+- ✅ Object: 7 functions
+- ✅ Array: 10 functions
+- ✅ Validation: 11 functions
+- ✅ Format: 6 functions
+- ✅ Storage: 2 wrappers
+- ✅ URL: 6 functions (mới)
+- ✅ Number: 11 functions (mới)
+- ✅ Color: 7 functions (mới)
+- ✅ File: 10 functions (mới)
+
+### Hooks (12 hooks)
+- ✅ useDebounce
+- ✅ useLocalStorage
+- ✅ useMediaQuery (+ 3 variants)
+- ✅ usePagination
+- ✅ useToggle
+- ✅ useAsync
+- ✅ useClickOutside (mới)
+- ✅ useWindowSize (mới)
+- ✅ useInterval (mới)
+- ✅ usePrevious (mới)
+- ✅ useCopyToClipboard (mới)
+- ✅ useOnlineStatus (mới)
+
+### Types & Constants
+- ✅ 20+ TypeScript types
+- ✅ 10+ Configuration constants
+
+## 🎯 Best Practices
+
+### Tree-shaking Optimization
+
+Để tối ưu bundle size, import từ sub-paths:
+
+```tsx
+// ❌ Không tối ưu - import toàn bộ
+import { capitalize } from '@longvhv/shared';
+
+// ✅ Tối ưu - import từ sub-path
+import { capitalize } from '@longvhv/shared/utils';
+import { useDebounce } from '@longvhv/shared/hooks';
+```
+
+### TypeScript Integration
+
+Sử dụng types để đảm bảo type safety:
+
+```tsx
+import type { ApiResponse, PaginationMeta } from '@longvhv/shared/types';
+
+const response: ApiResponse<User[]> = await api.get('/users');
+const meta: PaginationMeta = response.meta;
+```
+
+### Performance Tips
+
+1. **Memo expensive computations** khi dùng với utils
+2. **Debounce user inputs** với useDebounce
+3. **Use proper dependencies** trong hooks
+4. **Optimize re-renders** với usePrevious
+
+## 🚀 Ready to Use
+
+Tất cả utilities và hooks đã sẵn sàng sử dụng trong toàn bộ ứng dụng SaaS của bạn!
+
+```bash
+# Build shared library
+cd packages/shared
+pnpm build
+
+# Use in your modules
+import { formatCurrency, useDebounce, hexToRgb } from '@longvhv/shared';
+```
