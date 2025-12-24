@@ -8,6 +8,7 @@ import { importApp } from './commands/import-app.js';
 import { cloneApp } from './commands/clone-app.js';
 import { listTemplates } from './commands/list-templates.js';
 import { adaptApp } from './commands/adapt-app.js';
+import { generateCode } from './commands/generate-code.js';
 
 const program = new Command();
 
@@ -97,6 +98,20 @@ program
       await adaptApp(appPath);
     } catch (error) {
       console.error(chalk.red('Error adapting app:'), error);
+      process.exit(1);
+    }
+  });
+
+// Generate code command
+program
+  .command('generate')
+  .alias('gen')
+  .description('Generate code using AI (React, Flutter, Go API)')
+  .action(async () => {
+    try {
+      await generateCode();
+    } catch (error) {
+      console.error(chalk.red('Error generating code:'), error);
       process.exit(1);
     }
   });

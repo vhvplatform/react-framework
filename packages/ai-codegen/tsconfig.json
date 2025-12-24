@@ -10,10 +10,5 @@
     "noEmit": false
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist"],
-  "references": [
-    { "path": "../templates" },
-    { "path": "../app-adapter" },
-    { "path": "../ai-codegen" }
-  ]
+  "exclude": ["node_modules", "dist"]
 }

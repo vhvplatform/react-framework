@@ -44,7 +44,8 @@
       "@longvhv/notifications": ["./packages/notifications/src"],
       "@longvhv/query": ["./packages/query/src"],
       "@longvhv/templates": ["./packages/templates/src"],
-      "@longvhv/app-adapter": ["./packages/app-adapter/src"]
+      "@longvhv/app-adapter": ["./packages/app-adapter/src"],
+      "@longvhv/ai-codegen": ["./packages/ai-codegen/src"]
     }
   },
   "references": [
@@ -66,6 +67,7 @@
     { "path": "./packages/notifications" },
     { "path": "./packages/query" },
     { "path": "./packages/templates" },
-    { "path": "./packages/app-adapter" }
+    { "path": "./packages/app-adapter" },
+    { "path": "./packages/ai-codegen" }
   ]
 }

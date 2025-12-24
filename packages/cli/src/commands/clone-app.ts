@@ -24,7 +24,7 @@ export async function cloneApp(templateName?: string, appName?: string) {
   const registry = new TemplateRegistry(templatesDir);
   await registry.initialize();
 
-  const availableTemplates = registry.listTemplates().map((t) => t.getName());
+  const availableTemplates = registry.listTemplates().map((t: any) => t.getName());
 
   if (availableTemplates.length === 0) {
     console.log(chalk.yellow('\n⚠️  No templates available.'));

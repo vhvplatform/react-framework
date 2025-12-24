@@ -49,6 +49,7 @@ A comprehensive, production-ready React + Vite framework for building multiple S
 ### 🛠️ Developer Experience
 
 - **CLI Tools** - Interactive app and module generation
+- **AI Code Generator** - Generate React, Flutter, and Go code using AI
 - **Template System** - Import apps from GitHub and create reusable templates
 - **Testing Utilities** - Vitest, Testing Library, and custom helpers
 - **ESLint + Prettier** - Consistent code formatting
@@ -72,7 +73,7 @@ A comprehensive, production-ready React + Vite framework for building multiple S
 - **Media Processing** - Image, video, Excel, and PDF utilities
 - **Vietnamese Utils** - Vietnamese text processing and validation
 
-## 📦 Packages (19 Total)
+## 📦 Packages (20 Total)
 
 ### Core Packages
 
@@ -269,6 +270,19 @@ Application analysis and adaptation:
 - Dependency resolution
 - Git repository import
 
+#### @longvhv/ai-codegen
+
+AI-powered code generation:
+
+- Generate React components and pages
+- Generate Flutter widgets and screens
+- Generate Go API endpoints
+- Full-stack code generation (React/Flutter + Go)
+- Uses OpenAI GPT-4
+- Interactive CLI with feature selection
+- Supports multiple state management patterns
+- Generates production-ready code
+
 ## 🚀 Quick Start
 
 ### Prerequisites
@@ -357,7 +371,23 @@ pnpm cli import-app https://github.com/username/repo my-template
 pnpm cli clone-app my-template my-app
 ```
 
-See [Template System Quick Start](./docs/TEMPLATE_QUICK_START.md) for more details.
+#### Option 4: Generate with AI
+
+```bash
+# Set OpenAI API key
+export OPENAI_API_KEY=sk-...
+
+# Generate code using AI
+pnpm cli generate
+
+# Follow prompts to generate:
+# - React components/pages
+# - Flutter widgets/screens
+# - Go API endpoints
+# - Full-stack applications
+```
+
+See [Template System Quick Start](./docs/TEMPLATE_QUICK_START.md) and [AI Code Generation Guide](./docs/AI_CODE_GENERATION.md) for more details.
 
 ### Create a Module
 
