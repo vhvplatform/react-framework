@@ -1,0 +1,33 @@
+{
+  "name": "@longvhv/config",
+  "version": "1.0.0",
+  "description": "Shared configuration presets for @longvhv SaaS applications",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./eslint": "./eslint.config.js",
+    "./prettier": "./prettier.config.js",
+    "./tsconfig": "./tsconfig.base.json"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist",
+    "type-check": "tsc --noEmit"
+  },
+  "keywords": [
+    "config",
+    "eslint",
+    "prettier",
+    "typescript",
+    "saas"
+  ],
+  "devDependencies": {
+    "typescript": "^5.3.0"
+  }
+}

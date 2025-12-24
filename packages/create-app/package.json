@@ -1,0 +1,46 @@
+{
+  "name": "@longvhv/create-app",
+  "version": "1.0.0",
+  "description": "Create a new SaaS application using @longvhv framework",
+  "type": "module",
+  "bin": {
+    "create-longvhv-app": "./dist/index.js"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist",
+    "type-check": "tsc --noEmit"
+  },
+  "keywords": [
+    "saas",
+    "framework",
+    "react",
+    "cli",
+    "generator"
+  ],
+  "dependencies": {
+    "commander": "^11.0.0",
+    "inquirer": "^9.2.0",
+    "fs-extra": "^11.2.0",
+    "chalk": "^5.3.0",
+    "ora": "^7.0.0",
+    "execa": "^8.0.0",
+    "validate-npm-package-name": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.0",
+    "@types/inquirer": "^9.0.0",
+    "@types/validate-npm-package-name": "^4.0.0",
+    "@types/node": "^20.10.6",
+    "typescript": "^5.3.0"
+  }
+}
