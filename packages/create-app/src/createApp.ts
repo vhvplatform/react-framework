@@ -222,7 +222,7 @@ async function createAppStructure(appPath: string, config: AppConfig) {
   if (config.registry !== 'https://registry.npmjs.org') {
     const registryWithoutProtocol = config.registry.replace(/^https?:\/\//, '');
     const npmrc = `@longvhv:registry=${config.registry}
-//${registryWithoutProtocol}/:_authToken=\${NPM_TOKEN}`;
+//${registryWithoutProtocol}/:_authToken=\${NODE_AUTH_TOKEN}`;
     await fs.writeFile(path.join(appPath, '.npmrc'), npmrc);
   }
 
@@ -397,7 +397,7 @@ This app uses [@longvhv/saas-framework-react](https://github.com/longvhv/saas-fr
 ## Documentation
 
 - [Framework Docs](https://github.com/longvhv/saas-framework-react)
-- [API Reference](https://github.com/longvhv/saas-framework-react/docs)
+- [API Reference](https://github.com/longvhv/saas-framework-react/tree/main/docs)
 `;
 
   await fs.writeFile(path.join(appPath, 'README.md'), readme);

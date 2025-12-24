@@ -7,11 +7,13 @@ The framework supports multi-repository architecture where each SaaS application
 ## Architecture
 
 ### Framework Repository
+
 - Contains all framework packages
 - Published to npm registry
 - Centralized maintenance
 
-### Application Repositories  
+### Application Repositories
+
 - Independent repositories per app
 - Consume framework via npm packages
 - Independent versioning and deployment
@@ -25,6 +27,7 @@ npx @longvhv/create-app my-saas-app
 ```
 
 This creates a new repository with:
+
 - Full project structure
 - Framework dependencies installed
 - Git initialized
@@ -78,14 +81,14 @@ pnpm release
 ```bash
 # In app repo, create .npmrc
 @longvhv:registry=https://npm.pkg.github.com
-//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
+//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}
 ```
 
 ### Custom Registry
 
 ```bash
 @longvhv:registry=https://npm.company.com
-//npm.company.com/:_authToken=${NPM_TOKEN}
+//npm.company.com/:_authToken=${NODE_AUTH_TOKEN}
 ```
 
 ## Updating Framework
@@ -109,12 +112,14 @@ npm install @longvhv/core@1.2.3 --save-exact
 ## Benefits
 
 ### For Framework
+
 - Centralized maintenance
 - Clear versioning
 - Easy distribution
 - Community contributions
 
 ### For Apps
+
 - Independent repositories
 - Choose upgrade timing
 - Isolated development
@@ -122,6 +127,7 @@ npm install @longvhv/core@1.2.3 --save-exact
 - Private per customer
 
 ### For Organizations
+
 - Better access control
 - Separate deployments
 - Independent scaling
