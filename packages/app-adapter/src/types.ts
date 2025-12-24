@@ -11,6 +11,11 @@ export interface AppAnalysisResult {
 }
 
 /**
+ * Common source directory names across different React project structures
+ */
+export const POSSIBLE_SOURCE_DIRS = ['src', 'app', 'source', 'client'] as const;
+
+/**
  * Information about a detected component
  */
 export interface ComponentInfo {

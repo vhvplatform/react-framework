@@ -1,6 +1,6 @@
 import fs from 'fs-extra';
 import path from 'path';
-import { StateManagementInfo } from './types.js';
+import { StateManagementInfo, POSSIBLE_SOURCE_DIRS } from './types.js';
 
 /**
  * Detects state management patterns in React applications
@@ -101,9 +101,7 @@ export class StateAdapter {
    */
   private async hasContextAPIUsage(appPath: string): Promise<boolean> {
     // Check in multiple possible source directories
-    const possibleSourceDirs = ['src', 'app', 'source', 'client'];
-
-    for (const sourceDir of possibleSourceDirs) {
+    for (const sourceDir of POSSIBLE_SOURCE_DIRS) {
       const srcPath = path.join(appPath, sourceDir);
 
       if (!(await fs.pathExists(srcPath))) {

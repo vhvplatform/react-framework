@@ -2,7 +2,7 @@ import fs from 'fs-extra';
 import path from 'path';
 import { parse } from '@babel/parser';
 import traverse from '@babel/traverse';
-import { RouteInfo } from './types.js';
+import { RouteInfo, POSSIBLE_SOURCE_DIRS } from './types.js';
 
 /**
  * Adapts routing patterns from various frameworks to the SaaS framework format
@@ -47,10 +47,9 @@ export class RouteAdapter {
     const routeFiles: string[] = [];
 
     // Support multiple source directory structures
-    const possibleSourceDirs = ['src', 'app', 'source', 'client'];
     const searchDirs: string[] = [appPath];
 
-    for (const sourceDir of possibleSourceDirs) {
+    for (const sourceDir of POSSIBLE_SOURCE_DIRS) {
       const sourcePath = path.join(appPath, sourceDir);
       if (await fs.pathExists(sourcePath)) {
         searchDirs.push(

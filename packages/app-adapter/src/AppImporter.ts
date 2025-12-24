@@ -4,7 +4,7 @@ import path from 'path';
 import chalk from 'chalk';
 import { AppAnalyzer } from './AppAnalyzer.js';
 import { TemplateConfig } from '@longvhv/templates';
-import { ImportAppOptions } from './types.js';
+import { ImportAppOptions, POSSIBLE_SOURCE_DIRS } from './types.js';
 
 /**
  * Imports applications from Git repositories and converts them to templates
@@ -197,10 +197,9 @@ export class AppImporter {
     await fs.ensureDir(templateDir);
 
     // Detect and copy source directory - support different structures
-    const possibleSourceDirs = ['src', 'app', 'source', 'client'];
     let sourceDirCopied = false;
 
-    for (const sourceDir of possibleSourceDirs) {
+    for (const sourceDir of POSSIBLE_SOURCE_DIRS) {
       const sourcePath = path.join(appPath, sourceDir);
       if (await fs.pathExists(sourcePath)) {
         await fs.copy(sourcePath, path.join(templateDir, 'src'));

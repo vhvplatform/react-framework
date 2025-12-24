@@ -4,7 +4,7 @@ import { ComponentExtractor } from './ComponentExtractor.js';
 import { RouteAdapter } from './RouteAdapter.js';
 import { StateAdapter } from './StateAdapter.js';
 import { DependencyResolver } from './DependencyResolver.js';
-import { AppAnalysisResult, StyleSystemInfo } from './types.js';
+import { AppAnalysisResult, StyleSystemInfo, POSSIBLE_SOURCE_DIRS } from './types.js';
 
 /**
  * Analyzes React application structure and extracts metadata
@@ -100,8 +100,7 @@ export class AppAnalyzer {
     }
 
     // Check for CSS Modules in different source directories
-    const possibleSourceDirs = ['src', 'app', 'source', 'client'];
-    for (const sourceDir of possibleSourceDirs) {
+    for (const sourceDir of POSSIBLE_SOURCE_DIRS) {
       const srcPath = path.join(appPath, sourceDir);
       if (await fs.pathExists(srcPath)) {
         const hasModuleCss = await this.hasFilesWithExtension(srcPath, '.module.css');
@@ -142,9 +141,7 @@ export class AppAnalyzer {
     const endpoints: string[] = [];
 
     // Support multiple source directory structures
-    const possibleSourceDirs = ['src', 'app', 'source', 'client'];
-
-    for (const sourceDir of possibleSourceDirs) {
+    for (const sourceDir of POSSIBLE_SOURCE_DIRS) {
       const srcPath = path.join(appPath, sourceDir);
 
       if (!(await fs.pathExists(srcPath))) {
