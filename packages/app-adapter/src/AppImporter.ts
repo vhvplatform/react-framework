@@ -73,15 +73,55 @@ export class AppImporter {
       // Copy source files to template directory
       const templateDir = path.join(targetDir, templateName);
       await fs.ensureDir(templateDir);
-      await fs.copy(path.join(tempDir, 'src'), path.join(templateDir, 'src'));
 
-      // Copy configuration files
+      // Detect and copy source directory - support different structures
+      const possibleSourceDirs = ['src', 'app', 'source', 'client'];
+      let sourceDirCopied = false;
+
+      for (const sourceDir of possibleSourceDirs) {
+        const sourcePath = path.join(tempDir, sourceDir);
+        if (await fs.pathExists(sourcePath)) {
+          await fs.copy(sourcePath, path.join(templateDir, 'src'));
+          console.log(chalk.gray(`Copied source files from /${sourceDir}`));
+          sourceDirCopied = true;
+          break;
+        }
+      }
+
+      if (!sourceDirCopied) {
+        throw new Error(
+          'Could not find source directory. Expected one of: src, app, source, client'
+        );
+      }
+
+      // Copy configuration files - support multiple build tools and frameworks
       const configFiles = [
+        // Tailwind & PostCSS
         'tailwind.config.js',
         'tailwind.config.ts',
+        'tailwind.config.cjs',
+        'tailwind.config.mjs',
         'postcss.config.js',
-        'vite.config.ts',
+        'postcss.config.cjs',
+        // TypeScript
         'tsconfig.json',
+        // Vite
+        'vite.config.ts',
+        'vite.config.js',
+        'vite.config.mjs',
+        // Webpack
+        'webpack.config.js',
+        'webpack.config.ts',
+        // Next.js
+        'next.config.js',
+        'next.config.mjs',
+        // Create React App
+        'craco.config.js',
+        // ESLint & Prettier (useful for maintaining code style)
+        '.eslintrc.js',
+        '.eslintrc.json',
+        '.prettierrc',
+        '.prettierrc.json',
       ];
 
       for (const file of configFiles) {
@@ -155,15 +195,53 @@ export class AppImporter {
     // Copy source files to template directory
     const templateDir = path.join(targetDir, templateName);
     await fs.ensureDir(templateDir);
-    await fs.copy(path.join(appPath, 'src'), path.join(templateDir, 'src'));
 
-    // Copy configuration files
+    // Detect and copy source directory - support different structures
+    const possibleSourceDirs = ['src', 'app', 'source', 'client'];
+    let sourceDirCopied = false;
+
+    for (const sourceDir of possibleSourceDirs) {
+      const sourcePath = path.join(appPath, sourceDir);
+      if (await fs.pathExists(sourcePath)) {
+        await fs.copy(sourcePath, path.join(templateDir, 'src'));
+        console.log(chalk.gray(`Copied source files from /${sourceDir}`));
+        sourceDirCopied = true;
+        break;
+      }
+    }
+
+    if (!sourceDirCopied) {
+      throw new Error('Could not find source directory. Expected one of: src, app, source, client');
+    }
+
+    // Copy configuration files - support multiple build tools and frameworks
     const configFiles = [
+      // Tailwind & PostCSS
       'tailwind.config.js',
       'tailwind.config.ts',
+      'tailwind.config.cjs',
+      'tailwind.config.mjs',
       'postcss.config.js',
-      'vite.config.ts',
+      'postcss.config.cjs',
+      // TypeScript
       'tsconfig.json',
+      // Vite
+      'vite.config.ts',
+      'vite.config.js',
+      'vite.config.mjs',
+      // Webpack
+      'webpack.config.js',
+      'webpack.config.ts',
+      // Next.js
+      'next.config.js',
+      'next.config.mjs',
+      // Create React App
+      'craco.config.js',
+      // ESLint & Prettier (useful for maintaining code style)
+      '.eslintrc.js',
+      '.eslintrc.json',
+      '.prettierrc',
+      '.prettierrc.json',
     ];
 
     for (const file of configFiles) {

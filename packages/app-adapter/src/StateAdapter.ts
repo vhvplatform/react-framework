@@ -69,11 +69,22 @@ export class StateAdapter {
    */
   private async findStoreFiles(appPath: string, _library: string): Promise<string[]> {
     const storeFiles: string[] = [];
-    const searchPaths = [
-      path.join(appPath, 'src', 'store'),
-      path.join(appPath, 'src', 'redux'),
-      path.join(appPath, 'src', 'state'),
-    ];
+
+    // Support multiple source directory structures
+    const possibleSourceDirs = ['src', 'app', 'source', 'client'];
+    const searchPaths: string[] = [];
+
+    for (const sourceDir of possibleSourceDirs) {
+      const sourcePath = path.join(appPath, sourceDir);
+      if (await fs.pathExists(sourcePath)) {
+        searchPaths.push(
+          path.join(sourcePath, 'store'),
+          path.join(sourcePath, 'redux'),
+          path.join(sourcePath, 'state'),
+          path.join(sourcePath, 'stores')
+        );
+      }
+    }
 
     for (const searchPath of searchPaths) {
       if (await fs.pathExists(searchPath)) {
@@ -89,24 +100,29 @@ export class StateAdapter {
    * Check if application uses Context API
    */
   private async hasContextAPIUsage(appPath: string): Promise<boolean> {
-    const srcPath = path.join(appPath, 'src');
+    // Check in multiple possible source directories
+    const possibleSourceDirs = ['src', 'app', 'source', 'client'];
 
-    if (!(await fs.pathExists(srcPath))) {
-      return false;
-    }
+    for (const sourceDir of possibleSourceDirs) {
+      const srcPath = path.join(appPath, sourceDir);
 
-    const files = await this.findFilesRecursive(srcPath);
+      if (!(await fs.pathExists(srcPath))) {
+        continue;
+      }
 
-    for (const file of files) {
-      if (
-        file.endsWith('.tsx') ||
-        file.endsWith('.jsx') ||
-        file.endsWith('.ts') ||
-        file.endsWith('.js')
-      ) {
-        const content = await fs.readFile(file, 'utf-8');
-        if (content.includes('createContext') || content.includes('useContext')) {
-          return true;
+      const files = await this.findFilesRecursive(srcPath);
+
+      for (const file of files) {
+        if (
+          file.endsWith('.tsx') ||
+          file.endsWith('.jsx') ||
+          file.endsWith('.ts') ||
+          file.endsWith('.js')
+        ) {
+          const content = await fs.readFile(file, 'utf-8');
+          if (content.includes('createContext') || content.includes('useContext')) {
+            return true;
+          }
         }
       }
     }

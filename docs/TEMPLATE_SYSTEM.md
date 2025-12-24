@@ -46,6 +46,19 @@ Analyzes and adapts existing applications into framework-compatible format.
 - API endpoints
 - TypeScript props definitions
 
+**Compatibility:**
+
+The app-adapter supports a wide range of React project structures:
+
+- **Build Tools**: Vite, Webpack, Next.js, Create React App (CRA)
+- **Source Directory Structures**: `src/`, `app/`, `source/`, `client/`
+- **Routing Patterns**: React Router, Next.js pages, custom routing
+- **Configuration Files**: Automatically detects and copies all relevant config files including:
+  - Tailwind configs (`.js`, `.ts`, `.cjs`, `.mjs`)
+  - Webpack, Vite, Next.js configs
+  - TypeScript, ESLint, Prettier configs
+  - PostCSS configs
+
 ### 3. @longvhv/cli (Enhanced)
 
 CLI commands for template management and app creation.

@@ -40,16 +40,34 @@ export class RouteAdapter {
       'router.jsx',
       'index.tsx',
       'index.jsx',
+      'main.tsx',
+      'main.jsx',
     ];
 
     const routeFiles: string[] = [];
 
-    const searchDirs = [
-      path.join(appPath, 'src'),
-      path.join(appPath, 'src', 'routes'),
-      path.join(appPath, 'src', 'router'),
-      appPath,
-    ];
+    // Support multiple source directory structures
+    const possibleSourceDirs = ['src', 'app', 'source', 'client'];
+    const searchDirs: string[] = [appPath];
+
+    for (const sourceDir of possibleSourceDirs) {
+      const sourcePath = path.join(appPath, sourceDir);
+      if (await fs.pathExists(sourcePath)) {
+        searchDirs.push(
+          sourcePath,
+          path.join(sourcePath, 'routes'),
+          path.join(sourcePath, 'router'),
+          path.join(sourcePath, 'pages'), // Next.js style
+          path.join(sourcePath, 'views')
+        );
+      }
+    }
+
+    // Also check for Next.js pages directory at root
+    const nextPagesDir = path.join(appPath, 'pages');
+    if (await fs.pathExists(nextPagesDir)) {
+      searchDirs.push(nextPagesDir);
+    }
 
     for (const dir of searchDirs) {
       if (await fs.pathExists(dir)) {

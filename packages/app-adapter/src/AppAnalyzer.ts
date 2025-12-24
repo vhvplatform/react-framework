@@ -28,8 +28,20 @@ export class AppAnalyzer {
   async analyzeApp(appPath: string): Promise<AppAnalysisResult> {
     console.log(`Analyzing application at ${appPath}...`);
 
+    // Detect source directory - support different structures
+    const possibleSourceDirs = ['src', 'app', 'source', 'client'];
+    let srcPath = path.join(appPath, 'src');
+
+    for (const sourceDir of possibleSourceDirs) {
+      const testPath = path.join(appPath, sourceDir);
+      if (await fs.pathExists(testPath)) {
+        srcPath = testPath;
+        console.log(`Using source directory: /${sourceDir}`);
+        break;
+      }
+    }
+
     // Extract components
-    const srcPath = path.join(appPath, 'src');
     const components = await this.componentExtractor.extractComponents(srcPath);
     console.log(`Found ${components.length} components`);
 
@@ -70,22 +82,35 @@ export class AppAnalyzer {
     const configFiles: string[] = [];
     let type: StyleSystemInfo['type'] = 'plain-css';
 
-    // Check for Tailwind
-    const tailwindConfig = path.join(appPath, 'tailwind.config.js');
-    const tailwindConfigTs = path.join(appPath, 'tailwind.config.ts');
-    if ((await fs.pathExists(tailwindConfig)) || (await fs.pathExists(tailwindConfigTs))) {
-      type = 'tailwind';
-      configFiles.push((await fs.pathExists(tailwindConfig)) ? tailwindConfig : tailwindConfigTs);
+    // Check for Tailwind - support multiple config formats
+    const tailwindConfigs = [
+      'tailwind.config.js',
+      'tailwind.config.ts',
+      'tailwind.config.cjs',
+      'tailwind.config.mjs',
+    ];
+
+    for (const config of tailwindConfigs) {
+      const configPath = path.join(appPath, config);
+      if (await fs.pathExists(configPath)) {
+        type = 'tailwind';
+        configFiles.push(configPath);
+        break;
+      }
     }
 
-    // Check for CSS Modules
-    const srcPath = path.join(appPath, 'src');
-    if (await fs.pathExists(srcPath)) {
-      const hasModuleCss = await this.hasFilesWithExtension(srcPath, '.module.css');
-      const hasModuleScss = await this.hasFilesWithExtension(srcPath, '.module.scss');
+    // Check for CSS Modules in different source directories
+    const possibleSourceDirs = ['src', 'app', 'source', 'client'];
+    for (const sourceDir of possibleSourceDirs) {
+      const srcPath = path.join(appPath, sourceDir);
+      if (await fs.pathExists(srcPath)) {
+        const hasModuleCss = await this.hasFilesWithExtension(srcPath, '.module.css');
+        const hasModuleScss = await this.hasFilesWithExtension(srcPath, '.module.scss');
 
-      if (hasModuleCss || hasModuleScss) {
-        type = type === 'tailwind' ? 'multiple' : 'css-modules';
+        if (hasModuleCss || hasModuleScss) {
+          type = type === 'tailwind' ? 'multiple' : 'css-modules';
+        }
+        break; // Only check the first existing source directory
       }
     }
 
@@ -115,29 +140,37 @@ export class AppAnalyzer {
    */
   private async detectApiEndpoints(appPath: string): Promise<string[]> {
     const endpoints: string[] = [];
-    const srcPath = path.join(appPath, 'src');
 
-    if (!(await fs.pathExists(srcPath))) {
-      return endpoints;
-    }
+    // Support multiple source directory structures
+    const possibleSourceDirs = ['src', 'app', 'source', 'client'];
 
-    // Look for API configuration files
-    const apiFiles = [
-      path.join(srcPath, 'api', 'index.ts'),
-      path.join(srcPath, 'api', 'client.ts'),
-      path.join(srcPath, 'services', 'api.ts'),
-      path.join(srcPath, 'lib', 'api.ts'),
-      path.join(srcPath, 'utils', 'api.ts'),
-    ];
+    for (const sourceDir of possibleSourceDirs) {
+      const srcPath = path.join(appPath, sourceDir);
 
-    for (const file of apiFiles) {
-      if (await fs.pathExists(file)) {
-        const content = await fs.readFile(file, 'utf-8');
+      if (!(await fs.pathExists(srcPath))) {
+        continue;
+      }
 
-        // Extract API base URLs
-        const urlMatches = content.match(/https?:\/\/[^\s'"]+/g);
-        if (urlMatches) {
-          endpoints.push(...urlMatches);
+      // Look for API configuration files
+      const apiFiles = [
+        path.join(srcPath, 'api', 'index.ts'),
+        path.join(srcPath, 'api', 'client.ts'),
+        path.join(srcPath, 'api', 'config.ts'),
+        path.join(srcPath, 'services', 'api.ts'),
+        path.join(srcPath, 'lib', 'api.ts'),
+        path.join(srcPath, 'utils', 'api.ts'),
+        path.join(srcPath, 'config', 'api.ts'),
+      ];
+
+      for (const file of apiFiles) {
+        if (await fs.pathExists(file)) {
+          const content = await fs.readFile(file, 'utf-8');
+
+          // Extract API base URLs
+          const urlMatches = content.match(/https?:\/\/[^\s'"]+/g);
+          if (urlMatches) {
+            endpoints.push(...urlMatches);
+          }
         }
       }
     }
