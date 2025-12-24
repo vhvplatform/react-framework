@@ -31,7 +31,14 @@
       "@longvhv/auth": ["./packages/auth/src"],
       "@longvhv/ui-components": ["./packages/ui-components/src"],
       "@longvhv/shared": ["./packages/shared/src"],
-      "@longvhv/cli": ["./packages/cli/src"]
+      "@longvhv/cli": ["./packages/cli/src"],
+      "@longvhv/i18n": ["./packages/i18n/src"],
+      "@longvhv/crud": ["./packages/crud/src"],
+      "@longvhv/cache": ["./packages/cache/src"],
+      "@longvhv/context": ["./packages/context/src"],
+      "@longvhv/forms": ["./packages/forms/src"],
+      "@longvhv/media": ["./packages/media/src"],
+      "@longvhv/vietnamese": ["./packages/vietnamese/src"]
     }
   },
   "references": [
@@ -39,6 +46,14 @@
     { "path": "./packages/api-client" },
     { "path": "./packages/auth" },
     { "path": "./packages/ui-components" },
-    { "path": "./packages/cli" }
+    { "path": "./packages/shared" },
+    { "path": "./packages/cli" },
+    { "path": "./packages/i18n" },
+    { "path": "./packages/crud" },
+    { "path": "./packages/cache" },
+    { "path": "./packages/context" },
+    { "path": "./packages/forms" },
+    { "path": "./packages/media" },
+    { "path": "./packages/vietnamese" }
   ]
 }

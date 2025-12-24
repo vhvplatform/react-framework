@@ -1,0 +1,1 @@
+export { CrudTable } from './CrudTable';

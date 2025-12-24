@@ -1,0 +1,28 @@
+{
+  "name": "@longvhv/forms",
+  "version": "1.0.0",
+  "description": "Comprehensive form management with validation for SaaS Framework React",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch"
+  },
+  "keywords": [
+    "forms",
+    "validation",
+    "react-forms",
+    "form-validation",
+    "form-builder"
+  ],
+  "author": "longvhv",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "@longvhv/ui-components": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "typescript": "^5.3.0"
+  }
+}

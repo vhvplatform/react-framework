@@ -1,0 +1,33 @@
+{
+  "name": "@longvhv/cache",
+  "version": "1.0.0",
+  "description": "Multi-layer caching system with Redis, Browser Cache, and RAM Cache support",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch"
+  },
+  "keywords": [
+    "cache",
+    "redis",
+    "browser-cache",
+    "ram-cache",
+    "memory-cache",
+    "localstorage",
+    "sessionstorage",
+    "indexeddb"
+  ],
+  "author": "longvhv",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": "^18.2.0"
+  },
+  "dependencies": {
+    "idb": "^7.1.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "typescript": "^5.3.0"
+  }
+}
