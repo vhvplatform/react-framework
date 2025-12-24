@@ -40,7 +40,10 @@ export async function createApp(name: string, options: CreateAppOptions) {
       name: 'template',
       message: 'Select template:',
       choices: [
-        { name: 'Integration Portal (Developer portal with API docs)', value: 'integration-portal' },
+        {
+          name: 'Integration Portal (Developer portal with API docs)',
+          value: 'integration-portal',
+        },
         { name: 'CRM Application (Customer relationship management)', value: 'crm' },
         { name: 'Admin Dashboard (Admin panel)', value: 'admin-dashboard' },
         { name: 'Blank (Minimal setup)', value: 'blank' },
@@ -195,7 +198,7 @@ async function createAppStructure(appPath: string, config: AppConfig) {
       '@longvhv/forms': config.frameworkVersion,
       '@longvhv/notifications': config.frameworkVersion,
       '@longvhv/query': config.frameworkVersion,
-      'react': '^18.2.0',
+      react: '^18.2.0',
       'react-dom': '^18.2.0',
       'react-router-dom': '^6.20.0',
     },
@@ -203,13 +206,13 @@ async function createAppStructure(appPath: string, config: AppConfig) {
       '@types/react': '^18.2.0',
       '@types/react-dom': '^18.2.0',
       '@vitejs/plugin-react': '^4.2.0',
-      'typescript': '^5.3.0',
-      'vite': '^5.0.0',
-      'vitest': '^1.0.0',
-      'eslint': '^8.0.0',
-      'tailwindcss': '^3.4.0',
-      'autoprefixer': '^10.4.0',
-      'postcss': '^8.4.0',
+      typescript: '^5.3.0',
+      vite: '^5.0.0',
+      vitest: '^1.0.0',
+      eslint: '^8.0.0',
+      tailwindcss: '^3.4.0',
+      autoprefixer: '^10.4.0',
+      postcss: '^8.4.0',
     },
   };
 
@@ -217,8 +220,9 @@ async function createAppStructure(appPath: string, config: AppConfig) {
 
   // Create .npmrc if using private registry
   if (config.registry !== 'https://registry.npmjs.org') {
+    const registryWithoutProtocol = config.registry.replace(/^https?:/, '');
     const npmrc = `@longvhv:registry=${config.registry}
-${config.registry.replace('https:', '')}/:_authToken=\${NPM_TOKEN}`;
+${registryWithoutProtocol}/:_authToken=\${NPM_TOKEN}`;
     await fs.writeFile(path.join(appPath, '.npmrc'), npmrc);
   }
 
