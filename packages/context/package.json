@@ -1,0 +1,30 @@
+{
+  "name": "@longvhv/context",
+  "version": "1.0.0",
+  "description": "Multi-tenant context management with user, site, and application information",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch"
+  },
+  "keywords": [
+    "context",
+    "multi-tenant",
+    "tenant",
+    "user",
+    "site",
+    "application",
+    "saas"
+  ],
+  "author": "longvhv",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "@longvhv/api-client": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "typescript": "^5.3.0"
+  }
+}

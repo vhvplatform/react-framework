@@ -1,0 +1,23 @@
+{
+  "name": "@longvhv/vietnamese",
+  "version": "1.0.0",
+  "description": "Vietnamese language processing utilities",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch"
+  },
+  "keywords": [
+    "vietnamese",
+    "vietnam",
+    "language",
+    "text-processing",
+    "validation"
+  ],
+  "author": "longvhv",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.3.0"
+  }
+}

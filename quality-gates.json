@@ -1,0 +1,71 @@
+{
+  "name": "SaaS Framework Quality Gate",
+  "description": "Enterprise-grade quality gate for SaaS Framework React",
+  "conditions": [
+    {
+      "metric": "coverage",
+      "operator": "LESS_THAN",
+      "value": "80",
+      "error": true,
+      "description": "Code coverage must be at least 80%"
+    },
+    {
+      "metric": "duplicated_lines_density",
+      "operator": "GREATER_THAN",
+      "value": "3",
+      "error": true,
+      "description": "Duplicated lines density must not exceed 3%"
+    },
+    {
+      "metric": "sqale_rating",
+      "operator": "GREATER_THAN",
+      "value": "1",
+      "error": true,
+      "description": "Maintainability rating must be A"
+    },
+    {
+      "metric": "reliability_rating",
+      "operator": "GREATER_THAN",
+      "value": "1",
+      "error": true,
+      "description": "Reliability rating must be A"
+    },
+    {
+      "metric": "security_rating",
+      "operator": "GREATER_THAN",
+      "value": "1",
+      "error": true,
+      "description": "Security rating must be A"
+    },
+    {
+      "metric": "code_smells",
+      "operator": "GREATER_THAN",
+      "value": "0",
+      "error": false,
+      "description": "No critical code smells allowed"
+    },
+    {
+      "metric": "security_hotspots_reviewed",
+      "operator": "LESS_THAN",
+      "value": "100",
+      "error": true,
+      "description": "All security hotspots must be reviewed"
+    }
+  ],
+  "thresholds": {
+    "coverage": {
+      "minimum": 80,
+      "target": 90,
+      "excellent": 95
+    },
+    "duplication": {
+      "maximum": 3,
+      "target": 2,
+      "excellent": 1
+    },
+    "complexity": {
+      "cognitive": 15,
+      "cyclomatic": 10
+    }
+  }
+}

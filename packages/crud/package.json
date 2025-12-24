@@ -1,0 +1,31 @@
+{
+  "name": "@longvhv/crud",
+  "version": "1.0.0",
+  "description": "CRUD utilities and hooks for SaaS Framework React",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch"
+  },
+  "keywords": [
+    "crud",
+    "create",
+    "read",
+    "update",
+    "delete",
+    "api",
+    "hooks"
+  ],
+  "author": "longvhv",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "@longvhv/api-client": "workspace:*",
+    "@longvhv/shared": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "typescript": "^5.3.0"
+  }
+}
