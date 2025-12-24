@@ -49,6 +49,8 @@ A comprehensive, production-ready React + Vite framework for building multiple S
 ### 🛠️ Developer Experience
 
 - **CLI Tools** - Interactive app and module generation
+- **AI Code Generator** - Generate React, Flutter, and Go code using AI (OpenAI, GitHub Copilot, or Gemini)
+- **Template System** - Import apps from GitHub and create reusable templates
 - **Testing Utilities** - Vitest, Testing Library, and custom helpers
 - **ESLint + Prettier** - Consistent code formatting
 - **Husky Hooks** - Pre-commit linting and validation
@@ -71,7 +73,7 @@ A comprehensive, production-ready React + Vite framework for building multiple S
 - **Media Processing** - Image, video, Excel, and PDF utilities
 - **Vietnamese Utils** - Vietnamese text processing and validation
 
-## 📦 Packages (17 Total)
+## 📦 Packages (20 Total)
 
 ### Core Packages
 
@@ -241,8 +243,45 @@ Command-line tools:
 
 - `create-app` - Generate new application
 - `create-module` - Generate module in existing app
+- `import-app` - Import GitHub repository as template
+- `clone-app` - Create app from template
+- `list-templates` - Show available templates
+- `adapt-app` - Convert standalone app to framework format
 - Interactive prompts
 - Template-based generation
+
+#### @longvhv/templates
+
+Template management system:
+
+- Template configuration storage
+- Template CRUD operations
+- Template registry and searching
+- Pre-configured integration-portal template
+
+#### @longvhv/app-adapter
+
+Application analysis and adaptation:
+
+- Component extraction and analysis
+- Route detection and conversion
+- State management detection (Redux, Zustand, Context)
+- Style system detection (Tailwind, CSS Modules, etc)
+- Dependency resolution
+- Git repository import
+
+#### @longvhv/ai-codegen
+
+AI-powered code generation with multiple provider support:
+
+- Generate React components and pages
+- Generate Flutter widgets and screens
+- Generate Go API endpoints
+- Full-stack code generation (React/Flutter + Go)
+- **Supports 3 AI providers**: OpenAI GPT-4, GitHub Copilot, Google Gemini
+- Interactive CLI with feature selection
+- Supports multiple state management patterns
+- Generates production-ready code
 
 ## 🚀 Quick Start
 
@@ -291,6 +330,8 @@ pnpm type-check
 
 ### Create Your First App
 
+#### Option 1: From Scratch
+
 ```bash
 # Generate a new application
 pnpm cli create-app my-app
@@ -304,6 +345,55 @@ pnpm install
 # Start development server
 pnpm dev
 ```
+
+#### Option 2: From Template
+
+```bash
+# List available templates
+pnpm cli list-templates
+
+# Create app from template
+pnpm cli clone-app integration-portal my-portal
+
+# Navigate and run
+cd my-portal
+pnpm install
+pnpm dev
+```
+
+#### Option 3: Import from GitHub
+
+```bash
+# Import a repository as a template
+pnpm cli import-app https://github.com/username/repo my-template
+
+# Create app from imported template
+pnpm cli clone-app my-template my-app
+```
+
+#### Option 4: Generate with AI
+
+```bash
+# Set OpenAI API key
+export OPENAI_API_KEY=sk-...
+
+# Generate new code using AI
+pnpm cli generate
+
+# Refine/upgrade existing code
+pnpm cli refine
+
+# Follow prompts to:
+# - Generate React components/pages
+# - Generate Flutter widgets/screens
+# - Generate Go API endpoints
+# - Create full-stack applications
+# - Refine and improve existing code
+# - Go API endpoints
+# - Full-stack applications
+```
+
+See [Template System Quick Start](./docs/TEMPLATE_QUICK_START.md) and [AI Code Generation Guide](./docs/AI_CODE_GENERATION.md) for more details.
 
 ### Create a Module
 

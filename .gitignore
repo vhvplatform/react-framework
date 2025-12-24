@@ -42,6 +42,7 @@ tmp
 temp
 *.tmp
 *.temp
+.tmp
 
 # OS files
 Thumbs.db
