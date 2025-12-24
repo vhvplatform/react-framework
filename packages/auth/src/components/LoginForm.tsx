@@ -52,13 +52,14 @@ export function LoginForm({
       remember,
     };
 
-    const result = await login(credentials);
-
-    // Check if login was successful
-    if ((result as { type: string }).type.endsWith('/fulfilled')) {
+    try {
+      await login(credentials);
       if (onSuccess) {
         onSuccess();
       }
+    } catch (error) {
+      // Error is handled by the auth slice
+      console.error('Login failed:', error);
     }
   };
 

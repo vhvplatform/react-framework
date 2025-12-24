@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useApi } from '@longvhv/api-client';
+import { unwrapResult } from '@reduxjs/toolkit';
 import {
   login,
   register,
@@ -33,7 +34,7 @@ export function useAuth() {
    */
   const loginUser = async (credentials: LoginCredentials) => {
     const result = await dispatch(login({ credentials, apiClient }) as never);
-    return result;
+    return unwrapResult(result as never);
   };
 
   /**
@@ -41,7 +42,7 @@ export function useAuth() {
    */
   const registerUser = async (credentials: RegisterCredentials) => {
     const result = await dispatch(register({ credentials, apiClient }) as never);
-    return result;
+    return unwrapResult(result as never);
   };
 
   /**
@@ -49,7 +50,7 @@ export function useAuth() {
    */
   const handleOAuthCallback = async (provider: string, params: OAuthCallbackParams) => {
     const result = await dispatch(oauthCallback({ provider, params, apiClient }) as never);
-    return result;
+    return unwrapResult(result as never);
   };
 
   /**
@@ -65,7 +66,7 @@ export function useAuth() {
    */
   const refreshUser = async () => {
     const result = await dispatch(fetchCurrentUser({ apiClient }) as never);
-    return result;
+    return unwrapResult(result as never);
   };
 
   /**

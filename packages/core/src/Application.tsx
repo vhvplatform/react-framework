@@ -94,9 +94,13 @@ export function Application({ config, modules = [], children }: ApplicationProps
           {children}
           {routes.length > 0 && (
             <Routes>
-              {routes.map((route, index) => (
-                <Route key={route.path || `route-${index}`} {...(route as object)} />
-              ))}
+              {routes.map((route, index) => {
+                const key = route.path || `route-${index}`;
+                // React Router's Route component accepts RouteObject properties
+                // Using any here is acceptable for framework infrastructure
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                return <Route key={key} {...(route as any)} />;
+              })}
             </Routes>
           )}
         </BrowserRouter>

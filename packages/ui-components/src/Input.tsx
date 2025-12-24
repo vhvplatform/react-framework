@@ -1,4 +1,4 @@
-import { InputHTMLAttributes, forwardRef } from 'react';
+import { useId, InputHTMLAttributes, forwardRef } from 'react';
 
 /**
  * Input props
@@ -59,7 +59,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     },
     ref
   ) => {
-    const inputId = id || `input-${Math.random().toString(36).substr(2, 9)}`;
+    const generatedId = useId();
+    const inputId = id || generatedId;
     const sizeClasses = getSizeClasses(size);
     const widthClass = fullWidth ? 'w-full' : '';
     const errorClass = error

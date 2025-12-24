@@ -1,3 +1,1 @@
-# Test
-
 # 🚀 SaaS Framework React
