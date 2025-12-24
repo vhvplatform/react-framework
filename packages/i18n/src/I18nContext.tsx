@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useCallback, useEffect, ReactNode } from 'react';
+import { createContext, useContext, useState, useCallback, useEffect, ReactNode } from 'react';
 import { I18nManager } from './I18nManager';
 import { I18nConfig, I18nContextValue, Language, TranslationDictionary } from './types';
 

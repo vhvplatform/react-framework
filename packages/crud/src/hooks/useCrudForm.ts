@@ -36,7 +36,7 @@ export function useCrudForm<T>(initialData?: T) {
 
   // Validate field
   const validateField = useCallback(
-    (field: keyof T, value: any, rules?: ValidationRule[]): string | null => {
+    (_field: keyof T, value: any, rules?: ValidationRule[]): string | null => {
       if (!rules) return null;
 
       for (const rule of rules) {

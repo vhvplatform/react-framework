@@ -38,7 +38,11 @@
       "@longvhv/context": ["./packages/context/src"],
       "@longvhv/forms": ["./packages/forms/src"],
       "@longvhv/media": ["./packages/media/src"],
-      "@longvhv/vietnamese": ["./packages/vietnamese/src"]
+      "@longvhv/vietnamese": ["./packages/vietnamese/src"],
+      "@longvhv/testing": ["./packages/testing/src"],
+      "@longvhv/theme": ["./packages/theme/src"],
+      "@longvhv/notifications": ["./packages/notifications/src"],
+      "@longvhv/query": ["./packages/query/src"]
     }
   },
   "references": [
@@ -54,6 +58,10 @@
     { "path": "./packages/context" },
     { "path": "./packages/forms" },
     { "path": "./packages/media" },
-    { "path": "./packages/vietnamese" }
+    { "path": "./packages/vietnamese" },
+    { "path": "./packages/testing" },
+    { "path": "./packages/theme" },
+    { "path": "./packages/notifications" },
+    { "path": "./packages/query" }
   ]
 }

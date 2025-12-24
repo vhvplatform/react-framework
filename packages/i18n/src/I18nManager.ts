@@ -54,7 +54,7 @@ export class I18nManager {
     if (translation === null) {
       // Try fallback language
       const fallbackTranslation = this.getTranslation(key, this.fallbackLanguage);
-      
+
       if (fallbackTranslation === null) {
         if (this.debug) {
           console.warn(`[i18n] Missing translation for key: ${key}`);
@@ -100,11 +100,14 @@ export class I18nManager {
   /**
    * Deep merge two objects
    */
-  private deepMerge(target: TranslationDictionary, source: TranslationDictionary): TranslationDictionary {
+  private deepMerge(
+    target: TranslationDictionary,
+    source: TranslationDictionary
+  ): TranslationDictionary {
     const result = { ...target };
 
     for (const key in source) {
-      if (source.hasOwnProperty(key)) {
+      if (Object.prototype.hasOwnProperty.call(source, key)) {
         if (
           typeof source[key] === 'object' &&
           !Array.isArray(source[key]) &&

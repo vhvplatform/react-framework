@@ -1,33 +1,84 @@
 # 🚀 SaaS Framework React
 
-A comprehensive React + Vite framework for building multiple SaaS applications in a monorepo architecture. Fully integrated with [@longvhv/saas-framework-go](https://github.com/longvhv/saas-framework-go) backend.
+[![CI](https://github.com/longvhv/saas-framework-react/actions/workflows/ci.yml/badge.svg)](https://github.com/longvhv/saas-framework-react/actions/workflows/ci.yml)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.3-blue.svg)](https://www.typescriptlang.org/)
+[![React](https://img.shields.io/badge/React-18.2-blue.svg)](https://reactjs.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## ✨ Features
+A comprehensive, production-ready React + Vite framework for building multiple SaaS applications in a monorepo architecture. Built with modern best practices, full TypeScript support, and enterprise-grade tooling.
 
-- 🏗️ **Modular Architecture** - Build applications with independent, reusable modules
-- 🔄 **Auto-Discovery** - Modules are automatically discovered and registered
-- 🔥 **Hot Module Replacement** - Instant reload without restart
-- 👥 **Parallel Development** - Multiple developers can work on different modules simultaneously
-- 🔐 **Authentication** - JWT and OAuth (Google, GitHub) support out of the box
-- 🌍 **Multi-Language** - Vietnamese & English with 200+ translations
-- 🏢 **Multi-Tenant** - Complete tenant, user, and site context management
-- 📋 **CRUD Operations** - Full-featured CRUD with hooks, tables, and validation
-- 💾 **Caching** - RAM, browser, and Redis-ready cache adapters
-- 📝 **Forms** - Advanced form management with validation
-- 🖼️ **Media Processing** - Image, video, Excel, and PDF processing
-- 🇻🇳 **Vietnamese Utils** - Text processing, validation, and formatting for Vietnamese
-- 🌐 **API Integration** - Seamless integration with @longvhv/saas-framework-go backend
-- 🎨 **UI Components** - Pre-built Tailwind CSS components
-- 📦 **Monorepo** - Manage multiple packages with pnpm workspaces
-- 🛠️ **CLI Tools** - Generate apps and modules with interactive commands
-- 📘 **TypeScript** - Full type safety across all packages
-- 🎯 **Redux Toolkit** - Predictable state management
-- 🛣️ **React Router v6** - Dynamic routing with protected routes
+## ✨ Key Features
 
-## 📦 Packages (13 Total)
+### 🏗️ Architecture & Development
 
-### @longvhv/core
-Core framework functionality including:
+- **Modular Architecture** - Build applications with independent, reusable modules
+- **Auto-Discovery** - Modules are automatically discovered and registered
+- **Hot Module Replacement** - Instant reload without application restart
+- **Parallel Development** - Multiple developers can work simultaneously on different modules
+- **Monorepo Structure** - Efficient package management with pnpm workspaces
+- **Full TypeScript** - End-to-end type safety across all packages
+
+### 🎨 UI & Theming
+
+- **UI Components** - Pre-built Tailwind CSS components (Button, Card, Input, Spinner)
+- **Dark/Light Mode** - Built-in theme management with system preference support
+- **Responsive Design** - Mobile-first, accessible components
+- **Toast Notifications** - Beautiful notifications with react-hot-toast
+
+### 🔐 Authentication & Security
+
+- **JWT Authentication** - Secure token-based authentication
+- **OAuth Support** - Google and GitHub OAuth integration
+- **Protected Routes** - Route guards for authenticated pages
+- **Session Persistence** - Automatic token refresh and storage
+
+### 🌐 API & Data Management
+
+- **HTTP Client** - Axios-based client with interceptors
+- **React Query** - Server state management with caching
+- **Optimistic Updates** - Instant UI updates before server response
+- **Error Handling** - Centralized error management and retry logic
+
+### 🏢 Multi-Tenancy
+
+- **Tenant Context** - Complete tenant, user, and site management
+- **Feature Flags** - Per-tenant feature enablement
+- **Usage Limits** - Quota management and tracking
+- **Role-Based Access** - Hierarchical permission system
+
+### 🛠️ Developer Experience
+
+- **CLI Tools** - Interactive app and module generation
+- **Testing Utilities** - Vitest, Testing Library, and custom helpers
+- **ESLint + Prettier** - Consistent code formatting
+- **Husky Hooks** - Pre-commit linting and validation
+- **Conventional Commits** - Enforced commit message standards
+- **Changesets** - Automated version management
+
+### 🚀 CI/CD
+
+- **GitHub Actions** - Automated testing, linting, and type checking
+- **Automated Releases** - Changeset-based versioning and publishing
+- **Code Coverage** - Codecov integration
+- **Build Artifacts** - Automatic artifact generation and storage
+
+### 📦 Additional Features
+
+- **Form Handling** - React Hook Form with Zod validation
+- **CRUD Operations** - Full-featured CRUD with hooks and tables
+- **Caching** - RAM, browser, and Redis-ready adapters
+- **Internationalization** - Multi-language support (Vietnamese, English, +4 more)
+- **Media Processing** - Image, video, Excel, and PDF utilities
+- **Vietnamese Utils** - Vietnamese text processing and validation
+
+## 📦 Packages (17 Total)
+
+### Core Packages
+
+#### @longvhv/core
+
+Core framework functionality:
+
 - Application lifecycle management
 - Module registry with dependency resolution
 - Redux store integration
@@ -35,51 +86,172 @@ Core framework functionality including:
 - Auto-discovery system
 - Hot Module Replacement support
 
-### @longvhv/api-client
-HTTP client for @longvhv/saas-framework-go backend:
+#### @longvhv/api-client
+
+HTTP client for backend integration:
+
 - Axios-based with interceptors
 - Automatic JWT token handling
 - Request/Response transformation
 - Error handling and 401 redirects
 
-### @longvhv/auth
-Authentication package with:
+#### @longvhv/auth
+
+Authentication and authorization:
+
 - Redux slice for auth state
 - JWT authentication
 - OAuth support (Google, GitHub)
-- Login form component
-- OAuth button component
+- Login/Logout components
 - Protected route component
 - useAuth hook
 
-### @longvhv/ui-components
-Tailwind CSS components:
+#### @longvhv/ui-components
+
+Tailwind CSS component library:
+
 - Button (primary, secondary, danger variants)
-- Card
+- Card (with header and footer)
 - Input (with label and error handling)
-- Spinner
+- Spinner (loading indicator)
 
-### @longvhv/shared (New!)
-Shared utilities and helpers:
-- **Utils**: 50+ functions (string, date, object, array, validation, format, storage)
-- **Hooks**: 6+ React hooks (useDebounce, useLocalStorage, usePagination, v.v.)
-- **Types**: Common TypeScript types and interfaces
-- **Constants**: App-wide constants (API config, routes, validation rules)
+### New Production-Ready Packages
 
-See [SHARED_LIBRARY.md](./SHARED_LIBRARY.md) for complete documentation.
+#### @longvhv/testing
 
-### @longvhv/cli
+Testing utilities and helpers:
+
+- Vitest setup with browser mocks
+- Testing Library custom render
+- Test data generators
+- Async helpers (waitForCondition, delay)
+- Mock utilities (localStorage, sessionStorage, API responses)
+
+#### @longvhv/theme
+
+Theme management system:
+
+- Dark/Light mode support
+- System preference detection
+- localStorage persistence
+- Customizable theme colors
+- CSS variable integration
+- React Context API
+
+#### @longvhv/notifications
+
+Toast notification system:
+
+- react-hot-toast integration
+- Success, error, warning, info types
+- Promise-based notifications
+- Loading states
+- Customizable position and duration
+
+#### @longvhv/query
+
+React Query integration:
+
+- Pre-configured QueryClient
+- Custom hooks (useFetch, useMutate)
+- Optimistic updates
+- Pagination helpers
+- Query key utilities
+- Prefetching support
+
+### Utility Packages
+
+#### @longvhv/shared
+
+50+ utility functions and hooks:
+
+- String, date, object, array utilities
+- Validation helpers
+- Format functions
+- Storage utilities
+- React hooks (useDebounce, useLocalStorage, usePagination)
+
+#### @longvhv/forms
+
+Form handling:
+
+- React Hook Form integration
+- Zod validation
+- Form field components
+- Error handling
+
+#### @longvhv/context
+
+Multi-tenant context management:
+
+- User context
+- Tenant context
+- Site context
+- Role management hooks
+- Permission checking
+
+#### @longvhv/crud
+
+CRUD operations:
+
+- useCrud hook
+- CrudTable component
+- useCrudForm hook
+- Generic CRUD patterns
+
+#### @longvhv/cache
+
+Caching system:
+
+- Memory cache adapter
+- Browser cache adapter
+- Redis-ready interface
+- TTL support
+
+#### @longvhv/i18n
+
+Internationalization:
+
+- 6 language support (Vietnamese, English, Spanish, Chinese, Japanese, Korean)
+- 200+ translations
+- Language switcher component
+- useTranslation hook
+
+#### @longvhv/media
+
+Media processing utilities:
+
+- Image optimization
+- Video processing
+- Excel file handling
+- PDF processing (placeholder)
+
+#### @longvhv/vietnamese
+
+Vietnamese-specific utilities:
+
+- Text processing (remove tones, slug generation)
+- Validation (names, phone numbers, addresses)
+- Vietnamese collation
+- Currency formatting
+
+#### @longvhv/cli
+
 Command-line tools:
-- `create-app` - Generate new application from template
+
+- `create-app` - Generate new application
 - `create-module` - Generate module in existing app
+- Interactive prompts
+- Template-based generation
 
 ## 🚀 Quick Start
 
 ### Prerequisites
 
-- Node.js >= 18
-- pnpm >= 8
-- @longvhv/saas-framework-go backend running
+```bash
+Node.js >= 18.0.0
+pnpm >= 8.0.0
+```
 
 ### Installation
 
@@ -95,14 +267,36 @@ pnpm install
 pnpm build
 ```
 
+### Development
+
+```bash
+# Start development mode (watches all packages)
+pnpm dev
+
+# Run tests
+pnpm test
+
+# Run tests with coverage
+pnpm test:coverage
+
+# Lint code
+pnpm lint
+
+# Format code
+pnpm format
+
+# Type check
+pnpm type-check
+```
+
 ### Create Your First App
 
 ```bash
-# Create a new application
-pnpm cli create-app my-saas-app
+# Generate a new application
+pnpm cli create-app my-app
 
 # Navigate to the app
-cd my-saas-app
+cd apps/my-app
 
 # Install dependencies
 pnpm install
@@ -111,693 +305,384 @@ pnpm install
 pnpm dev
 ```
 
-Your app will be available at `http://localhost:3000`
-
-## 🔄 Parallel Module Development
-
-The framework supports automatic module discovery for easier parallel development:
+### Create a Module
 
 ```bash
-# Create multiple modules - they're auto-discovered!
+# Inside your app directory
 pnpm cli create-module dashboard
-pnpm cli create-module users
-pnpm cli create-module analytics
+
+# This creates:
+# - src/modules/dashboard/
+# - src/modules/dashboard/routes.tsx
+# - src/modules/dashboard/index.ts
+# - src/modules/dashboard/DashboardPage.tsx
 ```
 
-**No need to manually import or register modules!** They're automatically discovered from `src/modules/`:
+## 📚 Usage Examples
+
+### Theme Management
 
 ```tsx
-// src/main.tsx - Auto-discovery setup
-import { loadModulesFromGlob } from '@longvhv/core';
-
-const modules = await loadModulesFromGlob(
-  import.meta.glob('./modules/*/index.ts')
-);
-
-<Application modules={modules}>
-  <App />
-</Application>
-```
-
-**Benefits:**
-- ✅ Work on multiple modules simultaneously
-- ✅ No merge conflicts in main.tsx
-- ✅ Hot reload support
-- ✅ Team collaboration friendly
-
-See [PARALLEL_DEVELOPMENT.md](./PARALLEL_DEVELOPMENT.md) for complete guide.
-
-## 📖 Usage Examples
-
-### Creating an Application
-
-```bash
-pnpm cli create-app
-```
-
-The CLI will prompt you for:
-- Application name
-- API URL (your @longvhv/saas-framework-go backend)
-- Authentication options (JWT, OAuth)
-- OAuth providers (Google, GitHub)
-
-### Creating a Module
-
-```bash
-# Navigate to your app directory
-cd my-saas-app
-
-# Create a new module
-pnpm cli create-module dashboard
-```
-
-The CLI will prompt you for:
-- Module name
-- Module ID
-- Route configuration
-- Redux state options
-
-### Using the Framework in Code
-
-#### Application Setup
-
-```tsx
-// src/main.tsx
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { Application } from '@longvhv/core';
-import { ApiProvider } from '@longvhv/api-client';
-import { authReducer } from '@longvhv/auth';
-import App from './App';
-
-const apiConfig = {
-  baseURL: 'http://localhost:8080',
-  getToken: () => localStorage.getItem('saas_auth_token'),
-  setToken: (token: string | null) => {
-    if (token) localStorage.setItem('saas_auth_token', token);
-    else localStorage.removeItem('saas_auth_token');
-  },
-  onUnauthorized: () => window.location.href = '/login',
-};
-
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <ApiProvider config={apiConfig}>
-      <Application
-        config={{
-          name: 'My SaaS App',
-          apiUrl: 'http://localhost:8080',
-          enableDevTools: true,
-        }}
-        modules={[
-          {
-            id: 'auth',
-            name: 'Authentication',
-            version: '1.0.0',
-            reducer: authReducer,
-          },
-        ]}
-      >
-        <App />
-      </Application>
-    </ApiProvider>
-  </React.StrictMode>
-);
-```
-
-#### Creating a Module
-
-```tsx
-// src/modules/dashboard/index.ts
-import { createModule } from '@longvhv/core';
-import { routes } from './routes';
-import dashboardReducer from './store/dashboardSlice';
-
-export const dashboardModule = createModule({
-  id: 'dashboard',
-  name: 'Dashboard',
-  version: '1.0.0',
-  routes,
-  reducer: dashboardReducer,
-  initialize: async () => {
-    console.log('Dashboard module initialized');
-  },
-});
-```
-
-#### Using Authentication
-
-```tsx
-// src/components/Profile.tsx
-import { useAuth } from '@longvhv/auth';
-import { Button } from '@longvhv/ui-components';
-
-export function Profile() {
-  const { user, logout, isAuthenticated } = useAuth();
-
-  if (!isAuthenticated) {
-    return <div>Please login</div>;
-  }
-
-  return (
-    <div>
-      <h1>Welcome, {user?.name}</h1>
-      <p>Email: {user?.email}</p>
-      <Button onClick={logout} variant="danger">
-        Logout
-      </Button>
-    </div>
-  );
-}
-```
-
-#### Protected Routes
-
-```tsx
-// src/App.tsx
-import { Routes, Route } from 'react-router-dom';
-import { ProtectedRoute } from '@longvhv/auth';
-import Dashboard from './pages/Dashboard';
-import Login from './pages/Login';
-
-export default function App() {
-  return (
-    <Routes>
-      <Route path="/login" element={<Login />} />
-      <Route
-        path="/dashboard"
-        element={
-          <ProtectedRoute>
-            <Dashboard />
-          </ProtectedRoute>
-        }
-      />
-    </Routes>
-  );
-}
-```
-
-#### Using OAuth
-
-```tsx
-// src/pages/Login.tsx
-import { LoginForm, OAuthButton } from '@longvhv/auth';
-import { Card } from '@longvhv/ui-components';
-
-export default function Login() {
-  return (
-    <div className="min-h-screen flex items-center justify-center">
-      <Card className="w-full max-w-md">
-        <LoginForm onSuccess={() => window.location.href = '/'} />
-        
-        <div className="mt-4">
-          <OAuthButton
-            config={{
-              provider: 'google',
-              authUrl: 'http://localhost:8080/api/auth/oauth/google',
-              clientId: 'your-google-client-id',
-              redirectUri: 'http://localhost:3000/oauth/callback',
-              scopes: ['email', 'profile'],
-            }}
-          />
-        </div>
-      </Card>
-    </div>
-  );
-}
-```
-
-#### Making API Calls
-
-```tsx
-// src/modules/users/api.ts
-import { useApi } from '@longvhv/api-client';
-
-export function useUsers() {
-  const apiClient = useApi();
-
-  const getUsers = async () => {
-    return await apiClient.get('/api/users');
-  };
-
-  const createUser = async (data: any) => {
-    return await apiClient.post('/api/users', data);
-  };
-
-  return { getUsers, createUser };
-}
-```
-
-## 🏗️ Architecture
-
-### Module System
-
-Modules are self-contained units that can include:
-- **Routes** - React Router routes
-- **State** - Redux reducers
-- **Components** - React components
-- **Services** - Business logic
-- **Dependencies** - Other modules they depend on
-
-Modules are registered with the Application component and initialized in dependency order.
-
-### State Management
-
-Redux Toolkit is used for global state management:
-- Each module can provide its own reducer
-- Reducers are automatically combined
-- TypeScript support for all state
-
-### API Integration
-
-The framework integrates seamlessly with @longvhv/saas-framework-go:
-
-**Authentication Endpoints:**
-- `POST /api/auth/login` - Login with credentials
-- `POST /api/auth/register` - Register new user
-- `POST /api/auth/logout` - Logout user
-- `GET /api/auth/me` - Get current user
-- `POST /api/auth/oauth/{provider}/callback` - OAuth callback
-
-**Response Format:**
-```json
-{
-  "success": true,
-  "data": { ... },
-  "message": "Success message"
-}
-```
-
-**Error Format:**
-```json
-{
-  "success": false,
-  "message": "Error message",
-  "code": "ERROR_CODE"
-}
-```
-
-## 🎨 UI Components
-
-All components use Tailwind CSS and support theming:
-
-```tsx
-import { Button, Card, Input, Spinner } from '@longvhv/ui-components';
-
-// Button variants
-<Button variant="primary">Primary</Button>
-<Button variant="secondary">Secondary</Button>
-<Button variant="danger">Danger</Button>
-
-// Card with title
-<Card title="My Card" hoverable>
-  Content goes here
-</Card>
-
-// Input with label and error
-<Input
-  label="Email"
-  type="email"
-  error="Invalid email"
-  fullWidth
-/>
-
-// Loading spinner
-<Spinner size="lg" color="primary" text="Loading..." />
-```
-
-## 🔧 Development
-
-### Project Structure
-
-```
-.
-├── packages/
-│   ├── core/              # Core framework
-│   ├── api-client/        # API client
-│   ├── auth/              # Authentication
-│   ├── ui-components/     # UI components
-│   └── cli/               # CLI tools
-├── package.json           # Root workspace config
-├── pnpm-workspace.yaml    # Workspace definition
-└── tsconfig.json          # TypeScript config
-```
-
-### Scripts
-
-```bash
-# Build all packages
-pnpm build
-
-# Watch mode for development
-pnpm dev
-
-# Type checking
-pnpm type-check
-
-# Linting
-pnpm lint
-
-# Format code
-pnpm format
-
-# Clean all build artifacts
-pnpm clean
-```
-
-### Adding a New Package
-
-1. Create package directory in `packages/`
-2. Add `package.json` and `tsconfig.json`
-3. Update root `tsconfig.json` references
-4. Build the package
-
-## 🔐 Security
-
-- JWT tokens stored in localStorage with automatic injection
-- CSRF protection for OAuth flows
-- Automatic 401 redirect
-- Token refresh support
-- Input validation and sanitization
-
-## 📄 License
-
-MIT License - see LICENSE file for details
-
-## 🤝 Contributing
-
-Contributions are welcome! Please read the contributing guidelines first.
-
-## 🐛 Issues
-
-Found a bug? Please open an issue on GitHub.
-
-## 📞 Support
-
-For support, email support@longvhv.com or join our Slack channel.
-
-## 🙏 Acknowledgments
-
-Built with:
-- React 18
-- TypeScript 5
-- Vite 5
-- Redux Toolkit 2
-- React Router v6
-- Tailwind CSS 3
-- Axios
-
-Integrated with [@longvhv/saas-framework-go](https://github.com/longvhv/saas-framework-go) backend framework.
-
-### @longvhv/i18n
-Internationalization support:
-- Vietnamese & English translations
-- 200+ pre-defined translations
-- React Context-based
-- LocalStorage persistence
-- Variable interpolation
-- Components: LanguageSwitcher
-- Hooks: useI18n, useTranslation
-- Utils: formatDate, formatCurrency
-
-### @longvhv/crud
-Complete CRUD operations:
-- useCrud hook with fetchAll, create, update, delete
-- useCrudForm with validation
-- useTable hooks (selection, sorting, filtering)
-- CrudTable component
-- Built-in validators
-- Auto-fetch, pagination support
-
-### @longvhv/cache
-Multi-layer caching system:
-- MemoryCacheAdapter (RAM cache with TTL)
-- BrowserCacheAdapter (localStorage/sessionStorage)
-- Redis support ready
-- Batch operations
-- Statistics tracking
-
-### @longvhv/context
-Multi-tenant context management:
-- CurrentUser with permissions
-- Tenant management with plans & limits
-- Site/location management
-- Application context
-- Hooks: useCurrentUser, useCurrentTenant, usePermissions
-- Features: switchTenant, hasPermission, hasRole
-
-### @longvhv/forms
-Advanced form management:
-- Complete form state management
-- Field-level and form-level validation
-- Built-in validators (required, email, pattern)
-- Dirty and touched state tracking
-- TypeScript support
-
-### @longvhv/media
-Media file processing:
-- **Image**: resize, crop, rotate, compress, thumbnail, format conversion
-- **Video**: metadata, thumbnail extraction, validation
-- **Excel**: read/write, export, CSV conversion, multi-sheet
-- **PDF**: page count, text extraction (ready for integration)
-
-### @longvhv/vietnamese
-Vietnamese language utilities:
-- **Text**: removeVietnameseTones, vietnameseToSlug, sort, highlight
-- **Validation**: phone, ID card, tax code, postal code, name, bank account
-- **Formatting**: phone, currency, date (Vietnamese locale)
-
-## 🌟 New Features Highlights
-
-### Multi-Language (i18n)
-```tsx
-import { I18nProvider, useTranslation, LanguageSwitcher } from '@longvhv/i18n';
+import { ThemeProvider, useTheme } from '@longvhv/theme';
 
 function App() {
   return (
-    <I18nProvider config={{ defaultLanguage: 'vi' }}>
-      <MyApp />
-    </I18nProvider>
+    <ThemeProvider defaultMode="system">
+      <YourApp />
+    </ThemeProvider>
+  );
+}
+
+function ThemeToggle() {
+  const { isDark, toggleMode } = useTheme();
+  return <button onClick={toggleMode}>{isDark ? '🌙 Dark' : '☀️ Light'}</button>;
+}
+```
+
+### Notifications
+
+```tsx
+import { NotificationProvider, useNotifications } from '@longvhv/notifications';
+
+function App() {
+  return (
+    <>
+      <NotificationProvider />
+      <YourApp />
+    </>
   );
 }
 
 function MyComponent() {
-  const { t } = useTranslation();
-  return (
-    <>
-      <h1>{t('common.welcome')}</h1>
-      <LanguageSwitcher />
-    </>
-  );
+  const notifications = useNotifications();
+
+  const handleSave = async () => {
+    await notifications.promise(api.save(data), {
+      loading: 'Saving...',
+      success: 'Saved successfully!',
+      error: 'Failed to save',
+    });
+  };
+
+  return <button onClick={handleSave}>Save</button>;
 }
 ```
 
-### Multi-Tenant Context
+### React Query
+
 ```tsx
-import { AppContextProvider, useCurrentUser, useCurrentTenant } from '@longvhv/context';
+import { QueryProvider, useFetch, useMutate } from '@longvhv/query';
 
 function App() {
   return (
-    <AppContextProvider config={{
-      application: { name: 'My SaaS', version: '1.0.0' },
-      endpoints: { user: '/api/me', tenant: '/api/tenant' }
-    }}>
-      <Dashboard />
-    </AppContextProvider>
+    <QueryProvider>
+      <YourApp />
+    </QueryProvider>
   );
 }
 
-function Dashboard() {
-  const user = useCurrentUser();
-  const tenant = useCurrentTenant();
-  
-  return <div>Welcome {user?.name} from {tenant?.name}!</div>;
-}
-```
+function UserList() {
+  const { data, isLoading } = useFetch('users', () => api.get('/users'));
 
-### CRUD Operations
-```tsx
-import { useCrud, CrudTable } from '@longvhv/crud';
-
-function Users() {
-  const crud = useCrud({ 
-    resource: 'users', 
-    autoFetch: true 
-  });
+  if (isLoading) return <div>Loading...</div>;
 
   return (
-    <CrudTable
-      data={crud.items}
-      loading={crud.loading}
-      config={{
-        columns: [
-          { key: 'name', label: 'Name' },
-          { key: 'email', label: 'Email' },
-        ],
-        actions: { edit: true, delete: true },
-      }}
-      onEdit={(user) => crud.setItem(user)}
-      onDelete={(user) => crud.remove(user.id)}
-    />
+    <ul>
+      {data.map((user) => (
+        <li key={user.id}>{user.name}</li>
+      ))}
+    </ul>
   );
 }
 ```
 
-### Vietnamese Utilities
-```tsx
-import { 
-  vietnameseToSlug, 
-  isValidVietnamesePhone,
-  formatVietnameseCurrency 
-} from '@longvhv/vietnamese';
+### Authentication
 
-vietnameseToSlug('Xin chào Việt Nam'); // "xin-chao-viet-nam"
-isValidVietnamesePhone('0987654321'); // true
-formatVietnameseCurrency(1000000); // "1.000.000₫"
+```tsx
+import { useAuth } from '@longvhv/auth';
+
+function Profile() {
+  const { user, isAuthenticated, logout } = useAuth();
+
+  if (!isAuthenticated) {
+    return <LoginForm />;
+  }
+
+  return (
+    <div>
+      <h1>Welcome, {user.name}</h1>
+      <button onClick={logout}>Logout</button>
+    </div>
+  );
+}
 ```
 
-### Media Processing
-```tsx
-import { resizeImage, extractVideoThumbnail, readExcelFile } from '@longvhv/media';
+## 🏗️ Architecture Overview
 
-// Image
-const resized = await resizeImage(file, { width: 800, quality: 0.9 });
+### Monorepo Structure
 
-// Video
-const thumbnail = await extractVideoThumbnail(videoFile, 5);
-
-// Excel
-const workbook = await readExcelFile(excelFile);
-const data = workbook.sheets[0].json;
+```
+saas-framework-react/
+├── packages/           # All framework packages
+│   ├── core/          # Core framework
+│   ├── api-client/    # HTTP client
+│   ├── auth/          # Authentication
+│   ├── ui-components/ # UI library
+│   ├── testing/       # Test utilities
+│   ├── theme/         # Theme system
+│   ├── notifications/ # Notifications
+│   ├── query/         # React Query
+│   ├── forms/         # Form handling
+│   ├── shared/        # Utilities
+│   ├── context/       # Multi-tenant context
+│   ├── crud/          # CRUD operations
+│   ├── cache/         # Caching
+│   ├── i18n/          # Internationalization
+│   ├── media/         # Media processing
+│   ├── vietnamese/    # Vietnamese utils
+│   └── cli/           # CLI tools
+├── .github/
+│   └── workflows/     # CI/CD workflows
+│       ├── ci.yml     # Test, lint, build
+│       └── release.yml # Automated releases
+├── .husky/            # Git hooks
+├── .changeset/        # Version management
+├── tests/             # Shared test utilities
+└── examples/          # Example applications
 ```
 
-## 📚 Documentation
+### Module System
 
-- [PARALLEL_DEVELOPMENT.md](./PARALLEL_DEVELOPMENT.md) - Guide for parallel module development
-- [SHARED_LIBRARY.md](./SHARED_LIBRARY.md) - Complete shared utilities reference
-- [EXAMPLE.md](./EXAMPLE.md) - Full application example
-- [CONTRIBUTING.md](./CONTRIBUTING.md) - Contribution guidelines
+The framework uses a module-based architecture where each module:
 
-## 🏗️ Architecture
-
-The framework uses a modular architecture where each module:
-- Has its own routes, components, and Redux reducers
+- Is self-contained with its own routes, components, and logic
+- Automatically registers itself with the core framework
 - Can depend on other modules
-- Supports lazy loading
-- Integrates automatically via auto-discovery
+- Supports hot module replacement
+- Can be developed independently
 
-## 🔐 Authentication Flow
+## 🧪 Testing
 
-1. User logs in with email/password or OAuth
-2. JWT token is stored in localStorage
-3. API client automatically injects token in requests
-4. 401 responses trigger automatic logout
-5. Protected routes check authentication state
+### Run Tests
 
-## 📊 State Management
+```bash
+# Run all tests
+pnpm test
 
-- **Redux Toolkit** for global state
-- **Automatic reducer registration** from modules
-- **TypeScript support** for state types
-- **Module-specific slices** for isolation
+# Run tests in watch mode
+pnpm test:watch
 
-## 🛠️ Development Tools
+# Run tests with UI
+pnpm test:ui
 
-### Auto-Discovery System
-```tsx
-import { loadModulesFromGlob } from '@longvhv/core';
-
-const modules = await loadModulesFromGlob(
-  import.meta.glob('./modules/*/index.ts')
-);
+# Generate coverage report
+pnpm test:coverage
 ```
 
-### Development Utilities
-```tsx
-import { validateModule, logModuleInfo, setupModuleDev } from '@longvhv/core';
+### Writing Tests
 
-// Validate module
-const validation = validateModule(myModule);
+```typescript
+import { render, screen, waitFor } from '@longvhv/testing';
+import { MyComponent } from './MyComponent';
 
-// Debug info
-logModuleInfo(myModule);
+describe('MyComponent', () => {
+  it('renders correctly', () => {
+    render(<MyComponent />);
+    expect(screen.getByText('Hello')).toBeInTheDocument();
+  });
 
-// Test in isolation
-const { module, cleanup } = setupModuleDev({
-  module: dashboardModule,
-  mockDependencies: { auth: {...} }
+  it('handles async operations', async () => {
+    render(<MyComponent />);
+    await waitFor(() => {
+      expect(screen.getByText('Loaded')).toBeInTheDocument();
+    });
+  });
 });
 ```
 
-## 🌐 Backend Integration
+## 🔧 Configuration
 
-Fully compatible with [@longvhv/saas-framework-go](https://github.com/longvhv/saas-framework-go):
+### TypeScript
 
-**API Endpoints:**
-- POST `/api/auth/login` - JWT login
-- POST `/api/auth/register` - Register user
-- POST `/api/auth/oauth/{provider}/callback` - OAuth callback
-- GET `/api/auth/me` - Get current user
-- POST `/api/tenant/switch` - Switch tenant
-- POST `/api/site/switch` - Switch site
+All packages use a shared TypeScript configuration with:
 
-**Response Format:**
-```json
-{
-  "success": true,
-  "data": { ... },
-  "message": "Success"
-}
+- Strict mode enabled
+- ES2020 target
+- React JSX transform
+- Path mapping for workspace packages
+
+### ESLint
+
+Configured with:
+
+- TypeScript support
+- React and React Hooks rules
+- Prettier integration
+- Custom rules for unused variables
+
+### Prettier
+
+Consistent formatting with:
+
+- 2 space indentation
+- Single quotes
+- Trailing commas
+- Semi-colons
+
+## 📝 Contributing
+
+We use conventional commits and changesets for version management.
+
+### Commit Message Format
+
+```
+type(scope): subject
+
+body
+
+footer
 ```
 
-## 🎯 Use Cases
+Types: `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`, `chore`, `revert`
 
-Perfect for building:
-- Multi-tenant SaaS applications
-- Admin dashboards
-- CRM systems
-- E-commerce platforms
-- Content management systems
-- Internal tools
-- Vietnamese-focused applications
+### Creating a Changeset
 
-## 📈 Package Statistics
+```bash
+# After making changes
+pnpm changeset
 
-| Package | Purpose | Size | Dependencies |
-|---------|---------|------|--------------|
-| core | Framework core | Medium | React, Redux, Router |
-| api-client | API communication | Small | Axios |
-| auth | Authentication | Small | Redux Toolkit |
-| ui-components | UI library | Small | Tailwind CSS |
-| shared | Utilities | Medium | None |
-| cli | Code generation | Small | Inquirer |
-| i18n | Internationalization | Small | React |
-| crud | CRUD operations | Medium | api-client, shared |
-| cache | Caching | Small | None |
-| context | Multi-tenant | Small | api-client |
-| forms | Form management | Medium | ui-components |
-| media | Media processing | Large | xlsx, pdfjs-dist |
-| vietnamese | Vietnamese utils | Small | None |
+# Follow the prompts to describe your changes
+# Commit the generated changeset file
+```
 
-## 🤝 Contributing
+### Pre-commit Hooks
 
-See [CONTRIBUTING.md](./CONTRIBUTING.md) for development guidelines.
+The following runs automatically before each commit:
+
+- ESLint fixes
+- Prettier formatting
+- Commit message validation
+
+## 🚢 Deployment & Publishing
+
+### CI/CD Pipeline
+
+The framework includes automated GitHub Actions workflows:
+
+**CI Workflow** (runs on push/PR):
+
+- Linting
+- Type checking
+- Building all packages
+- Running tests
+- Coverage reporting
+
+**Release Workflow** (runs on main branch):
+
+- Creates version PR with changesets
+- Publishes packages to npm
+- Generates changelogs
+
+### Manual Publishing
+
+```bash
+# Create a changeset
+pnpm changeset
+
+# Version packages
+pnpm changeset:version
+
+# Publish to npm
+pnpm changeset:publish
+```
+
+## 📖 Documentation
+
+Each package includes comprehensive README documentation:
+
+- Installation instructions
+- API reference
+- Usage examples
+- Type definitions
+
+See individual package READMEs for detailed documentation.
+
+## 🛡️ Security
+
+- JWT token management with automatic refresh
+- Secure storage (httpOnly cookies recommended)
+- CSRF protection ready
+- OAuth integration
+- Role-based access control
+- Input validation with Zod
+
+## ⚡ Performance
+
+- Tree-shakeable packages
+- Code splitting support
+- Lazy loading
+- React Query caching
+- Optimistic UI updates
+- Memoization utilities
+
+## 🐛 Troubleshooting
+
+### Build Issues
+
+```bash
+# Clean all builds
+pnpm clean
+
+# Reinstall dependencies
+rm -rf node_modules pnpm-lock.yaml
+pnpm install
+
+# Rebuild packages
+pnpm build
+```
+
+### Type Errors
+
+```bash
+# Run type check
+pnpm type-check
+
+# Check specific package
+cd packages/your-package
+pnpm type-check
+```
+
+### Test Failures
+
+```bash
+# Run tests in watch mode
+pnpm test:watch
+
+# Run specific test file
+pnpm test path/to/test.test.ts
+```
 
 ## 📄 License
 
-MIT
+MIT © longvhv
 
-## 🙏 Acknowledgments
+## 🤝 Support
 
-Built with:
-- React 18.2
-- TypeScript 5.3
-- Vite 5.0
-- Redux Toolkit 2.0
-- React Router v6
-- Tailwind CSS 3.4
-- pnpm workspaces
+- 📧 Email: support@example.com
+- 🐛 Issues: [GitHub Issues](https://github.com/longvhv/saas-framework-react/issues)
+- 💬 Discussions: [GitHub Discussions](https://github.com/longvhv/saas-framework-react/discussions)
+
+## 🎯 Roadmap
+
+- [ ] Storybook integration
+- [ ] E2E testing with Playwright
+- [ ] SSR support with Vite SSR
+- [ ] Mobile app with React Native
+- [ ] GraphQL support
+- [ ] WebSocket integration
+- [ ] Analytics integration
+- [ ] Performance monitoring
 
 ---
 
-**Ready to build amazing SaaS applications! 🚀**
+Built with ❤️ by longvhv

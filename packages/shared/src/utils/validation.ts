@@ -47,10 +47,6 @@ export function maxLength(value: string, max: number): boolean {
   return value.length <= max;
 }
 
-export function inRange(value: number, min: number, max: number): boolean {
-  return value >= min && value <= max;
-}
-
 export function getPasswordStrength(password: string): {
   score: number;
   level: 'weak' | 'medium' | 'strong' | 'very-strong';

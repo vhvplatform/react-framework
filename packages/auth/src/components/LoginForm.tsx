@@ -166,7 +166,7 @@ export function LoginForm({
       {showRegisterLink && (
         <div style={{ marginTop: '20px', textAlign: 'center' }}>
           <a href={registerUrl} style={{ color: '#007bff', textDecoration: 'none' }}>
-            Don't have an account? Register
+            Don&apos;t have an account? Register
           </a>
         </div>
       )}

@@ -1,0 +1,28 @@
+{
+  "name": "@longvhv/theme",
+  "version": "1.0.0",
+  "description": "Theme management with dark/light mode support",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "type-check": "tsc --noEmit"
+  },
+  "keywords": [
+    "theme",
+    "dark-mode",
+    "light-mode",
+    "theming",
+    "react"
+  ],
+  "author": "longvhv",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "typescript": "^5.3.0"
+  }
+}

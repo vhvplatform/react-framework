@@ -10,7 +10,7 @@ import { configureStore } from '@reduxjs/toolkit';
 export function createMockStore(initialState = {}) {
   return configureStore({
     reducer: {
-      auth: (state = { user: null, isAuthenticated: false }, action) => state,
+      auth: (state = { user: null, isAuthenticated: false }, _action) => state,
       // Add other reducers as needed
     },
     preloadedState: initialState,
@@ -20,19 +20,21 @@ export function createMockStore(initialState = {}) {
 /**
  * Create a wrapper component with all providers
  */
-export function createWrapper(options: {
-  store?: ReturnType<typeof createMockStore>;
-  router?: boolean;
-} = {}) {
+export function createWrapper(
+  options: {
+    store?: ReturnType<typeof createMockStore>;
+    router?: boolean;
+  } = {}
+) {
   const { store = createMockStore(), router = true } = options;
 
   return function Wrapper({ children }: { children: ReactNode }) {
     const wrapped = <Provider store={store}>{children}</Provider>;
-    
+
     if (router) {
       return <BrowserRouter>{wrapped}</BrowserRouter>;
     }
-    
+
     return wrapped;
   };
 }
@@ -48,7 +50,7 @@ export function renderWithProviders(
   } = {}
 ) {
   const { store, router, ...renderOptions } = options;
-  
+
   return render(ui, {
     wrapper: createWrapper({ store, router }),
     ...renderOptions,
@@ -64,7 +66,7 @@ export function waitFor(
 ): Promise<void> {
   return new Promise((resolve, reject) => {
     const startTime = Date.now();
-    
+
     const check = () => {
       if (condition()) {
         resolve();
@@ -74,7 +76,7 @@ export function waitFor(
         setTimeout(check, interval);
       }
     };
-    
+
     check();
   });
 }

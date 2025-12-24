@@ -1,5 +1,4 @@
-import React from 'react';
-import { TableColumn, CrudTableConfig } from '../types';
+import { CrudTableConfig } from '../types';
 import { Button } from '@longvhv/ui-components';
 
 interface CrudTableProps<T> {
@@ -139,24 +138,24 @@ export function CrudTable<T extends { id?: any }>({
                 <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                   <div className="flex gap-2 justify-end">
                     {actions.view && (
-                      <Button size="small" variant="secondary" onClick={() => onView?.(item)}>
+                      <Button size="sm" variant="secondary" onClick={() => onView?.(item)}>
                         View
                       </Button>
                     )}
                     {actions.edit && (
-                      <Button size="small" variant="primary" onClick={() => onEdit?.(item)}>
+                      <Button size="sm" variant="primary" onClick={() => onEdit?.(item)}>
                         Edit
                       </Button>
                     )}
                     {actions.delete && (
-                      <Button size="small" variant="danger" onClick={() => onDelete?.(item)}>
+                      <Button size="sm" variant="danger" onClick={() => onDelete?.(item)}>
                         Delete
                       </Button>
                     )}
                     {actions.custom?.map((action, idx) => (
                       <Button
                         key={idx}
-                        size="small"
+                        size="sm"
                         variant="secondary"
                         onClick={() => action.onClick(item)}
                       >

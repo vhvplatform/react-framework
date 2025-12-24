@@ -208,28 +208,24 @@ export function formatVietnameseDate(
   date: Date,
   format: 'short' | 'long' | 'full' = 'short'
 ): string {
-  const options: Intl.DateTimeFormatOptions = {
+  const formatOptions: Record<string, Intl.DateTimeFormatOptions> = {
     short: { day: '2-digit', month: '2-digit', year: 'numeric' },
     long: { day: 'numeric', month: 'long', year: 'numeric' },
     full: { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' },
-  }[format];
+  };
   
-  return new Intl.DateTimeFormat('vi-VN', options).format(date);
+  return new Intl.DateTimeFormat('vi-VN', formatOptions[format]).format(date);
 }
 
 /**
  * Vietnamese number to words (for amounts)
  */
-export function vietnameseNumberToWords(num: number): string {
-  if (num === 0) return 'không';
-  
-  const ones = ['', 'một', 'hai', 'ba', 'bốn', 'năm', 'sáu', 'bảy', 'tám', 'chín'];
-  const teens = ['mười', 'mười một', 'mười hai', 'mười ba', 'mười bốn', 'mười lăm', 'mười sáu', 'mười bảy', 'mười tám', 'mười chín'];
-  const tens = ['', '', 'hai mươi', 'ba mươi', 'bốn mươi', 'năm mươi', 'sáu mươi', 'bảy mươi', 'tám mươi', 'chín mươi'];
-  const thousands = ['', 'nghìn', 'triệu', 'tỷ'];
-  
-  // Simple implementation for numbers up to 999,999,999
-  // This can be extended for larger numbers
+export function vietnameseNumberToWords(_num: number): string {
+  // Simple implementation - can be extended for larger numbers
+  // const ones = ['', 'một', 'hai', 'ba', 'bốn', 'năm', 'sáu', 'bảy', 'tám', 'chín'];
+  // const teens = ['mười', 'mười một', 'mười hai', 'mười ba', 'mười bốn', 'mười lăm', 'mười sáu', 'mười bảy', 'mười tám', 'mười chín'];
+  // const tens = ['', '', 'hai mươi', 'ba mươi', 'bốn mươi', 'năm mươi', 'sáu mươi', 'bảy mươi', 'tám mươi', 'chín mươi'];
+  // const thousands = ['', 'nghìn', 'triệu', 'tỷ'];
   
   return 'Coming soon';
 }

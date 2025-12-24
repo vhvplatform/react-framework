@@ -19,7 +19,7 @@ export interface PDFMetadata {
 /**
  * Get PDF page count (placeholder - requires pdfjs-dist in actual implementation)
  */
-export async function getPDFPageCount(file: File): Promise<number> {
+export async function getPDFPageCount(_file: File): Promise<number> {
   // This would use pdfjs-dist in actual implementation
   return 1;
 }
@@ -27,7 +27,7 @@ export async function getPDFPageCount(file: File): Promise<number> {
 /**
  * Extract text from PDF
  */
-export async function extractPDFText(file: File): Promise<string> {
+export async function extractPDFText(_file: File): Promise<string> {
   // Placeholder - would use pdfjs-dist
   return '';
 }

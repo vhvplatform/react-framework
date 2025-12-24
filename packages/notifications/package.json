@@ -1,0 +1,29 @@
+{
+  "name": "@longvhv/notifications",
+  "version": "1.0.0",
+  "description": "Toast notification system with react-hot-toast",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "type-check": "tsc --noEmit"
+  },
+  "keywords": [
+    "notifications",
+    "toast",
+    "react-hot-toast",
+    "alerts",
+    "messages"
+  ],
+  "author": "longvhv",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-hot-toast": "^2.4.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "typescript": "^5.3.0"
+  }
+}
