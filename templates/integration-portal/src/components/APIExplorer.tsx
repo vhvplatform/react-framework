@@ -19,7 +19,7 @@ export function APIExplorer() {
           <textarea
             className="w-full px-3 py-2 border rounded-md font-mono text-sm"
             rows={8}
-            placeholder='{&#10;  "key": "value"&#10;}'
+            placeholder={'{\n  "key": "value"\n}'}
           />
         </div>
         <button className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
