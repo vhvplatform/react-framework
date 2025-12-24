@@ -1,0 +1,43 @@
+{
+  "name": "@longvhv/saas-framework-react",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A comprehensive React + Vite framework for building multiple SaaS applications",
+  "scripts": {
+    "build": "pnpm -r build",
+    "dev": "pnpm -r --parallel dev",
+    "clean": "pnpm -r clean && rm -rf node_modules",
+    "lint": "eslint . --ext .ts,.tsx",
+    "format": "prettier --write \"**/*.{ts,tsx,json,md}\"",
+    "type-check": "pnpm -r type-check",
+    "cli": "node packages/cli/dist/index.js"
+  },
+  "keywords": [
+    "saas",
+    "framework",
+    "react",
+    "vite",
+    "typescript",
+    "redux",
+    "monorepo"
+  ],
+  "author": "longvhv",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.10.6",
+    "@types/react": "^18.2.46",
+    "@types/react-dom": "^18.2.18",
+    "@typescript-eslint/eslint-plugin": "^6.17.0",
+    "@typescript-eslint/parser": "^6.17.0",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "prettier": "^3.1.1",
+    "typescript": "^5.3.3"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+    "composite": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "forceConsistentCasingInFileNames": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+
+    /* Path mapping */
+    "baseUrl": ".",
+    "paths": {
+      "@longvhv/core": ["./packages/core/src"],
+      "@longvhv/api-client": ["./packages/api-client/src"],
+      "@longvhv/auth": ["./packages/auth/src"],
+      "@longvhv/ui-components": ["./packages/ui-components/src"],
+      "@longvhv/cli": ["./packages/cli/src"]
+    }
+  },
+  "references": [
+    { "path": "./packages/core" },
+    { "path": "./packages/api-client" },
+    { "path": "./packages/auth" },
+    { "path": "./packages/ui-components" },
+    { "path": "./packages/cli" }
+  ]
+}
