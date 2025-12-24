@@ -8,13 +8,18 @@
     "dev": "pnpm -r --parallel dev",
     "clean": "pnpm -r clean && rm -rf node_modules",
     "lint": "eslint . --ext .ts,.tsx",
+    "lint:sonar": "eslint . --config .eslintrc.sonar.json --ext .ts,.tsx",
+    "lint:sonar:fix": "eslint . --config .eslintrc.sonar.json --ext .ts,.tsx --fix",
     "format": "prettier --write \"**/*.{ts,tsx,json,md}\"",
     "type-check": "pnpm -r type-check",
     "cli": "node packages/cli/dist/index.js",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:ui": "vitest --ui",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "quality:check": "bash scripts/quality-check.sh",
+    "sonar:scan": "sonar-scanner",
+    "sonar:preview": "sonar-scanner -Dsonar.analysis.mode=preview"
   },
   "keywords": [
     "saas",
@@ -42,8 +47,10 @@
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-sonarjs": "^0.23.0",
     "happy-dom": "^12.10.3",
     "prettier": "^3.1.1",
+    "sonarqube-scanner": "^3.3.0",
     "typescript": "^5.3.3",
     "vitest": "^1.1.0"
   },

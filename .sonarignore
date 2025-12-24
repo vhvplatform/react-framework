@@ -1,0 +1,66 @@
+# SonarQube Ignore File
+# Files and directories to exclude from SonarQube analysis
+
+# Dependencies
+**/node_modules/**
+**/pnpm-lock.yaml
+**/package-lock.json
+**/yarn.lock
+
+# Build outputs
+**/dist/**
+**/build/**
+**/out/**
+**/.next/**
+**/.nuxt/**
+
+# Coverage reports
+**/coverage/**
+**/.nyc_output/**
+
+# Type definitions
+**/*.d.ts
+
+# Configuration files
+**/*.config.js
+**/*.config.ts
+**/vite.config.ts
+**/tailwind.config.js
+**/postcss.config.js
+
+# Test files (analyzed separately)
+**/*.test.ts
+**/*.test.tsx
+**/*.spec.ts
+**/*.spec.tsx
+**/tests/setup.ts
+**/tests/utils/**
+
+# Generated files
+**/generated/**
+**/__generated__/**
+
+# IDE
+**/.vscode/**
+**/.idea/**
+**/*.swp
+**/*.swo
+**/*~
+
+# Logs
+**/logs/**
+**/*.log
+
+# Environment files
+**/.env
+**/.env.*
+
+# Examples (optional - uncomment if you want to exclude)
+# examples/**
+
+# Documentation (optional - uncomment if you want to exclude)
+# docs/**
+# **/*.md
+
+# Scripts
+scripts/**
