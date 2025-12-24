@@ -30,6 +30,7 @@
       "@longvhv/api-client": ["./packages/api-client/src"],
       "@longvhv/auth": ["./packages/auth/src"],
       "@longvhv/ui-components": ["./packages/ui-components/src"],
+      "@longvhv/shared": ["./packages/shared/src"],
       "@longvhv/cli": ["./packages/cli/src"]
     }
   },

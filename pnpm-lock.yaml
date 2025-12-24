@@ -136,6 +136,19 @@ importers:
         specifier: ^5.3.3
         version: 5.9.3
 
+  packages/shared:
+    dependencies:
+      react:
+        specifier: ^18.2.0
+        version: 18.3.1
+    devDependencies:
+      '@types/react':
+        specifier: ^18.2.46
+        version: 18.3.27
+      typescript:
+        specifier: ^5.3.3
+        version: 5.9.3
+
   packages/ui-components:
     dependencies:
       react:

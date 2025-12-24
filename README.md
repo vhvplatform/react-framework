@@ -26,6 +26,8 @@ Core framework functionality including:
 - Module registry with dependency resolution
 - Redux store integration
 - React Router integration
+- Auto-discovery system
+- Hot Module Replacement support
 
 ### @longvhv/api-client
 HTTP client for @longvhv/saas-framework-go backend:
@@ -50,6 +52,15 @@ Tailwind CSS components:
 - Card
 - Input (with label and error handling)
 - Spinner
+
+### @longvhv/shared (New!)
+Shared utilities and helpers:
+- **Utils**: 50+ functions (string, date, object, array, validation, format, storage)
+- **Hooks**: 6+ React hooks (useDebounce, useLocalStorage, usePagination, v.v.)
+- **Types**: Common TypeScript types and interfaces
+- **Constants**: App-wide constants (API config, routes, validation rules)
+
+See [SHARED_LIBRARY.md](./SHARED_LIBRARY.md) for complete documentation.
 
 ### @longvhv/cli
 Command-line tools:
