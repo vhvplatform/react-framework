@@ -208,10 +208,10 @@ export default {
 
     await fs.writeFile(path.join(appPath, 'index.html'), indexHtml);
 
-    // Create src/main.tsx
+    // Create src/main.tsx with auto-discovery
     const mainTsx = `import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { Application } from '@longvhv/core';
+import { Application, loadModulesFromGlob } from '@longvhv/core';
 import { ApiProvider } from '@longvhv/api-client';
 ${enableAuth ? "import { authReducer } from '@longvhv/auth';" : ''}
 import App from './App';
@@ -233,33 +233,46 @@ const apiConfig = {
   },
 };
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <ApiProvider config={apiConfig}>
-      <Application
-        config={{
-          name: '${appName}',
-          apiUrl: '${apiUrl}',
-          enableDevTools: true,
-        }}
-        modules={[
-          ${
-            enableAuth
-              ? `{
-            id: 'auth',
-            name: 'Authentication',
-            version: '1.0.0',
-            reducer: authReducer,
-          },`
-              : ''
-          }
-        ]}
-      >
-        <App />
-      </Application>
-    </ApiProvider>
-  </React.StrictMode>
-);
+// Auto-discover and load modules from src/modules directory
+// This enables hot reloading and easier parallel module development
+const loadModules = async () => {
+  const discoveredModules = await loadModulesFromGlob(
+    import.meta.glob('./modules/*/index.ts')
+  );
+
+  return [
+    ${
+      enableAuth
+        ? `{
+      id: 'auth',
+      name: 'Authentication',
+      version: '1.0.0',
+      reducer: authReducer,
+    },`
+        : ''
+    }
+    ...discoveredModules,
+  ];
+};
+
+loadModules().then((modules) => {
+  ReactDOM.createRoot(document.getElementById('root')!).render(
+    <React.StrictMode>
+      <ApiProvider config={apiConfig}>
+        <Application
+          config={{
+            name: '${appName}',
+            apiUrl: '${apiUrl}',
+            enableDevTools: true,
+          }}
+          modules={modules}
+        >
+          <App />
+        </Application>
+      </ApiProvider>
+    </React.StrictMode>
+  );
+});
 `;
 
     await fs.writeFile(path.join(appPath, 'src', 'main.tsx'), mainTsx);

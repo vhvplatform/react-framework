@@ -91,11 +91,13 @@ export async function createModule(name?: string) {
     // Create components directory
     await fs.mkdir(path.join(modulePath, 'components'), { recursive: true });
 
-    // Create module index file
+    // Create module index file with auto-discovery support
     const indexTs = `import { createModule } from '@longvhv/core';
 ${hasRoutes ? "import { routes } from './routes';" : ''}
 ${hasState ? `import ${stateName}Reducer from './store/${stateName}Slice';` : ''}
 
+// Export the module for auto-discovery
+// The export name must end with 'Module' for auto-discovery to work
 export const ${moduleId.replace(/-/g, '')}Module = createModule({
   id: '${moduleId}',
   name: '${moduleName}',
@@ -106,6 +108,16 @@ export const ${moduleId.replace(/-/g, '')}Module = createModule({
     console.log('${moduleName} module initialized');
   },
 });
+
+// For development: Enable hot module replacement
+if (import.meta.hot) {
+  import.meta.hot.accept(() => {
+    console.log('Hot reloading ${moduleName} module');
+  });
+}
+
+// Default export for convenience
+export default ${moduleId.replace(/-/g, '')}Module;
 `;
 
     await fs.writeFile(path.join(modulePath, 'index.ts'), indexTs);
@@ -205,16 +217,23 @@ export const selectCount = (state: { ${stateName}: ${componentName}State }) => s
       console.log(chalk.white(`  State: ${stateName}`));
     }
 
-    console.log(chalk.cyan('\n📝 Next steps:\n'));
-    console.log(
-      chalk.white(`  1. Import the module in src/main.tsx:`)
-    );
-    console.log(
-      chalk.gray(`     import { ${moduleId.replace(/-/g, '')}Module } from './modules/${moduleId}';`)
-    );
-    console.log(chalk.white(`  2. Add it to the modules array in Application component:`));
+    console.log(chalk.cyan('\n📝 Registration options:\n'));
+    console.log(chalk.white('  Option 1: Auto-discovery (Recommended for development)'));
+    console.log(chalk.gray('     Update src/main.tsx to use auto-discovery:'));
+    console.log(chalk.gray('     '));
+    console.log(chalk.gray('     import { loadModulesFromGlob } from \'@longvhv/core\';'));
+    console.log(chalk.gray('     '));
+    console.log(chalk.gray('     const modules = await loadModulesFromGlob('));
+    console.log(chalk.gray('       import.meta.glob(\'./modules/*/index.ts\')'));
+    console.log(chalk.gray('     );'));
+    console.log(chalk.gray('     '));
+    console.log(chalk.gray('     <Application modules={modules}>'));
+    console.log();
+    console.log(chalk.white('  Option 2: Manual import'));
+    console.log(chalk.gray(`     import { ${moduleId.replace(/-/g, '')}Module } from './modules/${moduleId}';`));
     console.log(chalk.gray(`     modules={[..., ${moduleId.replace(/-/g, '')}Module]}`));
     console.log();
+    console.log(chalk.cyan('💡 Tip: Auto-discovery supports hot reloading for better development experience!\n'));
   } catch (error) {
     spinner.fail(chalk.red('Failed to create module'));
     throw error;

@@ -5,6 +5,9 @@ A comprehensive React + Vite framework for building multiple SaaS applications i
 ## ✨ Features
 
 - 🏗️ **Modular Architecture** - Build applications with independent, reusable modules
+- 🔄 **Auto-Discovery** - Modules are automatically discovered and registered
+- 🔥 **Hot Module Replacement** - Instant reload without restart
+- 👥 **Parallel Development** - Multiple developers can work on different modules simultaneously
 - 🔐 **Authentication** - JWT and OAuth (Google, GitHub) support out of the box
 - 🌐 **API Integration** - Seamless integration with @longvhv/saas-framework-go backend
 - 🎨 **UI Components** - Pre-built Tailwind CSS components
@@ -92,6 +95,40 @@ pnpm dev
 ```
 
 Your app will be available at `http://localhost:3000`
+
+## 🔄 Parallel Module Development
+
+The framework supports automatic module discovery for easier parallel development:
+
+```bash
+# Create multiple modules - they're auto-discovered!
+pnpm cli create-module dashboard
+pnpm cli create-module users
+pnpm cli create-module analytics
+```
+
+**No need to manually import or register modules!** They're automatically discovered from `src/modules/`:
+
+```tsx
+// src/main.tsx - Auto-discovery setup
+import { loadModulesFromGlob } from '@longvhv/core';
+
+const modules = await loadModulesFromGlob(
+  import.meta.glob('./modules/*/index.ts')
+);
+
+<Application modules={modules}>
+  <App />
+</Application>
+```
+
+**Benefits:**
+- ✅ Work on multiple modules simultaneously
+- ✅ No merge conflicts in main.tsx
+- ✅ Hot reload support
+- ✅ Team collaboration friendly
+
+See [PARALLEL_DEVELOPMENT.md](./PARALLEL_DEVELOPMENT.md) for complete guide.
 
 ## 📖 Usage Examples
 
