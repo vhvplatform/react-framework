@@ -36,13 +36,21 @@ source ~/.bashrc
 
 ## Usage
 
-### Basic Command
+### Basic Commands
 
 ```bash
+# Generate new code
 pnpm cli generate
 # or
 pnpm cli gen
+
+# Refine/upgrade existing code
+pnpm cli refine
 ```
+
+The generate command creates new code from scratch, while the refine command improves existing code.
+
+### Code Generation
 
 This launches an interactive CLI that guides you through the generation process.
 
@@ -240,6 +248,231 @@ func SetupRoutes(router *gin.Engine) {
     }
 }
 ```
+
+## Code Refinement
+
+The `refine` command allows you to improve, upgrade, or modify existing AI-generated code.
+
+### Refinement Modes
+
+#### 1. Single Refinement
+
+Apply one specific modification to your code:
+
+```bash
+pnpm cli refine
+```
+
+Select:
+
+- File: `src/components/UserCard.tsx`
+- Mode: `Single refinement`
+- Type: `Refactor`
+- Instructions: `Extract the user avatar logic into a separate component`
+
+The AI will:
+
+- Analyze your current code
+- Apply the requested changes
+- Show you what changed
+- Ask for confirmation before applying
+
+#### 2. Multiple Refinements
+
+Apply several improvements in sequence:
+
+```bash
+pnpm cli refine
+```
+
+Select:
+
+- File: `src/pages/Dashboard.tsx`
+- Mode: `Multiple refinements`
+- Add refinements:
+  1. Type: `Improve types` - Instructions: `Add proper TypeScript interfaces for all props`
+  2. Type: `Optimize` - Instructions: `Use React.memo to prevent unnecessary re-renders`
+  3. Type: `Add comments` - Instructions: `Add JSDoc comments to all functions`
+
+Each refinement builds on the previous one, resulting in cumulative improvements.
+
+#### 3. Upgrade Mode
+
+Modernize code to use latest patterns:
+
+```bash
+pnpm cli refine
+```
+
+Select:
+
+- File: `src/legacy/UserList.tsx`
+- Mode: `Upgrade to modern patterns`
+- Target version: `React 18` (optional)
+
+The AI will:
+
+- Convert class components to functional components
+- Update to latest hooks patterns
+- Apply modern TypeScript features
+- Use current best practices
+
+### Modification Types
+
+- **Refactor**: Improve code structure and readability
+- **Optimize**: Enhance performance
+- **Add Feature**: Add new functionality
+- **Fix Bug**: Identify and fix issues
+- **Improve Types**: Better TypeScript types
+- **Add Tests**: Generate test cases
+- **Update Styling**: Modify visual design
+- **Add Comments**: Documentation and comments
+
+### Examples
+
+#### Example 1: Refactor Component
+
+```bash
+pnpm cli refine
+```
+
+Input file (`Button.tsx`):
+
+```tsx
+export function Button(props: any) {
+  return <button onClick={props.onClick}>{props.children}</button>;
+}
+```
+
+Instructions: "Split into multiple smaller components and add proper types"
+
+Output:
+
+```tsx
+interface ButtonProps {
+  onClick: () => void;
+  children: React.ReactNode;
+  variant?: 'primary' | 'secondary';
+  disabled?: boolean;
+}
+
+export function Button({ onClick, children, variant = 'primary', disabled }: ButtonProps) {
+  return (
+    <button onClick={onClick} disabled={disabled} className={`btn btn-${variant}`}>
+      <ButtonContent>{children}</ButtonContent>
+    </button>
+  );
+}
+```
+
+#### Example 2: Add Feature
+
+```bash
+pnpm cli refine
+```
+
+Instructions: "Add loading state and error handling to the API call"
+
+Before:
+
+```tsx
+const fetchUsers = async () => {
+  const response = await fetch('/api/users');
+  const data = await response.json();
+  setUsers(data);
+};
+```
+
+After:
+
+```tsx
+const [loading, setLoading] = useState(false);
+const [error, setError] = useState<string | null>(null);
+
+const fetchUsers = async () => {
+  setLoading(true);
+  setError(null);
+
+  try {
+    const response = await fetch('/api/users');
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    setUsers(data);
+  } catch (err) {
+    setError(err instanceof Error ? err.message : 'An error occurred');
+  } finally {
+    setLoading(false);
+  }
+};
+```
+
+#### Example 3: Upgrade Flutter Code
+
+```bash
+pnpm cli refine
+```
+
+Mode: `Upgrade to modern patterns`
+Target: `Flutter 3`
+
+Before:
+
+```dart
+class UserList extends StatefulWidget {
+  @override
+  _UserListState createState() => _UserListState();
+}
+
+class _UserListState extends State<UserList> {
+  List users;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      itemCount: users.length,
+      itemBuilder: (context, index) => Text(users[index]),
+    );
+  }
+}
+```
+
+After:
+
+```dart
+class UserList extends StatelessWidget {
+  const UserList({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final users = context.watch<UserProvider>().users;
+
+    return ListView.builder(
+      itemCount: users.length,
+      itemBuilder: (context, index) => UserListItem(user: users[index]),
+    );
+  }
+}
+```
+
+### Safety Features
+
+- **Backup Creation**: Automatically backs up original file before changes
+- **Preview Changes**: Shows what will change before applying
+- **Separate File Option**: Can save to new file instead of overwriting
+- **Change Summary**: Lists all modifications made
+
+### Best Practices for Refinement
+
+1. **Start Small**: Make one change at a time for better control
+2. **Review Changes**: Always review the diff before applying
+3. **Keep Backups**: Enable backup creation for important files
+4. **Be Specific**: Provide clear, detailed instructions
+5. **Iterative Approach**: Refine multiple times if needed
+6. **Test After**: Run tests after applying refinements
 
 ## Configuration Options
 

@@ -9,6 +9,7 @@ import { cloneApp } from './commands/clone-app.js';
 import { listTemplates } from './commands/list-templates.js';
 import { adaptApp } from './commands/adapt-app.js';
 import { generateCode } from './commands/generate-code.js';
+import { refineCode } from './commands/refine-code.js';
 
 const program = new Command();
 
@@ -112,6 +113,19 @@ program
       await generateCode();
     } catch (error) {
       console.error(chalk.red('Error generating code:'), error);
+      process.exit(1);
+    }
+  });
+
+// Refine code command
+program
+  .command('refine')
+  .description('Refine/upgrade AI-generated code')
+  .action(async () => {
+    try {
+      await refineCode();
+    } catch (error) {
+      console.error(chalk.red('Error refining code:'), error);
       process.exit(1);
     }
   });

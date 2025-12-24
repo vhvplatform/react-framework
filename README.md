@@ -377,12 +377,18 @@ pnpm cli clone-app my-template my-app
 # Set OpenAI API key
 export OPENAI_API_KEY=sk-...
 
-# Generate code using AI
+# Generate new code using AI
 pnpm cli generate
 
-# Follow prompts to generate:
-# - React components/pages
-# - Flutter widgets/screens
+# Refine/upgrade existing code
+pnpm cli refine
+
+# Follow prompts to:
+# - Generate React components/pages
+# - Generate Flutter widgets/screens
+# - Generate Go API endpoints
+# - Create full-stack applications
+# - Refine and improve existing code
 # - Go API endpoints
 # - Full-stack applications
 ```
