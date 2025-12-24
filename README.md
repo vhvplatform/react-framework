@@ -9,16 +9,22 @@ A comprehensive React + Vite framework for building multiple SaaS applications i
 - 🔥 **Hot Module Replacement** - Instant reload without restart
 - 👥 **Parallel Development** - Multiple developers can work on different modules simultaneously
 - 🔐 **Authentication** - JWT and OAuth (Google, GitHub) support out of the box
+- 🌍 **Multi-Language** - Vietnamese & English with 200+ translations
+- 🏢 **Multi-Tenant** - Complete tenant, user, and site context management
+- 📋 **CRUD Operations** - Full-featured CRUD with hooks, tables, and validation
+- 💾 **Caching** - RAM, browser, and Redis-ready cache adapters
+- 📝 **Forms** - Advanced form management with validation
+- 🖼️ **Media Processing** - Image, video, Excel, and PDF processing
+- 🇻🇳 **Vietnamese Utils** - Text processing, validation, and formatting for Vietnamese
 - 🌐 **API Integration** - Seamless integration with @longvhv/saas-framework-go backend
 - 🎨 **UI Components** - Pre-built Tailwind CSS components
 - 📦 **Monorepo** - Manage multiple packages with pnpm workspaces
 - 🛠️ **CLI Tools** - Generate apps and modules with interactive commands
-- 🔥 **Hot Module Replacement** - Fast development with Vite
 - 📘 **TypeScript** - Full type safety across all packages
 - 🎯 **Redux Toolkit** - Predictable state management
 - 🛣️ **React Router v6** - Dynamic routing with protected routes
 
-## 📦 Packages
+## 📦 Packages (13 Total)
 
 ### @longvhv/core
 Core framework functionality including:
@@ -502,3 +508,296 @@ Built with:
 - Axios
 
 Integrated with [@longvhv/saas-framework-go](https://github.com/longvhv/saas-framework-go) backend framework.
+
+### @longvhv/i18n
+Internationalization support:
+- Vietnamese & English translations
+- 200+ pre-defined translations
+- React Context-based
+- LocalStorage persistence
+- Variable interpolation
+- Components: LanguageSwitcher
+- Hooks: useI18n, useTranslation
+- Utils: formatDate, formatCurrency
+
+### @longvhv/crud
+Complete CRUD operations:
+- useCrud hook with fetchAll, create, update, delete
+- useCrudForm with validation
+- useTable hooks (selection, sorting, filtering)
+- CrudTable component
+- Built-in validators
+- Auto-fetch, pagination support
+
+### @longvhv/cache
+Multi-layer caching system:
+- MemoryCacheAdapter (RAM cache with TTL)
+- BrowserCacheAdapter (localStorage/sessionStorage)
+- Redis support ready
+- Batch operations
+- Statistics tracking
+
+### @longvhv/context
+Multi-tenant context management:
+- CurrentUser with permissions
+- Tenant management with plans & limits
+- Site/location management
+- Application context
+- Hooks: useCurrentUser, useCurrentTenant, usePermissions
+- Features: switchTenant, hasPermission, hasRole
+
+### @longvhv/forms
+Advanced form management:
+- Complete form state management
+- Field-level and form-level validation
+- Built-in validators (required, email, pattern)
+- Dirty and touched state tracking
+- TypeScript support
+
+### @longvhv/media
+Media file processing:
+- **Image**: resize, crop, rotate, compress, thumbnail, format conversion
+- **Video**: metadata, thumbnail extraction, validation
+- **Excel**: read/write, export, CSV conversion, multi-sheet
+- **PDF**: page count, text extraction (ready for integration)
+
+### @longvhv/vietnamese
+Vietnamese language utilities:
+- **Text**: removeVietnameseTones, vietnameseToSlug, sort, highlight
+- **Validation**: phone, ID card, tax code, postal code, name, bank account
+- **Formatting**: phone, currency, date (Vietnamese locale)
+
+## 🌟 New Features Highlights
+
+### Multi-Language (i18n)
+```tsx
+import { I18nProvider, useTranslation, LanguageSwitcher } from '@longvhv/i18n';
+
+function App() {
+  return (
+    <I18nProvider config={{ defaultLanguage: 'vi' }}>
+      <MyApp />
+    </I18nProvider>
+  );
+}
+
+function MyComponent() {
+  const { t } = useTranslation();
+  return (
+    <>
+      <h1>{t('common.welcome')}</h1>
+      <LanguageSwitcher />
+    </>
+  );
+}
+```
+
+### Multi-Tenant Context
+```tsx
+import { AppContextProvider, useCurrentUser, useCurrentTenant } from '@longvhv/context';
+
+function App() {
+  return (
+    <AppContextProvider config={{
+      application: { name: 'My SaaS', version: '1.0.0' },
+      endpoints: { user: '/api/me', tenant: '/api/tenant' }
+    }}>
+      <Dashboard />
+    </AppContextProvider>
+  );
+}
+
+function Dashboard() {
+  const user = useCurrentUser();
+  const tenant = useCurrentTenant();
+  
+  return <div>Welcome {user?.name} from {tenant?.name}!</div>;
+}
+```
+
+### CRUD Operations
+```tsx
+import { useCrud, CrudTable } from '@longvhv/crud';
+
+function Users() {
+  const crud = useCrud({ 
+    resource: 'users', 
+    autoFetch: true 
+  });
+
+  return (
+    <CrudTable
+      data={crud.items}
+      loading={crud.loading}
+      config={{
+        columns: [
+          { key: 'name', label: 'Name' },
+          { key: 'email', label: 'Email' },
+        ],
+        actions: { edit: true, delete: true },
+      }}
+      onEdit={(user) => crud.setItem(user)}
+      onDelete={(user) => crud.remove(user.id)}
+    />
+  );
+}
+```
+
+### Vietnamese Utilities
+```tsx
+import { 
+  vietnameseToSlug, 
+  isValidVietnamesePhone,
+  formatVietnameseCurrency 
+} from '@longvhv/vietnamese';
+
+vietnameseToSlug('Xin chào Việt Nam'); // "xin-chao-viet-nam"
+isValidVietnamesePhone('0987654321'); // true
+formatVietnameseCurrency(1000000); // "1.000.000₫"
+```
+
+### Media Processing
+```tsx
+import { resizeImage, extractVideoThumbnail, readExcelFile } from '@longvhv/media';
+
+// Image
+const resized = await resizeImage(file, { width: 800, quality: 0.9 });
+
+// Video
+const thumbnail = await extractVideoThumbnail(videoFile, 5);
+
+// Excel
+const workbook = await readExcelFile(excelFile);
+const data = workbook.sheets[0].json;
+```
+
+## 📚 Documentation
+
+- [PARALLEL_DEVELOPMENT.md](./PARALLEL_DEVELOPMENT.md) - Guide for parallel module development
+- [SHARED_LIBRARY.md](./SHARED_LIBRARY.md) - Complete shared utilities reference
+- [EXAMPLE.md](./EXAMPLE.md) - Full application example
+- [CONTRIBUTING.md](./CONTRIBUTING.md) - Contribution guidelines
+
+## 🏗️ Architecture
+
+The framework uses a modular architecture where each module:
+- Has its own routes, components, and Redux reducers
+- Can depend on other modules
+- Supports lazy loading
+- Integrates automatically via auto-discovery
+
+## 🔐 Authentication Flow
+
+1. User logs in with email/password or OAuth
+2. JWT token is stored in localStorage
+3. API client automatically injects token in requests
+4. 401 responses trigger automatic logout
+5. Protected routes check authentication state
+
+## 📊 State Management
+
+- **Redux Toolkit** for global state
+- **Automatic reducer registration** from modules
+- **TypeScript support** for state types
+- **Module-specific slices** for isolation
+
+## 🛠️ Development Tools
+
+### Auto-Discovery System
+```tsx
+import { loadModulesFromGlob } from '@longvhv/core';
+
+const modules = await loadModulesFromGlob(
+  import.meta.glob('./modules/*/index.ts')
+);
+```
+
+### Development Utilities
+```tsx
+import { validateModule, logModuleInfo, setupModuleDev } from '@longvhv/core';
+
+// Validate module
+const validation = validateModule(myModule);
+
+// Debug info
+logModuleInfo(myModule);
+
+// Test in isolation
+const { module, cleanup } = setupModuleDev({
+  module: dashboardModule,
+  mockDependencies: { auth: {...} }
+});
+```
+
+## 🌐 Backend Integration
+
+Fully compatible with [@longvhv/saas-framework-go](https://github.com/longvhv/saas-framework-go):
+
+**API Endpoints:**
+- POST `/api/auth/login` - JWT login
+- POST `/api/auth/register` - Register user
+- POST `/api/auth/oauth/{provider}/callback` - OAuth callback
+- GET `/api/auth/me` - Get current user
+- POST `/api/tenant/switch` - Switch tenant
+- POST `/api/site/switch` - Switch site
+
+**Response Format:**
+```json
+{
+  "success": true,
+  "data": { ... },
+  "message": "Success"
+}
+```
+
+## 🎯 Use Cases
+
+Perfect for building:
+- Multi-tenant SaaS applications
+- Admin dashboards
+- CRM systems
+- E-commerce platforms
+- Content management systems
+- Internal tools
+- Vietnamese-focused applications
+
+## 📈 Package Statistics
+
+| Package | Purpose | Size | Dependencies |
+|---------|---------|------|--------------|
+| core | Framework core | Medium | React, Redux, Router |
+| api-client | API communication | Small | Axios |
+| auth | Authentication | Small | Redux Toolkit |
+| ui-components | UI library | Small | Tailwind CSS |
+| shared | Utilities | Medium | None |
+| cli | Code generation | Small | Inquirer |
+| i18n | Internationalization | Small | React |
+| crud | CRUD operations | Medium | api-client, shared |
+| cache | Caching | Small | None |
+| context | Multi-tenant | Small | api-client |
+| forms | Form management | Medium | ui-components |
+| media | Media processing | Large | xlsx, pdfjs-dist |
+| vietnamese | Vietnamese utils | Small | None |
+
+## 🤝 Contributing
+
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for development guidelines.
+
+## 📄 License
+
+MIT
+
+## 🙏 Acknowledgments
+
+Built with:
+- React 18.2
+- TypeScript 5.3
+- Vite 5.0
+- Redux Toolkit 2.0
+- React Router v6
+- Tailwind CSS 3.4
+- pnpm workspaces
+
+---
+
+**Ready to build amazing SaaS applications! 🚀**
