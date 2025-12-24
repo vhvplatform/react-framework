@@ -1,7 +1,13 @@
 /**
  * Supported languages
+ * - vi: Vietnamese (Tiếng Việt)
+ * - en: English
+ * - es: Spanish (Español)
+ * - zh: Chinese Simplified (简体中文)
+ * - ja: Japanese (日本語)
+ * - ko: Korean (한국어)
  */
-export type Language = 'vi' | 'en';
+export type Language = 'vi' | 'en' | 'es' | 'zh' | 'ja' | 'ko';
 
 /**
  * Translation dictionary
