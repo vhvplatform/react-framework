@@ -32,10 +32,15 @@ export async function importApp(repoUrl?: string, templateName?: string) {
       default: repoUrl,
       when: !repoUrl,
       validate: (input: string) => {
-        if (!input.includes('github.com')) {
-          return 'Please provide a valid GitHub repository URL';
+        try {
+          const url = new URL(input);
+          if (url.hostname !== 'github.com' && !url.hostname.endsWith('.github.com')) {
+            return 'Please provide a valid GitHub repository URL';
+          }
+          return true;
+        } catch {
+          return 'Please provide a valid URL';
         }
-        return true;
       },
     },
     {
