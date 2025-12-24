@@ -8,3 +8,4 @@ export {
   usePermissions,
 } from './providers/AppContextProvider';
 export type * from './types';
+export * from './hooks';
