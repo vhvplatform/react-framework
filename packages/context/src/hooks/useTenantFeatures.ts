@@ -6,14 +6,18 @@ export function useTenantFeatures() {
 
   const hasFeature = useCallback(
     (featureName: string): boolean => {
-      if (!tenant || !tenant.features) return false;
-      return tenant.features.includes(featureName);
+      if (!tenant) return false;
+      // Features can be stored in settings or metadata
+      const features = tenant.settings?.features || tenant.metadata?.features || [];
+      return Array.isArray(features) && features.includes(featureName);
     },
     [tenant]
   );
 
   const getFeatures = useCallback((): string[] => {
-    return tenant?.features || [];
+    if (!tenant) return [];
+    const features = tenant.settings?.features || tenant.metadata?.features || [];
+    return Array.isArray(features) ? features : [];
   }, [tenant]);
 
   const isWithinLimit = useCallback(

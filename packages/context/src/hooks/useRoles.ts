@@ -23,18 +23,18 @@ export function useRoles() {
 
   const isSuperAdmin = useCallback((): boolean => {
     if (!user) return false;
-    return user.role === 'superadmin';
+    return user.role === 'super_admin';
   }, [user]);
 
   const canAccessResource = useCallback(
     (requiredRole: UserRole): boolean => {
       if (!user) return false;
       const roleHierarchy: Record<UserRole, number> = {
-        superadmin: 5,
-        owner: 4,
+        super_admin: 4,
         admin: 3,
         manager: 2,
         user: 1,
+        guest: 0,
       };
       return roleHierarchy[user.role] >= roleHierarchy[requiredRole];
     },
