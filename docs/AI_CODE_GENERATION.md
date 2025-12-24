@@ -2,7 +2,7 @@
 
 ## Overview
 
-The AI Code Generator uses OpenAI's GPT-4 to generate production-ready code for React, Flutter, and Go API backends. It can generate individual components, full pages/screens, API endpoints, or complete full-stack applications.
+The AI Code Generator uses multiple AI providers (OpenAI GPT-4, GitHub Copilot, or Google Gemini) to generate production-ready code for React, Flutter, and Go API backends. It can generate individual components, full pages/screens, API endpoints, or complete full-stack applications.
 
 ## Features
 
@@ -15,9 +15,11 @@ The AI Code Generator uses OpenAI's GPT-4 to generate production-ready code for 
 
 ## Prerequisites
 
-### OpenAI API Key
+### AI Provider Setup
 
-You need an OpenAI API key to use the code generator:
+The code generator supports three AI providers. Choose one and configure it:
+
+#### Option 1: OpenAI (GPT-4)
 
 1. Sign up at [https://platform.openai.com](https://platform.openai.com)
 2. Create an API key in your account settings
@@ -31,6 +33,40 @@ Or add to your `.bashrc` or `.zshrc`:
 
 ```bash
 echo 'export OPENAI_API_KEY=sk-...' >> ~/.bashrc
+source ~/.bashrc
+```
+
+#### Option 2: GitHub Copilot
+
+1. Ensure you have an active GitHub Copilot subscription
+2. Generate a GitHub token with Copilot access at [https://github.com/settings/tokens](https://github.com/settings/tokens)
+3. Set the environment variable:
+
+```bash
+export GITHUB_TOKEN=ghp_...
+```
+
+Or add to your `.bashrc` or `.zshrc`:
+
+```bash
+echo 'export GITHUB_TOKEN=ghp_...' >> ~/.bashrc
+source ~/.bashrc
+```
+
+#### Option 3: Google Gemini
+
+1. Sign up at [https://makersuite.google.com/app/apikey](https://makersuite.google.com/app/apikey)
+2. Create a Gemini API key
+3. Set the environment variable:
+
+```bash
+export GEMINI_API_KEY=AI...
+```
+
+Or add to your `.bashrc` or `.zshrc`:
+
+```bash
+echo 'export GEMINI_API_KEY=AI...' >> ~/.bashrc
 source ~/.bashrc
 ```
 
@@ -48,7 +84,7 @@ pnpm cli gen
 pnpm cli refine
 ```
 
-The generate command creates new code from scratch, while the refine command improves existing code.
+The generate command creates new code from scratch, while the refine command improves existing code. Both commands will prompt you to select your preferred AI provider (OpenAI, GitHub Copilot, or Gemini).
 
 ### Code Generation
 
@@ -64,6 +100,7 @@ pnpm cli gen
 
 Select:
 
+- **AI Provider**: `OpenAI (GPT-4)`, `GitHub Copilot`, or `Google Gemini`
 - Target: `React Component`
 - Description: `A reusable card component that displays user information with avatar, name, email, and action buttons`
 - Component name: `UserCard`
@@ -83,6 +120,7 @@ pnpm cli gen
 
 Select:
 
+- **AI Provider**: `OpenAI (GPT-4)`, `GitHub Copilot`, or `Google Gemini`
 - Target: `Flutter Widget`
 - Description: `A custom button widget with loading state, icon support, and various color schemes`
 - Widget name: `CustomButton`

@@ -49,7 +49,7 @@ A comprehensive, production-ready React + Vite framework for building multiple S
 ### 🛠️ Developer Experience
 
 - **CLI Tools** - Interactive app and module generation
-- **AI Code Generator** - Generate React, Flutter, and Go code using AI
+- **AI Code Generator** - Generate React, Flutter, and Go code using AI (OpenAI, GitHub Copilot, or Gemini)
 - **Template System** - Import apps from GitHub and create reusable templates
 - **Testing Utilities** - Vitest, Testing Library, and custom helpers
 - **ESLint + Prettier** - Consistent code formatting
@@ -272,13 +272,13 @@ Application analysis and adaptation:
 
 #### @longvhv/ai-codegen
 
-AI-powered code generation:
+AI-powered code generation with multiple provider support:
 
 - Generate React components and pages
 - Generate Flutter widgets and screens
 - Generate Go API endpoints
 - Full-stack code generation (React/Flutter + Go)
-- Uses OpenAI GPT-4
+- **Supports 3 AI providers**: OpenAI GPT-4, GitHub Copilot, Google Gemini
 - Interactive CLI with feature selection
 - Supports multiple state management patterns
 - Generates production-ready code

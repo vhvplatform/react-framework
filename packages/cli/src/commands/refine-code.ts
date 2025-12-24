@@ -11,16 +11,67 @@ import { AIService, CodeRefiner, ModificationType } from '@longvhv/ai-codegen';
 export async function refineCode() {
   console.log(chalk.blue.bold('\n🔧 AI Code Refiner\n'));
 
-  // Check for API key
-  const apiKey = process.env.OPENAI_API_KEY;
-  if (!apiKey) {
-    console.error(
-      chalk.red(
-        '\n❌ Error: OPENAI_API_KEY environment variable is not set.\nPlease set it with your OpenAI API key.\n'
-      )
-    );
-    console.log(chalk.white('Example: export OPENAI_API_KEY=sk-...\n'));
-    process.exit(1);
+  // Prompt for AI provider selection
+  const providerAnswer = await inquirer.prompt<{
+    provider: 'openai' | 'github-copilot' | 'gemini';
+  }>([
+    {
+      type: 'list',
+      name: 'provider',
+      message: 'Select AI provider:',
+      choices: [
+        { name: 'OpenAI (GPT-4)', value: 'openai' },
+        { name: 'GitHub Copilot', value: 'github-copilot' },
+        { name: 'Google Gemini', value: 'gemini' },
+      ],
+      default: 'openai',
+    },
+  ]);
+
+  // Check for appropriate API key based on provider
+  let apiKey: string | undefined;
+  let githubToken: string | undefined;
+
+  switch (providerAnswer.provider) {
+    case 'openai':
+      apiKey = process.env.OPENAI_API_KEY;
+      if (!apiKey) {
+        console.error(
+          chalk.red(
+            '\n❌ Error: OPENAI_API_KEY environment variable is not set.\nPlease set it with your OpenAI API key.\n'
+          )
+        );
+        console.log(chalk.white('Example: export OPENAI_API_KEY=sk-...\n'));
+        process.exit(1);
+      }
+      break;
+
+    case 'github-copilot':
+      githubToken = process.env.GITHUB_TOKEN;
+      if (!githubToken) {
+        console.error(
+          chalk.red(
+            '\n❌ Error: GITHUB_TOKEN environment variable is not set.\nPlease set it with your GitHub token with Copilot access.\n'
+          )
+        );
+        console.log(chalk.white('Example: export GITHUB_TOKEN=ghp_...\n'));
+        process.exit(1);
+      }
+      apiKey = githubToken;
+      break;
+
+    case 'gemini':
+      apiKey = process.env.GEMINI_API_KEY;
+      if (!apiKey) {
+        console.error(
+          chalk.red(
+            '\n❌ Error: GEMINI_API_KEY environment variable is not set.\nPlease set it with your Google Gemini API key.\n'
+          )
+        );
+        console.log(chalk.white('Example: export GEMINI_API_KEY=AI...\n'));
+        process.exit(1);
+      }
+      break;
   }
 
   // Prompt for file path
@@ -59,11 +110,17 @@ export async function refineCode() {
   const filePath = path.resolve(fileAnswers.filePath);
 
   try {
-    // Initialize AI service and refiner
+    // Initialize AI service and refiner with selected provider
     const aiService = new AIService({
-      provider: 'openai',
-      apiKey,
-      model: 'gpt-4-turbo-preview',
+      provider: providerAnswer.provider,
+      apiKey: apiKey!,
+      githubToken,
+      model:
+        providerAnswer.provider === 'openai'
+          ? 'gpt-4-turbo-preview'
+          : providerAnswer.provider === 'gemini'
+            ? 'gemini-pro'
+            : 'gpt-4',
     });
 
     const refiner = new CodeRefiner(aiService);

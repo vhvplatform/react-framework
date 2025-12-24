@@ -99,11 +99,15 @@ export interface GoField {
  * AI provider configuration
  */
 export interface AIConfig {
-  provider: 'openai' | 'anthropic';
+  provider: 'openai' | 'github-copilot' | 'gemini';
   apiKey: string;
   model?: string;
   temperature?: number;
   maxTokens?: number;
+  // GitHub Copilot specific
+  githubToken?: string;
+  // Gemini specific
+  projectId?: string;
 }
 
 /**
