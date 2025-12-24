@@ -37,6 +37,10 @@ export default defineConfig({
       '@longvhv/media': path.resolve(__dirname, './packages/media/src'),
       '@longvhv/vietnamese': path.resolve(__dirname, './packages/vietnamese/src'),
       '@longvhv/cli': path.resolve(__dirname, './packages/cli/src'),
+      '@longvhv/testing': path.resolve(__dirname, './packages/testing/src'),
+      '@longvhv/theme': path.resolve(__dirname, './packages/theme/src'),
+      '@longvhv/notifications': path.resolve(__dirname, './packages/notifications/src'),
+      '@longvhv/query': path.resolve(__dirname, './packages/query/src'),
     },
   },
 });
