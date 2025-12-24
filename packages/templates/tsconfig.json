@@ -12,6 +12,5 @@
     "moduleResolution": "node"
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist"],
-  "references": [{ "path": "../templates" }, { "path": "../app-adapter" }]
+  "exclude": ["node_modules", "dist"]
 }

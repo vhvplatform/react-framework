@@ -13,5 +13,5 @@
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"],
-  "references": [{ "path": "../templates" }, { "path": "../app-adapter" }]
+  "references": [{ "path": "../templates" }]
 }
