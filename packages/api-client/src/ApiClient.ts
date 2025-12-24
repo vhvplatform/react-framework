@@ -1,4 +1,4 @@
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios, { AxiosInstance, AxiosResponse } from 'axios';
 import { ApiClientConfig, ApiError, ApiResponse, RequestOptions } from './types';
 
 /**
@@ -71,7 +71,7 @@ export class ApiClient {
           const apiError = new ApiError(
             data?.message || error.message || 'An error occurred',
             status,
-            data?.data?.code as string,
+            (data?.data as { code?: string })?.code,
             data?.data as Record<string, unknown>
           );
 
@@ -139,7 +139,7 @@ export class ApiClient {
       throw new ApiError(
         data.message || 'Request failed',
         response.status,
-        data.data?.code as string,
+        (data.data as { code?: string })?.code,
         data.data as Record<string, unknown>
       );
     }

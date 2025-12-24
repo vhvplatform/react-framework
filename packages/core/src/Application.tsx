@@ -1,7 +1,7 @@
-import React, { createContext, useEffect, useState, useMemo } from 'react';
+import { createContext, useEffect, useState, useMemo } from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { ModuleRegistry, moduleRegistry } from './ModuleRegistry';
+import { moduleRegistry } from './ModuleRegistry';
 import { createStore } from './store';
 import { ApplicationProps, ModuleContextValue } from './types';
 
@@ -95,7 +95,7 @@ export function Application({ config, modules = [], children }: ApplicationProps
           {routes.length > 0 && (
             <Routes>
               {routes.map((route, index) => (
-                <Route key={route.path || index} {...route} />
+                <Route key={route.path || `route-${index}`} {...(route as object)} />
               ))}
             </Routes>
           )}

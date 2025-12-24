@@ -131,9 +131,9 @@ export const oauthCallback = createAsyncThunk<
  * Logout async thunk
  * Calls @longvhv/saas-framework-go /api/auth/logout endpoint
  */
-export const logout = createAsyncThunk<void, { apiClient: ApiClient }, { rejectValue: string }>(
+export const logout = createAsyncThunk<void, { apiClient: ApiClient }>(
   'auth/logout',
-  async ({ apiClient }, { rejectWithValue }) => {
+  async ({ apiClient }) => {
     try {
       await apiClient.post('/api/auth/logout');
     } catch (error) {

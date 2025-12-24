@@ -1,4 +1,4 @@
-import React, { useState, FormEvent } from 'react';
+import { useState, FormEvent } from 'react';
 import { useAuth } from '../hooks/useAuth';
 import { LoginCredentials } from '../types';
 

@@ -1,4 +1,4 @@
-import { AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
+import { AxiosRequestConfig } from 'axios';
 
 /**
  * API client configuration

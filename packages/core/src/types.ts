@@ -1,6 +1,6 @@
-import { ComponentType, ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { RouteObject } from 'react-router-dom';
-import { Reducer, AnyAction } from '@reduxjs/toolkit';
+import { Reducer } from '@reduxjs/toolkit';
 
 /**
  * Module interface for the framework
