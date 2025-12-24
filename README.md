@@ -49,6 +49,7 @@ A comprehensive, production-ready React + Vite framework for building multiple S
 ### 🛠️ Developer Experience
 
 - **CLI Tools** - Interactive app and module generation
+- **Template System** - Import apps from GitHub and create reusable templates
 - **Testing Utilities** - Vitest, Testing Library, and custom helpers
 - **ESLint + Prettier** - Consistent code formatting
 - **Husky Hooks** - Pre-commit linting and validation
@@ -71,7 +72,7 @@ A comprehensive, production-ready React + Vite framework for building multiple S
 - **Media Processing** - Image, video, Excel, and PDF utilities
 - **Vietnamese Utils** - Vietnamese text processing and validation
 
-## 📦 Packages (17 Total)
+## 📦 Packages (19 Total)
 
 ### Core Packages
 
@@ -241,8 +242,32 @@ Command-line tools:
 
 - `create-app` - Generate new application
 - `create-module` - Generate module in existing app
+- `import-app` - Import GitHub repository as template
+- `clone-app` - Create app from template
+- `list-templates` - Show available templates
+- `adapt-app` - Convert standalone app to framework format
 - Interactive prompts
 - Template-based generation
+
+#### @longvhv/templates
+
+Template management system:
+
+- Template configuration storage
+- Template CRUD operations
+- Template registry and searching
+- Pre-configured integration-portal template
+
+#### @longvhv/app-adapter
+
+Application analysis and adaptation:
+
+- Component extraction and analysis
+- Route detection and conversion
+- State management detection (Redux, Zustand, Context)
+- Style system detection (Tailwind, CSS Modules, etc)
+- Dependency resolution
+- Git repository import
 
 ## 🚀 Quick Start
 
@@ -291,6 +316,8 @@ pnpm type-check
 
 ### Create Your First App
 
+#### Option 1: From Scratch
+
 ```bash
 # Generate a new application
 pnpm cli create-app my-app
@@ -304,6 +331,33 @@ pnpm install
 # Start development server
 pnpm dev
 ```
+
+#### Option 2: From Template
+
+```bash
+# List available templates
+pnpm cli list-templates
+
+# Create app from template
+pnpm cli clone-app integration-portal my-portal
+
+# Navigate and run
+cd my-portal
+pnpm install
+pnpm dev
+```
+
+#### Option 3: Import from GitHub
+
+```bash
+# Import a repository as a template
+pnpm cli import-app https://github.com/username/repo my-template
+
+# Create app from imported template
+pnpm cli clone-app my-template my-app
+```
+
+See [Template System Quick Start](./docs/TEMPLATE_QUICK_START.md) for more details.
 
 ### Create a Module
 
