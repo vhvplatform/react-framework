@@ -33,12 +33,15 @@ npx @longvhv/create-app my-saas-app
 
 This creates a new repository with:
 
-- Full project structure (src, public, scripts)
+- Full project structure (src, public, scripts, hooks, utils, types)
 - Framework dependencies installed from npm
 - Git initialized with initial commit
 - CI/CD configured (GitHub Actions, GitLab CI)
-- Deployment ready (Vercel, AWS, Docker)
-- TypeScript, ESLint, Prettier configured
+- Deployment ready (Kubernetes, Vercel, AWS, Docker)
+- TypeScript, ESLint, Prettier, EditorConfig configured
+- **Kubernetes manifests and Helm charts** (if K8s deployment selected)
+- **Dockerfile and Docker Compose** (if containerized deployment)
+- **Service mesh configuration** (if microservices enabled)
 
 #### Interactive Prompts
 
@@ -49,7 +52,11 @@ The CLI will ask you to choose:
 3. **Package Registry**: npm public, GitHub Packages, custom
 4. **Git Initialization**: yes/no
 5. **CI/CD Setup**: GitHub Actions, GitLab CI, none
-6. **Deployment Target**: Vercel, AWS, Docker, none
+6. **Deployment Target**: **Kubernetes** (NEW!), Vercel, AWS, Docker, none
+7. **Microservices Features**: Enable for Kubernetes deployments (NEW!)
+8. **Kubernetes Namespace**: Target namespace for deployment (NEW!)
+9. **CI/CD Setup**: GitHub Actions, GitLab CI, none
+10. **Deployment Target**: Vercel, AWS, Docker, none
 
 #### CLI Options
 
@@ -304,6 +311,330 @@ Applications can version independently:
   }
 }
 ```
+
+## Kubernetes & Microservices Deployment
+
+### Overview
+
+The framework now supports **Kubernetes-native deployment** with comprehensive microservices architecture features, making it ideal for:
+
+- **Cloud-native applications** requiring auto-scaling
+- **Microservices architectures** with service mesh integration
+- **Enterprise deployments** on Kubernetes clusters
+- **Multi-tenant SaaS** applications with resource isolation
+- **High-availability** applications with automatic failover
+
+### What's Included
+
+When you select Kubernetes deployment, the CLI generates:
+
+#### 1. Kubernetes Manifests (`k8s/`)
+
+- **deployment.yaml**: Application deployment with 3 replicas, health checks, resource limits
+- **hpa.yaml**: Horizontal Pod Autoscaler for automatic scaling based on CPU/memory
+- **kustomization.yaml**: Kustomize configuration for environment management
+- **README.md**: Comprehensive deployment guide
+
+#### 2. Service Mesh Configuration (Optional)
+
+When microservices are enabled:
+
+- **virtual-service.yaml**: Istio VirtualService for traffic routing, timeouts, retries
+- **destination-rule.yaml**: Load balancing, circuit breakers, connection pooling
+
+#### 3. Helm Charts (`helm/`)
+
+- **Chart.yaml**: Helm chart metadata
+- **values.yaml**: Configurable values for different environments
+- **templates/**: Kubernetes resource templates
+
+#### 4. Container Configuration
+
+- **Dockerfile**: Multi-stage build for optimized image size
+- **nginx.conf**: Nginx configuration with SPA routing, security headers
+- **healthcheck.sh**: Container health check script
+- **docker-compose.yml**: Local development with Docker
+- **.dockerignore**: Optimize build context
+
+#### 5. CI/CD Pipeline
+
+GitHub Actions workflow (`k8s-deploy.yml`) that:
+
+- Builds and tests the application
+- Creates Docker image and pushes to container registry
+- Deploys to Kubernetes cluster
+- Performs rolling updates with health checks
+
+### Deployment Methods
+
+#### Using kubectl
+
+```bash
+# Apply manifests directly
+kubectl apply -f k8s/deployment.yaml
+kubectl apply -f k8s/hpa.yaml
+
+# Check status
+kubectl get pods -n your-namespace
+kubectl get svc -n your-namespace
+```
+
+#### Using Helm
+
+```bash
+# Install application
+helm install my-app ./helm/my-app -n production --create-namespace
+
+# Upgrade application
+helm upgrade my-app ./helm/my-app -n production
+
+# Rollback if needed
+helm rollback my-app -n production
+```
+
+#### Using Kustomize
+
+```bash
+# Deploy with kustomize
+kubectl apply -k k8s/
+
+# Or using kubectl kustomize
+kubectl kustomize k8s/ | kubectl apply -f -
+```
+
+### Key Features
+
+#### Auto-Scaling
+
+Horizontal Pod Autoscaler automatically scales pods based on:
+
+- CPU utilization (target: 70%)
+- Memory utilization (target: 80%)
+- Custom metrics (if configured)
+
+```yaml
+minReplicas: 2
+maxReplicas: 10
+```
+
+#### Health Checks
+
+- **Liveness Probe**: Restarts unhealthy containers
+- **Readiness Probe**: Controls traffic routing to healthy pods
+
+```yaml
+livenessProbe:
+  httpGet:
+    path: /health
+    port: 3000
+  initialDelaySeconds: 30
+  periodSeconds: 10
+
+readinessProbe:
+  httpGet:
+    path: /ready
+    port: 3000
+  initialDelaySeconds: 10
+  periodSeconds: 5
+```
+
+#### Resource Management
+
+Defined resource requests and limits prevent resource exhaustion:
+
+```yaml
+resources:
+  requests:
+    memory: '256Mi'
+    cpu: '250m'
+  limits:
+    memory: '512Mi'
+    cpu: '500m'
+```
+
+#### Service Mesh (Istio)
+
+When microservices are enabled, you get:
+
+- **Traffic Management**: Fine-grained traffic routing and splitting
+- **Resilience**: Automatic retries, timeouts, circuit breakers
+- **Security**: Mutual TLS, authorization policies
+- **Observability**: Distributed tracing, metrics, logging
+
+Example traffic splitting for canary deployment:
+
+```yaml
+http:
+  - route:
+      - destination:
+          host: my-app
+          subset: v1
+        weight: 90
+      - destination:
+          host: my-app
+          subset: v2
+        weight: 10
+```
+
+### Configuration Management
+
+#### ConfigMaps
+
+Store configuration separately from container images:
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: my-app-config
+data:
+  api-url: 'http://api-service/api'
+  app-name: 'my-app'
+```
+
+#### Secrets
+
+Store sensitive data securely:
+
+```bash
+# Create secret
+kubectl create secret generic my-app-secrets \
+  --from-literal=api-key=your-secret-key \
+  -n your-namespace
+```
+
+### Multi-Environment Deployment
+
+Use Kustomize overlays for different environments:
+
+```
+k8s/
+├── base/
+│   ├── deployment.yaml
+│   └── kustomization.yaml
+├── overlays/
+│   ├── dev/
+│   │   └── kustomization.yaml
+│   ├── staging/
+│   │   └── kustomization.yaml
+│   └── production/
+│       └── kustomization.yaml
+```
+
+Deploy to different environments:
+
+```bash
+# Development
+kubectl apply -k k8s/overlays/dev
+
+# Production
+kubectl apply -k k8s/overlays/production
+```
+
+### Monitoring & Observability
+
+#### Logs
+
+```bash
+# View logs from all pods
+kubectl logs -l app=my-app -n your-namespace --tail=100
+
+# Follow logs
+kubectl logs -f deployment/my-app -n your-namespace
+```
+
+#### Metrics
+
+Integrate with Prometheus for metrics collection:
+
+```bash
+# Port forward to Prometheus
+kubectl port-forward svc/prometheus 9090:9090
+
+# View metrics at http://localhost:9090
+```
+
+#### Tracing
+
+With Istio service mesh, distributed tracing is automatic:
+
+```bash
+# View traces in Jaeger
+istioctl dashboard jaeger
+```
+
+### Security Best Practices
+
+The generated Kubernetes configuration follows security best practices:
+
+1. **Non-root containers**: Runs as user ID 1000
+2. **Read-only root filesystem**: Where possible
+3. **No privilege escalation**: Drops all capabilities
+4. **Resource limits**: Prevents resource exhaustion
+5. **Network policies**: Control pod-to-pod communication (configurable)
+6. **Secret management**: Environment variables from secrets
+7. **Security contexts**: Pod and container-level security settings
+
+### CI/CD Integration
+
+The generated GitHub Actions workflow automates:
+
+1. **Build**: Compiles and tests the application
+2. **Containerize**: Builds optimized Docker image
+3. **Push**: Uploads to GitHub Container Registry
+4. **Deploy**: Updates Kubernetes deployment
+5. **Verify**: Checks rollout status
+
+Required GitHub secrets:
+
+- `KUBECONFIG`: Base64-encoded kubeconfig file
+- `NPM_TOKEN`: NPM authentication token (if using private registry)
+
+### Cost Optimization
+
+- **Right-sizing**: Defined resource requests match actual usage
+- **Auto-scaling**: Scales down during low traffic
+- **Efficient images**: Multi-stage builds reduce image size
+- **Resource sharing**: ClusterIP services reduce load balancer costs
+
+### High Availability
+
+- **Multiple replicas**: Minimum 2 pods for redundancy
+- **Pod disruption budgets**: Ensure availability during updates
+- **Rolling updates**: Zero-downtime deployments
+- **Health checks**: Automatic recovery from failures
+
+### Example: Complete Deployment Flow
+
+```bash
+# 1. Create application
+npx @longvhv/create-app my-microservice
+cd my-microservice
+
+# 2. Build Docker image
+docker build -t ghcr.io/your-org/my-microservice:v1.0.0 .
+docker push ghcr.io/your-org/my-microservice:v1.0.0
+
+# 3. Update image in k8s manifests
+sed -i 's|:latest|:v1.0.0|g' k8s/deployment.yaml
+
+# 4. Deploy to Kubernetes
+kubectl create namespace production
+kubectl apply -f k8s/deployment.yaml -n production
+kubectl apply -f k8s/hpa.yaml -n production
+
+# 5. Verify deployment
+kubectl get pods -n production
+kubectl get svc -n production
+
+# 6. Access application
+kubectl port-forward svc/my-microservice 8080:80 -n production
+# Visit http://localhost:8080
+```
+
+### Troubleshooting
+
+Common issues and solutions are documented in the generated `k8s/README.md` file.
 
 ## Benefits
 
