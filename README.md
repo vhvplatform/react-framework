@@ -5,12 +5,34 @@
 [![React](https://img.shields.io/badge/React-18.2-blue.svg)](https://reactjs.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-A comprehensive, production-ready React + Vite framework for building multiple SaaS applications in a monorepo architecture. Built with modern best practices, full TypeScript support, and enterprise-grade tooling.
+A comprehensive, production-ready React + Vite framework for building multiple SaaS applications. Supports both **monorepo** and **multi-repo** architectures. Built with modern best practices, full TypeScript support, and enterprise-grade tooling.
+
+## 🎯 Architecture Options
+
+### Monorepo (Default)
+
+Work on multiple applications in a single repository with shared packages. Ideal for:
+
+- Small to medium teams
+- Tight integration between apps
+- Rapid prototyping and development
+
+### Multi-Repo (New!)
+
+Each application lives in its own repository, consuming framework packages via npm. Perfect for:
+
+- Large teams and organizations
+- Independent app deployment
+- Customer-specific applications
+- Better access control and security
+
+[📖 Multi-Repo Architecture Guide →](docs/MULTI_REPO.md)
 
 ## ✨ Key Features
 
 ### 🏗️ Architecture & Development
 
+- **Multi-Repo Support** - Create standalone apps consuming framework packages via npm (NEW!)
 - **Modular Architecture** - Build applications with independent, reusable modules
 - **Auto-Discovery** - Modules are automatically discovered and registered
 - **Hot Module Replacement** - Instant reload without application restart
@@ -73,7 +95,7 @@ A comprehensive, production-ready React + Vite framework for building multiple S
 - **Media Processing** - Image, video, Excel, and PDF utilities
 - **Vietnamese Utils** - Vietnamese text processing and validation
 
-## 📦 Packages (20 Total)
+## 📦 Packages (22 Total)
 
 ### Core Packages
 
@@ -250,6 +272,28 @@ Command-line tools:
 - Interactive prompts
 - Template-based generation
 
+#### @longvhv/create-app (NEW!)
+
+Standalone CLI for creating multi-repo apps:
+
+- Bootstrap new SaaS applications in separate repositories
+- Interactive template selection (blank, CRM, admin, integration portal)
+- Framework version selection (latest or specific)
+- Registry configuration (npm, GitHub Packages, custom)
+- CI/CD setup (GitHub Actions, GitLab CI)
+- Deployment configuration (Vercel, AWS, Docker)
+- Complete project structure generation
+
+#### @longvhv/config (NEW!)
+
+Shared configuration presets:
+
+- ESLint configuration for TypeScript + React
+- Prettier configuration with standard formatting
+- Base TypeScript configuration
+- Reusable across all applications
+- Customizable and extendable
+
 #### @longvhv/templates
 
 Template management system:
@@ -284,6 +328,32 @@ AI-powered code generation with multiple provider support:
 - Generates production-ready code
 
 ## 🚀 Quick Start
+
+### For Multi-Repo Apps (Recommended)
+
+Create a standalone application in its own repository:
+
+```bash
+# Create new app using npx
+npx @longvhv/create-app my-saas-app
+
+# Follow interactive prompts to select:
+# - Template (blank, CRM, admin, integration portal)
+# - Framework version
+# - Registry (npm, GitHub Packages, custom)
+# - CI/CD setup
+# - Deployment target
+
+# Start development
+cd my-saas-app
+npm run dev
+```
+
+[📖 Full Multi-Repo Guide →](docs/MULTI_REPO.md)
+
+### For Monorepo Development
+
+Work on the framework or contribute to existing packages:
 
 ### Prerequisites
 
