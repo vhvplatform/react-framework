@@ -221,7 +221,7 @@ async function createAppStructure(appPath: string, config: AppConfig) {
   // Create .npmrc if using private registry
   if (config.registry !== 'https://registry.npmjs.org') {
     const npmrc = `@longvhv:registry=${config.registry}
-${config.registry.replace('https:', '')}/:_authToken=\${NPM_TOKEN}`;
+${config.registry.replace('https://', '//')}/:_authToken=\${NPM_TOKEN}`;
     await fs.writeFile(path.join(appPath, '.npmrc'), npmrc);
   }
 
