@@ -314,6 +314,8 @@ Applications can version independently:
 
 ## Kubernetes & Microservices Deployment
 
+> 📘 **Complete Developer Guide**: For a comprehensive step-by-step guide on developing and deploying microservices, see the [Microservices Developer Guide](./MICROSERVICES_DEVELOPER_GUIDE.md).
+
 ### Overview
 
 The framework now supports **Kubernetes-native deployment** with comprehensive microservices architecture features, making it ideal for:

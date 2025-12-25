@@ -758,6 +758,16 @@ pnpm changeset:publish
 
 ## 📖 Documentation
 
+### Quick Start Guides
+
+- [Quick Start](./docs/QUICK-START.md) - Get started in 5 minutes
+- [Multi-Repo Architecture](./docs/MULTI_REPO.md) - Deploy apps in separate repositories
+- **[Microservices Developer Guide](./docs/MICROSERVICES_DEVELOPER_GUIDE.md)** - Complete guide for developing and deploying microservices on Kubernetes (NEW!)
+- [Template System](./docs/TEMPLATE_QUICK_START.md) - Create reusable templates
+- [AI Code Generation](./docs/AI_CODE_GENERATION.md) - Generate code with AI
+
+### Package Documentation
+
 Each package includes comprehensive README documentation:
 
 - Installation instructions
@@ -766,6 +776,13 @@ Each package includes comprehensive README documentation:
 - Type definitions
 
 See individual package READMEs for detailed documentation.
+
+### Advanced Topics
+
+- [Setup Development Environment](./docs/SETUP-DEV.md)
+- [Docker Setup](./docs/SETUP-DOCKER.md)
+- [Server Setup](./docs/SETUP-SERVER.md)
+- [Template System](./docs/TEMPLATE_SYSTEM.md)
 
 ## 🛡️ Security
 
