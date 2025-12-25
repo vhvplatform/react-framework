@@ -220,12 +220,11 @@ export async function createApp(name: string, options: CreateAppOptions) {
   await createAppStructure(appPath, config, options);
 
   if (!options.skipInstall) {
-    const installCmd = config.packageManager === 'npm' ? 'install' : 'install';
     const spinner = createSpinner(
       `Installing dependencies with ${config.packageManager}...`
     ).start();
     try {
-      await execa(config.packageManager, [installCmd], { cwd: appPath });
+      await execa(config.packageManager, ['install'], { cwd: appPath });
       spinner.succeed(chalk.green('Dependencies installed successfully'));
     } catch (error) {
       spinner.fail(chalk.red('Failed to install dependencies'));
@@ -298,7 +297,7 @@ async function createAppStructure(appPath: string, config: AppConfig, options: C
     version: '0.1.0',
     private: true,
     type: 'module',
-    description: `SaaS application built with @longvhv framework`,
+    description: `SaaS application built with the @longvhv framework`,
     author: '',
     license: 'MIT',
     scripts: {
