@@ -1,0 +1,73 @@
+{
+  "name": "@longvhv/create-app",
+  "version": "1.0.0",
+  "description": "CLI tool to bootstrap new SaaS applications using @longvhv framework",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "create-longvhv-app": "./dist/index.js"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist",
+    "type-check": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "saas",
+    "framework",
+    "cli",
+    "create-app",
+    "bootstrap",
+    "react",
+    "vite",
+    "typescript",
+    "scaffolding"
+  ],
+  "author": "longvhv",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/longvhv/saas-framework-react.git",
+    "directory": "packages/create-app"
+  },
+  "bugs": {
+    "url": "https://github.com/longvhv/saas-framework-react/issues"
+  },
+  "homepage": "https://github.com/longvhv/saas-framework-react#readme",
+  "dependencies": {
+    "commander": "^11.0.0",
+    "inquirer": "^9.2.0",
+    "fs-extra": "^11.2.0",
+    "chalk": "^5.3.0",
+    "ora": "^7.0.0",
+    "execa": "^8.0.0",
+    "validate-npm-package-name": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.0",
+    "@types/inquirer": "^9.0.0",
+    "@types/validate-npm-package-name": "^4.0.0",
+    "@types/node": "^20.10.6",
+    "typescript": "^5.3.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

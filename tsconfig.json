@@ -45,7 +45,9 @@
       "@longvhv/query": ["./packages/query/src"],
       "@longvhv/templates": ["./packages/templates/src"],
       "@longvhv/app-adapter": ["./packages/app-adapter/src"],
-      "@longvhv/ai-codegen": ["./packages/ai-codegen/src"]
+      "@longvhv/ai-codegen": ["./packages/ai-codegen/src"],
+      "@longvhv/create-app": ["./packages/create-app/src"],
+      "@longvhv/config": ["./packages/config/src"]
     }
   },
   "references": [
@@ -68,6 +70,8 @@
     { "path": "./packages/query" },
     { "path": "./packages/templates" },
     { "path": "./packages/app-adapter" },
-    { "path": "./packages/ai-codegen" }
+    { "path": "./packages/ai-codegen" },
+    { "path": "./packages/create-app" },
+    { "path": "./packages/config" }
   ]
 }

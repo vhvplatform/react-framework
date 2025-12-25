@@ -1,0 +1,64 @@
+{
+  "name": "@longvhv/config",
+  "version": "1.0.0",
+  "description": "Shared configuration presets for @longvhv framework applications",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js",
+    "./eslint": "./eslint.config.js",
+    "./prettier": "./prettier.config.js",
+    "./tsconfig": "./tsconfig.base.json"
+  },
+  "files": [
+    "dist",
+    "eslint.config.js",
+    "prettier.config.js",
+    "tsconfig.base.json",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist",
+    "type-check": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "config",
+    "eslint",
+    "prettier",
+    "typescript",
+    "preset",
+    "saas",
+    "framework"
+  ],
+  "author": "longvhv",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/longvhv/saas-framework-react.git",
+    "directory": "packages/config"
+  },
+  "bugs": {
+    "url": "https://github.com/longvhv/saas-framework-react/issues"
+  },
+  "homepage": "https://github.com/longvhv/saas-framework-react#readme",
+  "devDependencies": {
+    "@types/node": "^20.10.6",
+    "typescript": "^5.3.0"
+  },
+  "peerDependencies": {
+    "eslint": "^8.0.0",
+    "prettier": "^3.0.0",
+    "typescript": "^5.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
