@@ -2,15 +2,17 @@ import fs from 'fs-extra';
 import path from 'path';
 import inquirer from 'inquirer';
 import chalk from 'chalk';
-import ora from 'ora';
+import ora, { Ora } from 'ora';
 import { execa } from 'execa';
 
 interface CreateAppOptions {
   template?: string;
-  version?: string;
+  frameworkVersion?: string;
   registry?: string;
   skipGit?: boolean;
   skipInstall?: boolean;
+  packageManager?: string;
+  verbose?: boolean;
 }
 
 interface AppConfig {
@@ -21,95 +23,179 @@ interface AppConfig {
   initGit: boolean;
   cicd: string;
   deployTarget: string;
+  packageManager: string;
+}
+
+/**
+ * Detect which package manager is available
+ */
+async function detectPackageManager(): Promise<string> {
+  const managers = ['pnpm', 'yarn', 'npm'];
+
+  for (const manager of managers) {
+    try {
+      await execa(manager, ['--version']);
+      return manager;
+    } catch {
+      continue;
+    }
+  }
+
+  return 'npm'; // fallback
+}
+
+/**
+ * Validate registry URL
+ */
+function isValidRegistryUrl(url: string): boolean {
+  try {
+    const parsed = new URL(url);
+    return parsed.protocol === 'https:' || parsed.protocol === 'http:';
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Create a spinner with consistent styling
+ */
+function createSpinner(text: string): Ora {
+  return ora({
+    text,
+    color: 'cyan',
+    spinner: 'dots',
+  });
+}
+
+/**
+ * Log message based on verbose flag
+ */
+function log(message: string, options: CreateAppOptions): void {
+  if (options.verbose) {
+    console.log(chalk.gray(`[INFO] ${message}`));
+  }
 }
 
 export async function createApp(name: string, options: CreateAppOptions) {
   const cwd = process.cwd();
   const appPath = path.join(cwd, name);
 
+  log('Starting application creation process', options);
+
   // Check if directory exists
   if (await fs.pathExists(appPath)) {
-    console.error(chalk.red(`\n❌ Directory "${name}" already exists\n`));
+    console.error(chalk.red(`\n❌ Error: Directory "${name}" already exists\n`));
+    console.error(
+      chalk.yellow('Please choose a different name or remove the existing directory.\n')
+    );
     process.exit(1);
   }
+
+  // Detect package manager
+  const detectedPM = options.packageManager || (await detectPackageManager());
+  log(`Detected package manager: ${detectedPM}`, options);
 
   // Interactive prompts
   const answers = await inquirer.prompt([
     {
       type: 'list',
       name: 'template',
-      message: 'Select template:',
+      message: 'Select application template:',
       choices: [
         {
-          name: 'Integration Portal (Developer portal with API docs)',
+          name: 'Blank (Minimal setup) - Recommended for new projects',
+          value: 'blank',
+        },
+        {
+          name: 'Integration Portal (Developer portal with API documentation)',
           value: 'integration-portal',
         },
-        { name: 'CRM Application (Customer relationship management)', value: 'crm' },
-        { name: 'Admin Dashboard (Admin panel)', value: 'admin-dashboard' },
-        { name: 'Blank (Minimal setup)', value: 'blank' },
+        {
+          name: 'CRM Application (Customer relationship management system)',
+          value: 'crm',
+        },
+        {
+          name: 'Admin Dashboard (Admin panel with user management)',
+          value: 'admin-dashboard',
+        },
       ],
       default: options.template || 'blank',
+      when: !options.template,
     },
     {
       type: 'list',
       name: 'frameworkVersion',
-      message: 'Framework version:',
+      message: 'Select framework version:',
       choices: [
-        { name: 'Latest (recommended)', value: 'latest' },
-        { name: 'Specific version', value: 'specific' },
+        { name: 'Latest (recommended) - Always use the newest version', value: 'latest' },
+        { name: 'Specific version - Pin to a specific version', value: 'specific' },
       ],
       default: 'latest',
+      when: !options.frameworkVersion,
     },
     {
       type: 'input',
       name: 'specificVersion',
-      message: 'Enter version:',
+      message: 'Enter specific version (e.g., 1.0.0):',
       when: (answers) => answers.frameworkVersion === 'specific',
       default: '1.0.0',
+      validate: (input) => {
+        if (!/^\d+\.\d+\.\d+(-[\w.]+)?$/.test(input)) {
+          return 'Please enter a valid semver version (e.g., 1.0.0)';
+        }
+        return true;
+      },
     },
     {
       type: 'list',
       name: 'registry',
-      message: 'Package registry:',
+      message: 'Select package registry:',
       choices: [
-        { name: 'npm (public)', value: 'https://registry.npmjs.org' },
-        { name: 'GitHub Packages (private)', value: 'https://npm.pkg.github.com' },
+        { name: 'npm (Public registry)', value: 'https://registry.npmjs.org' },
+        { name: 'GitHub Packages (Private registry)', value: 'https://npm.pkg.github.com' },
         { name: 'Custom registry', value: 'custom' },
       ],
       default: options.registry || 'https://registry.npmjs.org',
+      when: !options.registry,
     },
     {
       type: 'input',
       name: 'customRegistry',
-      message: 'Registry URL:',
+      message: 'Enter custom registry URL (e.g., https://npm.company.com):',
       when: (answers) => answers.registry === 'custom',
+      validate: (input) => {
+        if (!isValidRegistryUrl(input)) {
+          return 'Please enter a valid HTTPS or HTTP URL';
+        }
+        return true;
+      },
     },
     {
       type: 'confirm',
       name: 'initGit',
-      message: 'Initialize git repository?',
+      message: 'Initialize Git repository?',
       default: !options.skipGit,
     },
     {
       type: 'list',
       name: 'cicd',
-      message: 'CI/CD setup:',
+      message: 'Select CI/CD platform:',
       choices: [
-        { name: 'GitHub Actions', value: 'github' },
-        { name: 'GitLab CI', value: 'gitlab' },
-        { name: 'None', value: 'none' },
+        { name: 'GitHub Actions (Recommended for GitHub)', value: 'github' },
+        { name: 'GitLab CI (For GitLab repositories)', value: 'gitlab' },
+        { name: 'None (Skip CI/CD setup)', value: 'none' },
       ],
       default: 'github',
     },
     {
       type: 'list',
       name: 'deployTarget',
-      message: 'Deployment target:',
+      message: 'Select deployment target:',
       choices: [
-        { name: 'Vercel', value: 'vercel' },
-        { name: 'AWS', value: 'aws' },
-        { name: 'Docker', value: 'docker' },
-        { name: 'None', value: 'none' },
+        { name: 'Vercel (Recommended for Next.js/React)', value: 'vercel' },
+        { name: 'AWS (Amazon Web Services)', value: 'aws' },
+        { name: 'Docker (Containerized deployment)', value: 'docker' },
+        { name: 'None (Manual deployment)', value: 'none' },
       ],
       default: 'vercel',
     },
@@ -117,76 +203,115 @@ export async function createApp(name: string, options: CreateAppOptions) {
 
   const config: AppConfig = {
     name,
-    template: answers.template,
-    frameworkVersion: answers.specificVersion || answers.frameworkVersion,
-    registry: answers.customRegistry || answers.registry,
+    template: options.template || answers.template,
+    frameworkVersion:
+      options.frameworkVersion || answers.specificVersion || answers.frameworkVersion,
+    registry: options.registry || answers.customRegistry || answers.registry,
     initGit: answers.initGit,
     cicd: answers.cicd,
     deployTarget: answers.deployTarget,
+    packageManager: detectedPM,
   };
 
-  console.log(chalk.blue('\n📁 Creating application structure...\n'));
+  log(`Configuration: ${JSON.stringify(config, null, 2)}`, options);
 
-  await createAppStructure(appPath, config);
+  console.log(chalk.blue.bold('\n📁 Creating application structure...\n'));
+
+  await createAppStructure(appPath, config, options);
 
   if (!options.skipInstall) {
-    const spinner = ora('Installing dependencies...').start();
+    const installCmd = config.packageManager === 'npm' ? 'install' : 'install';
+    const spinner = createSpinner(
+      `Installing dependencies with ${config.packageManager}...`
+    ).start();
     try {
-      await execa('npm', ['install'], { cwd: appPath });
-      spinner.succeed('Dependencies installed');
+      await execa(config.packageManager, [installCmd], { cwd: appPath });
+      spinner.succeed(chalk.green('Dependencies installed successfully'));
     } catch (error) {
-      spinner.fail('Failed to install dependencies');
-      console.error(error);
+      spinner.fail(chalk.red('Failed to install dependencies'));
+      console.error(chalk.yellow('\nYou can install dependencies manually by running:'));
+      console.error(chalk.cyan(`  cd ${name} && ${config.packageManager} install\n`));
+      if (options.verbose && error instanceof Error) {
+        console.error(chalk.gray(error.message));
+      }
     }
   }
 
   if (config.initGit) {
-    const spinner = ora('Initializing git repository...').start();
+    const spinner = createSpinner('Initializing Git repository...').start();
     try {
       await execa('git', ['init'], { cwd: appPath });
       await execa('git', ['add', '.'], { cwd: appPath });
-      await execa('git', ['commit', '-m', 'Initial commit'], { cwd: appPath });
-      spinner.succeed('Git repository initialized');
+      await execa('git', ['commit', '-m', 'chore: initial commit from create-longvhv-app'], {
+        cwd: appPath,
+      });
+      spinner.succeed(chalk.green('Git repository initialized'));
     } catch (error) {
-      spinner.fail('Failed to initialize git');
+      spinner.fail(chalk.red('Failed to initialize Git'));
+      if (options.verbose && error instanceof Error) {
+        console.error(chalk.gray(error.message));
+      }
     }
   }
 
-  console.log(chalk.green(`\n✅ Successfully created "${name}"!\n`));
-  console.log(chalk.white('Next steps:\n'));
-  console.log(chalk.cyan(`  cd ${name}`));
+  // Success message
+  console.log(chalk.green.bold(`\n✅ Successfully created "${name}"!\n`));
+  console.log(chalk.white.bold('📖 Next steps:\n'));
+  console.log(chalk.cyan(`  1. cd ${name}`));
   if (options.skipInstall) {
-    console.log(chalk.cyan('  npm install'));
+    console.log(chalk.cyan(`  2. ${config.packageManager} install`));
+    console.log(chalk.cyan(`  3. ${config.packageManager} run dev`));
+  } else {
+    console.log(chalk.cyan(`  2. ${config.packageManager} run dev`));
   }
-  console.log(chalk.cyan('  npm run dev\n'));
+  console.log(chalk.white('\n📚 Documentation:'));
+  console.log(chalk.gray('  https://github.com/longvhv/saas-framework-react\n'));
+  console.log(chalk.green('Happy coding! 🚀\n'));
 }
 
-async function createAppStructure(appPath: string, config: AppConfig) {
+async function createAppStructure(appPath: string, config: AppConfig, options: CreateAppOptions) {
   await fs.ensureDir(appPath);
 
+  log('Creating directory structure', options);
+
   // Create directories
-  await fs.ensureDir(path.join(appPath, 'src'));
-  await fs.ensureDir(path.join(appPath, 'src/modules'));
-  await fs.ensureDir(path.join(appPath, 'src/components'));
-  await fs.ensureDir(path.join(appPath, 'public'));
-  await fs.ensureDir(path.join(appPath, 'scripts'));
+  await Promise.all([
+    fs.ensureDir(path.join(appPath, 'src')),
+    fs.ensureDir(path.join(appPath, 'src/modules')),
+    fs.ensureDir(path.join(appPath, 'src/components')),
+    fs.ensureDir(path.join(appPath, 'src/hooks')),
+    fs.ensureDir(path.join(appPath, 'src/utils')),
+    fs.ensureDir(path.join(appPath, 'src/types')),
+    fs.ensureDir(path.join(appPath, 'public')),
+    fs.ensureDir(path.join(appPath, 'scripts')),
+  ]);
 
   if (config.cicd === 'github') {
     await fs.ensureDir(path.join(appPath, '.github/workflows'));
   }
 
-  // Create package.json
+  log('Creating package.json', options);
+
+  // Create package.json with complete metadata
   const packageJson = {
     name: config.name,
-    version: '1.0.0',
+    version: '0.1.0',
     private: true,
     type: 'module',
+    description: `SaaS application built with @longvhv framework`,
+    author: '',
+    license: 'MIT',
     scripts: {
       dev: 'vite',
       build: 'vite build',
       preview: 'vite preview',
       test: 'vitest',
+      'test:ui': 'vitest --ui',
+      'test:coverage': 'vitest --coverage',
       lint: 'eslint src --ext ts,tsx',
+      'lint:fix': 'eslint src --ext ts,tsx --fix',
+      format: 'prettier --write "src/**/*.{ts,tsx,json,css,md}"',
+      'format:check': 'prettier --check "src/**/*.{ts,tsx,json,css,md}"',
       'type-check': 'tsc --noEmit',
     },
     dependencies: {
@@ -205,14 +330,24 @@ async function createAppStructure(appPath: string, config: AppConfig) {
     devDependencies: {
       '@types/react': '^18.2.0',
       '@types/react-dom': '^18.2.0',
+      '@typescript-eslint/eslint-plugin': '^6.0.0',
+      '@typescript-eslint/parser': '^6.0.0',
       '@vitejs/plugin-react': '^4.2.0',
+      '@vitest/ui': '^1.0.0',
+      eslint: '^8.0.0',
+      'eslint-config-prettier': '^9.0.0',
+      'eslint-plugin-react': '^7.33.0',
+      'eslint-plugin-react-hooks': '^4.6.0',
+      prettier: '^3.0.0',
       typescript: '^5.3.0',
       vite: '^5.0.0',
       vitest: '^1.0.0',
-      eslint: '^8.0.0',
       tailwindcss: '^3.4.0',
       autoprefixer: '^10.4.0',
       postcss: '^8.4.0',
+    },
+    engines: {
+      node: '>=18.0.0',
     },
   };
 
@@ -220,6 +355,7 @@ async function createAppStructure(appPath: string, config: AppConfig) {
 
   // Create .npmrc if using private registry
   if (config.registry !== 'https://registry.npmjs.org') {
+    log('Creating .npmrc for private registry', options);
     const npmrc = `@longvhv:registry=${config.registry}
 ${config.registry.replace('https://', '//')}/:_authToken=\${NPM_TOKEN}`;
     await fs.writeFile(path.join(appPath, '.npmrc'), npmrc);
@@ -417,6 +553,152 @@ VITE_AUTH_ENABLED=true
 VITE_FEATURE_X=false`;
 
   await fs.writeFile(path.join(appPath, '.env.example'), envExample);
+
+  log('Creating ESLint configuration', options);
+
+  // Create .eslintrc.json
+  const eslintConfig = {
+    root: true,
+    env: {
+      browser: true,
+      es2020: true,
+    },
+    extends: [
+      'eslint:recommended',
+      'plugin:@typescript-eslint/recommended',
+      'plugin:react/recommended',
+      'plugin:react-hooks/recommended',
+      'prettier',
+    ],
+    ignorePatterns: ['dist', '.eslintrc.json'],
+    parser: '@typescript-eslint/parser',
+    parserOptions: {
+      ecmaVersion: 'latest',
+      sourceType: 'module',
+      ecmaFeatures: {
+        jsx: true,
+      },
+    },
+    plugins: ['react', '@typescript-eslint', 'react-hooks'],
+    rules: {
+      'react/react-in-jsx-scope': 'off',
+      '@typescript-eslint/no-explicit-any': 'warn',
+      '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+    },
+    settings: {
+      react: {
+        version: 'detect',
+      },
+    },
+  };
+
+  await fs.writeJson(path.join(appPath, '.eslintrc.json'), eslintConfig, { spaces: 2 });
+
+  log('Creating Prettier configuration', options);
+
+  // Create .prettierrc
+  const prettierConfig = {
+    semi: true,
+    trailingComma: 'es5',
+    singleQuote: true,
+    printWidth: 100,
+    tabWidth: 2,
+    useTabs: false,
+    arrowParens: 'always',
+    endOfLine: 'lf',
+  };
+
+  await fs.writeJson(path.join(appPath, '.prettierrc'), prettierConfig, { spaces: 2 });
+
+  // Create .prettierignore
+  const prettierIgnore = `# Build output
+dist
+build
+.next
+out
+
+# Dependencies
+node_modules
+.pnpm-store
+
+# Generated files
+*.min.js
+*.min.css
+coverage
+
+# Config files
+package-lock.json
+pnpm-lock.yaml
+yarn.lock`;
+
+  await fs.writeFile(path.join(appPath, '.prettierignore'), prettierIgnore);
+
+  log('Creating PostCSS configuration', options);
+
+  // Create postcss.config.js
+  const postcssConfig = `export default {
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {},
+  },
+};`;
+
+  await fs.writeFile(path.join(appPath, 'postcss.config.js'), postcssConfig);
+
+  log('Creating EditorConfig', options);
+
+  // Create .editorconfig
+  const editorConfig = `# EditorConfig helps maintain consistent coding styles
+# https://editorconfig.org
+
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+indent_style = space
+indent_size = 2
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.md]
+trim_trailing_whitespace = false
+
+[*.{json,yml,yaml}]
+indent_size = 2`;
+
+  await fs.writeFile(path.join(appPath, '.editorconfig'), editorConfig);
+
+  log('Creating VSCode settings', options);
+
+  // Create .vscode/settings.json
+  await fs.ensureDir(path.join(appPath, '.vscode'));
+  const vscodeSettings = {
+    'editor.formatOnSave': true,
+    'editor.defaultFormatter': 'esbenp.prettier-vscode',
+    'editor.codeActionsOnSave': {
+      'source.fixAll.eslint': 'explicit',
+    },
+    'typescript.tsdk': 'node_modules/typescript/lib',
+    'typescript.enablePromptUseWorkspaceTsdk': true,
+  };
+
+  await fs.writeJson(path.join(appPath, '.vscode/settings.json'), vscodeSettings, {
+    spaces: 2,
+  });
+
+  // Create .vscode/extensions.json
+  const vscodeExtensions = {
+    recommendations: [
+      'dbaeumer.vscode-eslint',
+      'esbenp.prettier-vscode',
+      'bradlc.vscode-tailwindcss',
+    ],
+  };
+
+  await fs.writeJson(path.join(appPath, '.vscode/extensions.json'), vscodeExtensions, {
+    spaces: 2,
+  });
 }
 
 async function createGitHubWorkflows(appPath: string, config: AppConfig) {
