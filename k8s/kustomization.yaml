@@ -1,0 +1,32 @@
+# Kustomization configuration for environment-specific deployments
+# Aligned with go-infrastructure deployment patterns
+
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: default
+
+resources:
+  - deployment.yaml
+  - hpa.yaml
+  - pdb.yaml
+
+commonLabels:
+  app: react-framework
+  managed-by: kustomize
+  part-of: go-infrastructure
+
+images:
+  - name: ghcr.io/vhvplatform/react-framework
+    newTag: latest
+
+configMapGenerator:
+  - name: react-framework-config
+    literals:
+      - api-url=http://go-api-service/api
+      - log-level=info
+      - app-name=react-framework
+
+replicas:
+  - name: react-framework
+    count: 3

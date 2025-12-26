@@ -1,0 +1,31 @@
+# Istio Gateway for ingress traffic
+# Entry point for external traffic to the mesh
+
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: react-framework-gateway
+  namespace: default
+  labels:
+    app: react-framework
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - react-framework.yourdomain.com
+    tls:
+      httpsRedirect: true
+  - port:
+      number: 443
+      name: https
+      protocol: HTTPS
+    hosts:
+    - react-framework.yourdomain.com
+    tls:
+      mode: SIMPLE
+      credentialName: react-framework-tls

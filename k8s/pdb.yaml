@@ -1,0 +1,16 @@
+# Pod Disruption Budget
+# Ensures high availability during voluntary disruptions
+
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: react-framework
+  namespace: default
+  labels:
+    app: react-framework
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: react-framework
+      tier: frontend
