@@ -10,7 +10,7 @@ The framework now supports automatic module discovery, eliminating the need to m
 
 ```tsx
 // src/main.tsx
-import { loadModulesFromGlob } from '@longvhv/core';
+import { loadModulesFromGlob } from '@vhvplatform/core';
 
 // Auto-discover all modules in src/modules directory
 const modules = await loadModulesFromGlob(
@@ -69,7 +69,7 @@ Modules must export a variable ending with `Module` for auto-discovery:
 
 ```tsx
 // src/modules/dashboard/index.ts
-import { createModule } from '@longvhv/core';
+import { createModule } from '@vhvplatform/core';
 
 // ✅ Correct - ends with 'Module'
 export const dashboardModule = createModule({
@@ -106,7 +106,7 @@ if (import.meta.hot) {
 For custom setups:
 
 ```tsx
-import { createModuleDevWrapper } from '@longvhv/core';
+import { createModuleDevWrapper } from '@vhvplatform/core';
 
 export const myModule = createModuleDevWrapper(
   () => createModule({
@@ -161,7 +161,7 @@ git merge feature/users-module
 Validate module structure during development:
 
 ```tsx
-import { validateModule, logModuleInfo } from '@longvhv/core';
+import { validateModule, logModuleInfo } from '@vhvplatform/core';
 
 const validation = validateModule(myModule);
 if (!validation.valid) {
@@ -177,7 +177,7 @@ logModuleInfo(myModule);
 Test modules in isolation:
 
 ```tsx
-import { setupModuleDev } from '@longvhv/core';
+import { setupModuleDev } from '@vhvplatform/core';
 
 const { module, cleanup } = setupModuleDev({
   module: dashboardModule,
@@ -202,7 +202,7 @@ cleanup();
 For production, load all modules at once:
 
 ```tsx
-import { loadModulesEager } from '@longvhv/core';
+import { loadModulesEager } from '@vhvplatform/core';
 
 const modules = loadModulesEager(
   import.meta.glob('./modules/*/index.ts', { eager: true })
@@ -277,7 +277,7 @@ src/
 Enable debug logging:
 
 ```tsx
-import { loadModulesFromGlob } from '@longvhv/core';
+import { loadModulesFromGlob } from '@vhvplatform/core';
 
 const modules = await loadModulesFromGlob(
   import.meta.glob('./modules/*/index.ts')
@@ -344,7 +344,7 @@ All modules are automatically integrated through the Application component!
 Create a custom loader for specific needs:
 
 ```tsx
-import { loadModules } from '@longvhv/core';
+import { loadModules } from '@vhvplatform/core';
 
 // Load modules with custom logic
 const customModules = await loadModules({

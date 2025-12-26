@@ -1,5 +1,5 @@
 {
-  "name": "@longvhv/i18n",
+  "name": "@vhvplatform/i18n",
   "version": "1.0.0",
   "description": "Internationalization (i18n) support for SaaS Framework React",
   "main": "dist/index.js",
@@ -14,7 +14,7 @@
     "translation",
     "multi-language"
   ],
-  "author": "longvhv",
+  "author": "vhvplatform",
   "license": "MIT",
   "peerDependencies": {
     "react": "^18.2.0"

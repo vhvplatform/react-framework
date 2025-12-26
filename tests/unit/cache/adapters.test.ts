@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { MemoryCacheAdapter, BrowserCacheAdapter } from '@longvhv/cache';
+import { MemoryCacheAdapter, BrowserCacheAdapter } from '@vhvplatform/cache';
 
 describe('Cache Package', () => {
   describe('MemoryCacheAdapter', () => {

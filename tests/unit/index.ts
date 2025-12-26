@@ -1,9 +1,9 @@
 /**
  * Test Index - Unit Tests for SaaS Framework React
- * 
+ *
  * This file serves as an index for all unit tests in the framework.
  * Total: 185+ tests across 46 test files covering all 13 packages.
- * 
+ *
  * Run tests: pnpm test
  * Watch mode: pnpm test:watch
  * Coverage: pnpm test:coverage
@@ -11,7 +11,7 @@
  */
 
 // =============================================================================
-// PACKAGE: @longvhv/shared (45+ tests)
+// PACKAGE: @vhvplatform/shared (45+ tests)
 // =============================================================================
 
 // String Utils (8 tests)
@@ -44,7 +44,7 @@ import './shared/utils/validation.test';
 // import './shared/hooks/usePagination.test';
 
 // =============================================================================
-// PACKAGE: @longvhv/vietnamese (20+ tests)
+// PACKAGE: @vhvplatform/vietnamese (20+ tests)
 // =============================================================================
 
 // Text Processing (12 tests)
@@ -57,7 +57,7 @@ import './vietnamese/validation.test';
 // import './vietnamese/format.test';
 
 // =============================================================================
-// PACKAGE: @longvhv/i18n (15+ tests)
+// PACKAGE: @vhvplatform/i18n (15+ tests)
 // =============================================================================
 
 // Translations (planned - 8 tests)
@@ -73,7 +73,7 @@ import './vietnamese/validation.test';
 // import './i18n/LanguageSwitcher.test';
 
 // =============================================================================
-// PACKAGE: @longvhv/forms (12+ tests)
+// PACKAGE: @vhvplatform/forms (12+ tests)
 // =============================================================================
 
 // Validators (planned - 10 tests)
@@ -86,7 +86,7 @@ import './vietnamese/validation.test';
 // import './forms/fieldValidation.test';
 
 // =============================================================================
-// PACKAGE: @longvhv/cache (15+ tests)
+// PACKAGE: @vhvplatform/cache (15+ tests)
 // =============================================================================
 
 // Memory Cache (planned - 8 tests)
@@ -99,7 +99,7 @@ import './vietnamese/validation.test';
 // import './cache/cacheOperations.test';
 
 // =============================================================================
-// PACKAGE: @longvhv/context (12+ tests)
+// PACKAGE: @vhvplatform/context (12+ tests)
 // =============================================================================
 
 // useRoles Hook (planned - 8 tests)
@@ -112,7 +112,7 @@ import './vietnamese/validation.test';
 // import './context/AppContextProvider.test';
 
 // =============================================================================
-// PACKAGE: @longvhv/auth (10+ tests)
+// PACKAGE: @vhvplatform/auth (10+ tests)
 // =============================================================================
 
 // Auth Slice (planned - 8 tests)
@@ -125,7 +125,7 @@ import './vietnamese/validation.test';
 // import './auth/ProtectedRoute.test';
 
 // =============================================================================
-// PACKAGE: @longvhv/crud (10+ tests)
+// PACKAGE: @vhvplatform/crud (10+ tests)
 // =============================================================================
 
 // useCrud Hook (planned - 8 tests)
@@ -138,7 +138,7 @@ import './vietnamese/validation.test';
 // import './crud/CrudTable.test';
 
 // =============================================================================
-// PACKAGE: @longvhv/media (12+ tests)
+// PACKAGE: @vhvplatform/media (12+ tests)
 // =============================================================================
 
 // Image Processing (planned - 6 tests)
@@ -154,7 +154,7 @@ import './vietnamese/validation.test';
 // import './media/pdf.test';
 
 // =============================================================================
-// PACKAGE: @longvhv/api-client (8+ tests)
+// PACKAGE: @vhvplatform/api-client (8+ tests)
 // =============================================================================
 
 // ApiClient (planned - 10 tests)
@@ -164,7 +164,7 @@ import './vietnamese/validation.test';
 // import './api-client/ApiProvider.test';
 
 // =============================================================================
-// PACKAGE: @longvhv/core (8+ tests)
+// PACKAGE: @vhvplatform/core (8+ tests)
 // =============================================================================
 
 // ModuleRegistry (planned - 8 tests)
@@ -177,7 +177,7 @@ import './vietnamese/validation.test';
 // import './core/useModule.test';
 
 // =============================================================================
-// PACKAGE: @longvhv/ui-components (15+ tests)
+// PACKAGE: @vhvplatform/ui-components (15+ tests)
 // =============================================================================
 
 // Button Component (planned - 8 tests)
@@ -196,7 +196,7 @@ import './vietnamese/validation.test';
 // import './ui-components/Modal.test';
 
 // =============================================================================
-// PACKAGE: @longvhv/cli (5+ tests)
+// PACKAGE: @vhvplatform/cli (5+ tests)
 // =============================================================================
 
 // create-app Command (planned - 4 tests)
@@ -207,15 +207,15 @@ import './vietnamese/validation.test';
 
 /**
  * Test Statistics Summary
- * 
+ *
  * Current Tests:     35 (implemented)
  * Planned Tests:    150+ (documented)
  * Total Tests:      185+
- * 
+ *
  * Coverage Goal:    80%+
  * Test Files:       46 files
  * Packages Tested:  13 packages
- * 
+ *
  * Status: ✅ Test infrastructure complete
  *         ✅ Core tests implemented
  *         📝 Additional tests planned

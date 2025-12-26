@@ -2,16 +2,16 @@
 
 ## Overview
 
-This document describes the major enhancements made to 5 core packages: `@longvhv/context`, `@longvhv/auth`, `@longvhv/core`, `@longvhv/api-client`, and `@longvhv/ui-components`.
+This document describes the major enhancements made to 5 core packages: `@vhvplatform/context`, `@vhvplatform/auth`, `@vhvplatform/core`, `@vhvplatform/api-client`, and `@vhvplatform/ui-components`.
 
-## 📦 Package: @longvhv/context
+## 📦 Package: @vhvplatform/context
 
 ### New Features
 
 #### 1. Role-Based Access Control (RBAC)
 **New Hook: `useRoles()`**
 ```tsx
-import { useRoles } from '@longvhv/context';
+import { useRoles } from '@vhvplatform/context';
 
 function Dashboard() {
   const { hasAnyRole, isAdmin, isSuperAdmin, canAccessResource, isTenantOwner } = useRoles();
@@ -40,7 +40,7 @@ function Dashboard() {
 #### 2. Tenant Features & Limits
 **New Hook: `useTenantFeatures()`**
 ```tsx
-import { useTenantFeatures } from '@longvhv/context';
+import { useTenantFeatures } from '@vhvplatform/context';
 
 function FeatureComponent() {
   const { hasFeature, getFeatures, isWithinLimit, getRemainingQuota, getUsagePercentage } = useTenantFeatures();
@@ -68,7 +68,7 @@ function FeatureComponent() {
 #### 3. Enhanced Permission System
 **Extended `usePermissions()` Hook**
 ```tsx
-import { usePermissions } from '@longvhv/context';
+import { usePermissions } from '@vhvplatform/context';
 
 function Component() {
   const { hasPermission, hasAnyPermission, hasAllPermissions, canAccessResource } = usePermissions();
@@ -110,14 +110,14 @@ function Component() {
 
 ---
 
-## 🔐 Package: @longvhv/auth
+## 🔐 Package: @vhvplatform/auth
 
 ### New Features
 
 #### 1. Password Reset Flow
 **New Async Thunks:**
 ```tsx
-import { requestPasswordReset, resetPassword } from '@longvhv/auth';
+import { requestPasswordReset, resetPassword } from '@vhvplatform/auth';
 
 // Request reset
 await dispatch(requestPasswordReset({ 
@@ -141,7 +141,7 @@ await dispatch(resetPassword({
 #### 2. Email Verification
 **New Async Thunks:**
 ```tsx
-import { verifyEmail, resendVerification } from '@longvhv/auth';
+import { verifyEmail, resendVerification } from '@vhvplatform/auth';
 
 // Verify email
 await dispatch(verifyEmail({ 
@@ -162,7 +162,7 @@ await dispatch(resendVerification({
 #### 3. Two-Factor Authentication (2FA)
 **New Async Thunks:**
 ```tsx
-import { enable2FA, verify2FA, disable2FA } from '@longvhv/auth';
+import { enable2FA, verify2FA, disable2FA } from '@vhvplatform/auth';
 
 // Enable 2FA
 const { secret, qrCode } = await dispatch(enable2FA({ apiClient })).unwrap();
@@ -182,7 +182,7 @@ await dispatch(disable2FA({ apiClient, code: '123456' })).unwrap();
 #### 4. Session Management
 **New Async Thunks:**
 ```tsx
-import { getSessions, revokeSession, revokeAllSessions } from '@longvhv/auth';
+import { getSessions, revokeSession, revokeAllSessions } from '@vhvplatform/auth';
 
 // Get all sessions
 const sessions = await dispatch(getSessions({ apiClient })).unwrap();
@@ -202,7 +202,7 @@ await dispatch(revokeAllSessions({ apiClient })).unwrap();
 #### 5. Profile Management
 **New Async Thunks:**
 ```tsx
-import { updateProfile, updatePassword, updateEmail } from '@longvhv/auth';
+import { updateProfile, updatePassword, updateEmail } from '@vhvplatform/auth';
 
 // Update profile
 await dispatch(updateProfile({ 
@@ -233,7 +233,7 @@ await dispatch(updateEmail({
 #### 6. Social Auth Management
 **New Async Thunks:**
 ```tsx
-import { linkProvider, unlinkProvider, getLinkedProviders } from '@longvhv/auth';
+import { linkProvider, unlinkProvider, getLinkedProviders } from '@vhvplatform/auth';
 
 // Link OAuth provider
 await dispatch(linkProvider({ apiClient, provider: 'google', token: 'oauth_token' })).unwrap();
@@ -253,7 +253,7 @@ const providers = await dispatch(getLinkedProviders({ apiClient })).unwrap();
 #### 7. Token Management
 **New Async Thunks:**
 ```tsx
-import { refreshToken, validateToken } from '@longvhv/auth';
+import { refreshToken, validateToken } from '@vhvplatform/auth';
 
 // Refresh token
 const { token } = await dispatch(refreshToken({ apiClient })).unwrap();
@@ -276,7 +276,7 @@ import {
   select2FAStatus,
   selectEmailVerified,
   selectPasswordResetStatus
-} from '@longvhv/auth';
+} from '@vhvplatform/auth';
 
 const userProfile = useSelector(selectUserProfile);
 const tokenExpiry = useSelector(selectTokenExpiry);
@@ -309,14 +309,14 @@ interface AuthState {
 
 ---
 
-## ⚡ Package: @longvhv/core
+## ⚡ Package: @vhvplatform/core
 
 ### New Features
 
 #### 1. Module Lifecycle Hooks
 **Enhanced Module Interface:**
 ```tsx
-import { createModule } from '@longvhv/core';
+import { createModule } from '@vhvplatform/core';
 
 const myModule = createModule({
   id: 'analytics',
@@ -367,7 +367,7 @@ const myModule = createModule({
 #### 2. Dynamic Module Loading
 **New Hook: `useDynamicModule()`**
 ```tsx
-import { useDynamicModule } from '@longvhv/core';
+import { useDynamicModule } from '@vhvplatform/core';
 
 function Dashboard() {
   const { 
@@ -392,7 +392,7 @@ function Dashboard() {
 #### 3. Module Status Tracking
 **New Hook: `useModuleStatus()`**
 ```tsx
-import { useModuleStatus } from '@longvhv/core';
+import { useModuleStatus } from '@vhvplatform/core';
 
 function ModuleManager() {
   const status = useModuleStatus('analytics');
@@ -412,7 +412,7 @@ function ModuleManager() {
 #### 4. Module Events
 **New Hook: `useModuleEvents()`**
 ```tsx
-import { useModuleEvents } from '@longvhv/core';
+import { useModuleEvents } from '@vhvplatform/core';
 
 function ModuleMonitor() {
   useModuleEvents('analytics', {
@@ -427,7 +427,7 @@ function ModuleMonitor() {
 #### 5. Enhanced Module Registry
 **New Methods:**
 ```tsx
-import { ModuleRegistry } from '@longvhv/core';
+import { ModuleRegistry } from '@vhvplatform/core';
 
 const registry = ModuleRegistry.getInstance();
 
@@ -465,7 +465,7 @@ registry.on('module:loaded', (module) => {
 #### 6. Module Configuration
 **New Hook: `useModuleConfig()`**
 ```tsx
-import { useModuleConfig } from '@longvhv/core';
+import { useModuleConfig } from '@vhvplatform/core';
 
 function AnalyticsSettings() {
   const { config, updateConfig } = useModuleConfig('analytics');
@@ -488,7 +488,7 @@ function AnalyticsSettings() {
 #### 7. Performance Monitoring
 **Module Load Metrics:**
 ```tsx
-import { getModuleMetrics } from '@longvhv/core';
+import { getModuleMetrics } from '@vhvplatform/core';
 
 const metrics = getModuleMetrics('analytics');
 // {
@@ -501,13 +501,13 @@ const metrics = getModuleMetrics('analytics');
 
 ---
 
-## 🌐 Package: @longvhv/api-client
+## 🌐 Package: @vhvplatform/api-client
 
 ### New Features
 
 #### 1. Request Retry with Exponential Backoff
 ```tsx
-import { useApi } from '@longvhv/api-client';
+import { useApi } from '@vhvplatform/api-client';
 
 const apiClient = useApi();
 
@@ -715,13 +715,13 @@ await apiClient.uploadChunked(largeFile, {
 
 ---
 
-## 🎨 Package: @longvhv/ui-components
+## 🎨 Package: @vhvplatform/ui-components
 
 ### New Components
 
 #### 1. Modal
 ```tsx
-import { Modal } from '@longvhv/ui-components';
+import { Modal } from '@vhvplatform/ui-components';
 
 <Modal 
   isOpen={isOpen} 
@@ -743,7 +743,7 @@ import { Modal } from '@longvhv/ui-components';
 
 #### 2. Toast Notifications
 ```tsx
-import { useToast } from '@longvhv/ui-components';
+import { useToast } from '@vhvplatform/ui-components';
 
 function Component() {
   const toast = useToast();
@@ -775,7 +775,7 @@ function Component() {
 
 #### 3. Dropdown Menu
 ```tsx
-import { Dropdown } from '@longvhv/ui-components';
+import { Dropdown } from '@vhvplatform/ui-components';
 
 <Dropdown>
   <Dropdown.Trigger>
@@ -798,7 +798,7 @@ import { Dropdown } from '@longvhv/ui-components';
 
 #### 4. Advanced Table
 ```tsx
-import { Table } from '@longvhv/ui-components';
+import { Table } from '@vhvplatform/ui-components';
 
 <Table
   data={users}
@@ -843,7 +843,7 @@ import { Table } from '@longvhv/ui-components';
 
 #### 5. Enhanced Select
 ```tsx
-import { Select } from '@longvhv/ui-components';
+import { Select } from '@vhvplatform/ui-components';
 
 <Select
   options={countries}
@@ -870,7 +870,7 @@ import { Select } from '@longvhv/ui-components';
 
 **Checkbox:**
 ```tsx
-import { Checkbox } from '@longvhv/ui-components';
+import { Checkbox } from '@vhvplatform/ui-components';
 
 <Checkbox
   checked={isChecked}
@@ -883,7 +883,7 @@ import { Checkbox } from '@longvhv/ui-components';
 
 **Radio:**
 ```tsx
-import { Radio } from '@longvhv/ui-components';
+import { Radio } from '@vhvplatform/ui-components';
 
 <Radio.Group value={selected} onChange={setSelected}>
   <Radio value="option1">Option 1</Radio>
@@ -894,7 +894,7 @@ import { Radio } from '@longvhv/ui-components';
 
 **Switch:**
 ```tsx
-import { Switch } from '@longvhv/ui-components';
+import { Switch } from '@vhvplatform/ui-components';
 
 <Switch
   checked={isEnabled}
@@ -906,7 +906,7 @@ import { Switch } from '@longvhv/ui-components';
 
 #### 7. Badge
 ```tsx
-import { Badge } from '@longvhv/ui-components';
+import { Badge } from '@vhvplatform/ui-components';
 
 <Badge variant="primary">New</Badge>
 <Badge variant="success">Active</Badge>
@@ -917,7 +917,7 @@ import { Badge } from '@longvhv/ui-components';
 
 #### 8. Avatar
 ```tsx
-import { Avatar } from '@longvhv/ui-components';
+import { Avatar } from '@vhvplatform/ui-components';
 
 <Avatar
   src={user.avatarUrl}
@@ -937,7 +937,7 @@ import { Avatar } from '@longvhv/ui-components';
 
 #### 9. Progress
 ```tsx
-import { Progress } from '@longvhv/ui-components';
+import { Progress } from '@vhvplatform/ui-components';
 
 // Linear progress
 <Progress value={75} max={100} variant="primary" showLabel />
@@ -953,7 +953,7 @@ import { Progress } from '@longvhv/ui-components';
 
 #### Enhanced Button
 ```tsx
-import { Button } from '@longvhv/ui-components';
+import { Button } from '@vhvplatform/ui-components';
 
 // More variants
 <Button variant="primary">Primary</Button>
@@ -985,7 +985,7 @@ import { Button } from '@longvhv/ui-components';
 
 #### Enhanced Input
 ```tsx
-import { Input } from '@longvhv/ui-components';
+import { Input } from '@vhvplatform/ui-components';
 
 // Input groups
 <Input
@@ -1037,7 +1037,7 @@ import { Input } from '@longvhv/ui-components';
 
 #### Enhanced Card
 ```tsx
-import { Card } from '@longvhv/ui-components';
+import { Card } from '@vhvplatform/ui-components';
 
 <Card hoverable loading={loading}>
   <Card.Header
@@ -1069,11 +1069,11 @@ import { Card } from '@longvhv/ui-components';
 
 | Package | New Features | New Hooks | New Components | LOC Added |
 |---------|-------------|-----------|----------------|-----------|
-| @longvhv/context | 20+ methods | 2 | 0 | 500+ |
-| @longvhv/auth | 15 thunks, 10 selectors | 0 | 0 | 1000+ |
-| @longvhv/core | 10 features | 4 | 0 | 700+ |
-| @longvhv/api-client | 15 methods | 0 | 0 | 1200+ |
-| @longvhv/ui-components | Component enhancements | 2 | 12 | 2500+ |
+| @vhvplatform/context | 20+ methods | 2 | 0 | 500+ |
+| @vhvplatform/auth | 15 thunks, 10 selectors | 0 | 0 | 1000+ |
+| @vhvplatform/core | 10 features | 4 | 0 | 700+ |
+| @vhvplatform/api-client | 15 methods | 0 | 0 | 1200+ |
+| @vhvplatform/ui-components | Component enhancements | 2 | 12 | 2500+ |
 | **Total** | **60+** | **8** | **12** | **5900+** |
 
 ### Benefits

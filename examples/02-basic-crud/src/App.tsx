@@ -1,6 +1,6 @@
 import React from 'react';
-import { useCrud, CrudTable } from '@longvhv/crud';
-import { Button, Card, Input, Modal } from '@longvhv/ui-components';
+import { useCrud, CrudTable } from '@vhvplatform/crud';
+import { Button, Card, Input, Modal } from '@vhvplatform/ui-components';
 
 interface User {
   id: number;
@@ -10,11 +10,11 @@ interface User {
 }
 
 const App: React.FC = () => {
-  const crud = useCrud<User>({ 
+  const crud = useCrud<User>({
     resource: 'users',
     autoFetch: true,
   });
-  
+
   const [isModalOpen, setIsModalOpen] = React.useState(false);
   const [formData, setFormData] = React.useState({ name: '', email: '', role: 'user' });
 

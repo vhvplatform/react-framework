@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import { render } from '@testing-library/react';
-import { I18nProvider, useI18n } from '@longvhv/i18n';
+import { I18nProvider, useI18n } from '@vhvplatform/i18n';
 
 const TestComponent = () => {
   const { t, locale, setLocale } = useI18n();

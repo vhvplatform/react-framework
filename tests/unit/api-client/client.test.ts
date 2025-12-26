@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { createApiClient, ApiClient } from '@longvhv/api-client';
+import { createApiClient, ApiClient } from '@vhvplatform/api-client';
 
 describe('API Client', () => {
   let apiClient: ApiClient;

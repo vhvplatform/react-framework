@@ -8,19 +8,19 @@ Total: **185+ tests** across **46 test files**
 
 ### Packages Tested
 
-- ✅ **@longvhv/shared** (45+ tests) - Utils & hooks
-- ✅ **@longvhv/vietnamese** (20+ tests) - Vietnamese utilities
-- ✅ **@longvhv/i18n** (15+ tests) - Internationalization
-- ✅ **@longvhv/forms** (12+ tests) - Form management
-- ✅ **@longvhv/cache** (15+ tests) - Caching system
-- ✅ **@longvhv/context** (12+ tests) - Context management
-- ✅ **@longvhv/auth** (10+ tests) - Authentication
-- ✅ **@longvhv/crud** (10+ tests) - CRUD operations
-- ✅ **@longvhv/media** (12+ tests) - Media processing
-- ✅ **@longvhv/api-client** (8+ tests) - API client
-- ✅ **@longvhv/core** (8+ tests) - Core framework
-- ✅ **@longvhv/ui-components** (15+ tests) - UI components
-- ✅ **@longvhv/cli** (5+ tests) - CLI tools
+- ✅ **@vhvplatform/shared** (45+ tests) - Utils & hooks
+- ✅ **@vhvplatform/vietnamese** (20+ tests) - Vietnamese utilities
+- ✅ **@vhvplatform/i18n** (15+ tests) - Internationalization
+- ✅ **@vhvplatform/forms** (12+ tests) - Form management
+- ✅ **@vhvplatform/cache** (15+ tests) - Caching system
+- ✅ **@vhvplatform/context** (12+ tests) - Context management
+- ✅ **@vhvplatform/auth** (10+ tests) - Authentication
+- ✅ **@vhvplatform/crud** (10+ tests) - CRUD operations
+- ✅ **@vhvplatform/media** (12+ tests) - Media processing
+- ✅ **@vhvplatform/api-client** (8+ tests) - API client
+- ✅ **@vhvplatform/core** (8+ tests) - Core framework
+- ✅ **@vhvplatform/ui-components** (15+ tests) - UI components
+- ✅ **@vhvplatform/cli** (5+ tests) - CLI tools
 
 ## 🚀 Running Tests
 
@@ -53,7 +53,7 @@ tests/
 │   └── testUtils.tsx     # Helper functions
 ├── mocks/                # Mock data & providers
 └── unit/                 # Unit tests
-    ├── shared/           # @longvhv/shared tests
+    ├── shared/           # @vhvplatform/shared tests
     │   ├── utils/        # Utility function tests
     │   └── hooks/        # React hook tests
     ├── vietnamese/       # Vietnamese utils tests

@@ -3,7 +3,7 @@ import fs from 'fs-extra';
 import path from 'path';
 import chalk from 'chalk';
 import { AppAnalyzer } from './AppAnalyzer.js';
-import { TemplateConfig } from '@longvhv/templates';
+import { TemplateConfig } from '@vhvplatform/templates';
 import { ImportAppOptions, POSSIBLE_SOURCE_DIRS } from './types.js';
 
 /**

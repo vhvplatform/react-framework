@@ -1,5 +1,5 @@
 {
-  "name": "@longvhv/forms",
+  "name": "@vhvplatform/forms",
   "version": "1.0.0",
   "description": "Comprehensive form management with validation for SaaS Framework React",
   "main": "dist/index.js",
@@ -15,11 +15,11 @@
     "form-validation",
     "form-builder"
   ],
-  "author": "longvhv",
+  "author": "vhvplatform",
   "license": "MIT",
   "peerDependencies": {
     "react": "^18.2.0",
-    "@longvhv/ui-components": "workspace:*"
+    "@vhvplatform/ui-components": "workspace:*"
   },
   "devDependencies": {
     "@types/react": "^18.2.0",

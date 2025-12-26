@@ -3,8 +3,8 @@ import chalk from 'chalk';
 import ora from 'ora';
 import path from 'path';
 import fs from 'fs-extra';
-import { AppImporter } from '@longvhv/app-adapter';
-import { TemplateRegistry } from '@longvhv/templates';
+import { AppImporter } from '@vhvplatform/app-adapter';
+import { TemplateRegistry } from '@vhvplatform/templates';
 
 interface AdaptAppAnswers {
   appPath: string;

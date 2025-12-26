@@ -1,5 +1,5 @@
 import chalk from 'chalk';
-import { TemplateRegistry } from '@longvhv/templates';
+import { TemplateRegistry } from '@vhvplatform/templates';
 
 /**
  * List all available templates

@@ -1,7 +1,7 @@
 {
-  "name": "@longvhv/api-client",
+  "name": "@vhvplatform/api-client",
   "version": "1.0.0",
-  "description": "API client for SaaS applications with @longvhv/saas-framework-go integration",
+  "description": "API client for SaaS applications with @vhvplatform/go-framework integration",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",

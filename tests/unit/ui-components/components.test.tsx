@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
-import { Button, Card, Input, Spinner } from '@longvhv/ui-components';
+import { Button, Card, Input, Spinner } from '@vhvplatform/ui-components';
 
 describe('UI Components', () => {
   describe('Button', () => {

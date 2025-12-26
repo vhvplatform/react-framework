@@ -92,7 +92,7 @@ export async function createModule(name?: string) {
     await fs.mkdir(path.join(modulePath, 'components'), { recursive: true });
 
     // Create module index file with auto-discovery support
-    const indexTs = `import { createModule } from '@longvhv/core';
+    const indexTs = `import { createModule } from '@vhvplatform/core';
 ${hasRoutes ? "import { routes } from './routes';" : ''}
 ${hasState ? `import ${stateName}Reducer from './store/${stateName}Slice';` : ''}
 
@@ -128,7 +128,7 @@ export default ${moduleId.replace(/-/g, '')}Module;
       .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
       .join('');
 
-    const componentTsx = `import { Card, Button } from '@longvhv/ui-components';
+    const componentTsx = `import { Card, Button } from '@vhvplatform/ui-components';
 
 export function ${componentName}() {
   return (
@@ -221,7 +221,7 @@ export const selectCount = (state: { ${stateName}: ${componentName}State }) => s
     console.log(chalk.white('  Option 1: Auto-discovery (Recommended for development)'));
     console.log(chalk.gray('     Update src/main.tsx to use auto-discovery:'));
     console.log(chalk.gray('     '));
-    console.log(chalk.gray('     import { loadModulesFromGlob } from \'@longvhv/core\';'));
+    console.log(chalk.gray('     import { loadModulesFromGlob } from \'@vhvplatform/core\';'));
     console.log(chalk.gray('     '));
     console.log(chalk.gray('     const modules = await loadModulesFromGlob('));
     console.log(chalk.gray('       import.meta.glob(\'./modules/*/index.ts\')'));

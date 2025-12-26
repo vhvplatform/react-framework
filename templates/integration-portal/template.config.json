@@ -3,7 +3,7 @@
   "description": "A developer portal template with API documentation, explorer, and analytics",
   "version": "1.0.0",
   "source": {
-    "repo": "https://github.com/longvhv/Integrationhubdeveloperportal",
+    "repo": "https://github.com/vhvplatform/Integrationhubdeveloperportal",
     "branch": "main"
   },
   "components": {

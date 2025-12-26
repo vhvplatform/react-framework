@@ -48,7 +48,7 @@ When using this framework:
 2. **HTTPS**: Always use HTTPS in production
 3. **Token Refresh**: Implement token refresh logic for long-lived sessions
 4. **Rate Limiting**: Configure rate limiting on the backend
-5. **CORS**: Configure proper CORS policies on @longvhv/saas-framework-go
+5. **CORS**: Configure proper CORS policies on @vhvplatform/go-framework
 6. **Input Validation**: Add additional validation on the backend
 7. **XSS Prevention**: The framework uses React which escapes by default, but be careful with dangerouslySetInnerHTML
 8. **CSRF**: OAuth flows include state parameter for CSRF protection

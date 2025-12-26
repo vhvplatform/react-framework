@@ -83,66 +83,66 @@ Comprehensive examples for every package and common scenarios.
 
 ## 🎯 Examples by Package
 
-### @longvhv/core
+### @vhvplatform/core
 - Module registration and lifecycle
 - Dynamic module loading
 - Module events and hooks
 - Redux integration
 
-### @longvhv/api-client  
+### @vhvplatform/api-client  
 - HTTP requests with retry
 - File upload with progress
 - Request caching
 - GraphQL integration
 
-### @longvhv/auth
+### @vhvplatform/auth
 - Login/logout flows
 - OAuth integration
 - 2FA setup
 - Session management
 
-### @longvhv/ui-components
+### @vhvplatform/ui-components
 - All 16 components with variants
 - Form patterns
 - Layout patterns
 - Accessibility examples
 
-### @longvhv/shared
+### @vhvplatform/shared
 - 70+ utility functions
 - 12 React hooks
 - Common patterns
 
-### @longvhv/i18n
+### @vhvplatform/i18n
 - Multi-language setup
 - Custom translations
 - Locale formatting
 
-### @longvhv/crud
+### @vhvplatform/crud
 - Complete CRUD patterns
 - Table with sorting/filtering
 - Form validation
 
-### @longvhv/cache
+### @vhvplatform/cache
 - Multi-layer caching
 - Cache strategies
 - TTL management
 
-### @longvhv/context
+### @vhvplatform/context
 - Multi-tenant setup
 - RBAC implementation
 - Feature flags
 
-### @longvhv/forms
+### @vhvplatform/forms
 - Form validation
 - Async validation
 - Complex forms
 
-### @longvhv/media
+### @vhvplatform/media
 - Image processing
 - Video handling
 - Excel/PDF generation
 
-### @longvhv/vietnamese
+### @vhvplatform/vietnamese
 - Text processing
 - Validation
 - Formatting
@@ -160,8 +160,8 @@ Each example includes:
 
 ```bash
 # Clone repository
-git clone https://github.com/longvhv/saas-framework-react.git
-cd saas-framework-react
+git clone https://github.com/vhvplatform/react-framework.git
+cd react-framework
 
 # Install dependencies
 pnpm install

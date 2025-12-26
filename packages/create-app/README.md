@@ -1,25 +1,25 @@
-# @longvhv/create-app
+# @vhvplatform/create-app
 
-CLI tool to bootstrap new SaaS applications using the @longvhv framework.
+CLI tool to bootstrap new SaaS applications using the @vhvplatform framework.
 
 ## Usage
 
 ### Interactive Mode
 
 ```bash
-npx @longvhv/create-app
+npx @vhvplatform/create-app
 ```
 
 ### With App Name
 
 ```bash
-npx @longvhv/create-app my-saas-app
+npx @vhvplatform/create-app my-saas-app
 ```
 
 ### With Options
 
 ```bash
-npx @longvhv/create-app my-saas-app \
+npx @vhvplatform/create-app my-saas-app \
   --template blank \
   --version latest \
   --registry https://registry.npmjs.org \
@@ -42,7 +42,7 @@ npx @longvhv/create-app my-saas-app \
 The CLI will create a new SaaS application with:
 
 - Full project structure (src, public, scripts, hooks, utils, types)
-- Package.json with all @longvhv dependencies
+- Package.json with all @vhvplatform dependencies
 - TypeScript configuration
 - Vite configuration
 - Tailwind CSS setup
@@ -216,7 +216,7 @@ When deploying to Kubernetes with microservices enabled, you get:
 To use a private registry (GitHub Packages, custom):
 
 ```bash
-npx @longvhv/create-app my-app --registry https://npm.pkg.github.com
+npx @vhvplatform/create-app my-app --registry https://npm.pkg.github.com
 ```
 
 The CLI will create a `.npmrc` file with the registry configuration. Make sure to set your `NPM_TOKEN` environment variable.

@@ -1,5 +1,5 @@
 import { CrudTableConfig } from '../types';
-import { Button } from '@longvhv/ui-components';
+import { Button } from '@vhvplatform/ui-components';
 
 interface CrudTableProps<T> {
   data: T[];

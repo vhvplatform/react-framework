@@ -1,5 +1,5 @@
 {
-  "name": "@longvhv/app-adapter",
+  "name": "@vhvplatform/app-adapter",
   "version": "1.0.0",
   "description": "Utilities to analyze and adapt existing applications into the framework",
   "type": "module",

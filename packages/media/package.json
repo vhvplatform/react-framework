@@ -1,5 +1,5 @@
 {
-  "name": "@longvhv/media",
+  "name": "@vhvplatform/media",
   "version": "1.0.0",
   "description": "Media processing library for images, videos, PDFs, and Excel files",
   "main": "dist/index.js",
@@ -16,7 +16,7 @@
     "excel",
     "file-processing"
   ],
-  "author": "longvhv",
+  "author": "vhvplatform",
   "license": "MIT",
   "dependencies": {
     "pdfjs-dist": "^3.11.174",

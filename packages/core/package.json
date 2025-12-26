@@ -1,5 +1,5 @@
 {
-  "name": "@longvhv/core",
+  "name": "@vhvplatform/core",
   "version": "1.0.0",
   "description": "Core framework for SaaS applications",
   "type": "module",

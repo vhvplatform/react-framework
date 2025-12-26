@@ -1,5 +1,5 @@
 {
-  "name": "@longvhv/theme",
+  "name": "@vhvplatform/theme",
   "version": "1.0.0",
   "description": "Theme management with dark/light mode support",
   "main": "dist/index.js",
@@ -16,7 +16,7 @@
     "theming",
     "react"
   ],
-  "author": "longvhv",
+  "author": "vhvplatform",
   "license": "MIT",
   "peerDependencies": {
     "react": "^18.2.0"

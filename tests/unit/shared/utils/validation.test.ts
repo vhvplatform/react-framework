@@ -8,7 +8,7 @@ import {
   isRequired,
   minLength,
   maxLength,
-} from '@longvhv/shared/utils';
+} from '@vhvplatform/shared/utils';
 
 describe('Validation Utils', () => {
   describe('isValidEmail', () => {

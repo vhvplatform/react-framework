@@ -1,10 +1,10 @@
 # 📚 Shared Library System Guide
 
-Hệ thống thư viện dùng chung (@longvhv/shared) cung cấp utilities, hooks, types và constants được tối ưu để tái sử dụng trong toàn bộ ứng dụng SaaS.
+Hệ thống thư viện dùng chung (@vhvplatform/shared) cung cấp utilities, hooks, types và constants được tối ưu để tái sử dụng trong toàn bộ ứng dụng SaaS.
 
 ## 📦 Tổng quan
 
-Package **@longvhv/shared** chứa:
+Package **@vhvplatform/shared** chứa:
 - **Utils** - Hàm tiện ích cho string, date, object, array, validation, format, storage
 - **Hooks** - React hooks tái sử dụng (debounce, localStorage, pagination, v.v.)
 - **Types** - TypeScript types và interfaces chung
@@ -16,13 +16,13 @@ Package **@longvhv/shared** chứa:
 
 ```tsx
 // Import toàn bộ
-import { capitalize, formatCurrency, useDebounce } from '@longvhv/shared';
+import { capitalize, formatCurrency, useDebounce } from '@vhvplatform/shared';
 
 // Import từ sub-path (tối ưu tree-shaking)
-import { capitalize, truncate } from '@longvhv/shared/utils';
-import { useDebounce, usePagination } from '@longvhv/shared/hooks';
-import { API_CONFIG, STORAGE_KEYS } from '@longvhv/shared/constants';
-import type { ApiResponse, PaginationMeta } from '@longvhv/shared/types';
+import { capitalize, truncate } from '@vhvplatform/shared/utils';
+import { useDebounce, usePagination } from '@vhvplatform/shared/hooks';
+import { API_CONFIG, STORAGE_KEYS } from '@vhvplatform/shared/constants';
+import type { ApiResponse, PaginationMeta } from '@vhvplatform/shared/types';
 ```
 
 ## 🛠️ Utils - Hàm tiện ích
@@ -40,7 +40,7 @@ import {
   randomString,
   pluralize,
   getInitials 
-} from '@longvhv/shared/utils';
+} from '@vhvplatform/shared/utils';
 
 // Examples
 capitalize('hello world');        // "Hello world"
@@ -66,7 +66,7 @@ import {
   addDays,
   startOfDay,
   endOfDay 
-} from '@longvhv/shared/utils';
+} from '@vhvplatform/shared/utils';
 
 // Examples
 formatDate(new Date());                    // "2024-12-24 10:30"
@@ -90,7 +90,7 @@ import {
   isEmpty,
   get,
   set 
-} from '@longvhv/shared/utils';
+} from '@vhvplatform/shared/utils';
 
 // Examples
 const obj = { a: 1, b: { c: 2 } };
@@ -116,7 +116,7 @@ import {
   sample,
   shuffle,
   range 
-} from '@longvhv/shared/utils';
+} from '@vhvplatform/shared/utils';
 
 // Examples
 unique([1, 2, 2, 3]);                     // [1, 2, 3]
@@ -145,7 +145,7 @@ import {
   maxLength,
   inRange,
   getPasswordStrength 
-} from '@longvhv/shared/utils';
+} from '@vhvplatform/shared/utils';
 
 // Examples
 isValidEmail('user@example.com');          // true
@@ -170,7 +170,7 @@ import {
   formatFileSize,
   formatPhoneNumber,
   formatCompactNumber 
-} from '@longvhv/shared/utils';
+} from '@vhvplatform/shared/utils';
 
 // Examples
 formatCurrency(1234.56);                   // "$1,234.56"
@@ -185,7 +185,7 @@ formatCompactNumber(1234567);              // "1.2M"
 ### Storage Utils
 
 ```tsx
-import { storage, sessionStorage } from '@longvhv/shared/utils';
+import { storage, sessionStorage } from '@vhvplatform/shared/utils';
 
 // localStorage
 storage.set('user', { id: 1, name: 'John' });
@@ -206,7 +206,7 @@ const temp = sessionStorage.get('temp');
 Delay cập nhật giá trị cho đến khi user ngừng typing:
 
 ```tsx
-import { useDebounce } from '@longvhv/shared/hooks';
+import { useDebounce } from '@vhvplatform/shared/hooks';
 
 function SearchInput() {
   const [search, setSearch] = useState('');
@@ -228,7 +228,7 @@ function SearchInput() {
 Sync React state với localStorage:
 
 ```tsx
-import { useLocalStorage } from '@longvhv/shared/hooks';
+import { useLocalStorage } from '@vhvplatform/shared/hooks';
 
 function ThemeToggle() {
   const [theme, setTheme, removeTheme] = useLocalStorage('theme', 'light');
@@ -251,7 +251,7 @@ import {
   useIsMobile, 
   useIsTablet, 
   useIsDesktop 
-} from '@longvhv/shared/hooks';
+} from '@vhvplatform/shared/hooks';
 
 function ResponsiveComponent() {
   const isMobile = useIsMobile();
@@ -270,7 +270,7 @@ function ResponsiveComponent() {
 Quản lý pagination logic:
 
 ```tsx
-import { usePagination } from '@longvhv/shared/hooks';
+import { usePagination } from '@vhvplatform/shared/hooks';
 
 function UserList({ users }: { users: User[] }) {
   const {
@@ -309,7 +309,7 @@ function UserList({ users }: { users: User[] }) {
 Toggle boolean state:
 
 ```tsx
-import { useToggle } from '@longvhv/shared/hooks';
+import { useToggle } from '@vhvplatform/shared/hooks';
 
 function Modal() {
   const [isOpen, toggle, setIsOpen] = useToggle(false);
@@ -329,7 +329,7 @@ function Modal() {
 Quản lý async operations:
 
 ```tsx
-import { useAsync } from '@longvhv/shared/hooks';
+import { useAsync } from '@vhvplatform/shared/hooks';
 
 function UserProfile({ userId }: { userId: string }) {
   const { data, loading, error, execute, reset } = useAsync(
@@ -370,7 +370,7 @@ import type {
   LoadingState,
   ResourceState,
   ListState,
-} from '@longvhv/shared/types';
+} from '@vhvplatform/shared/types';
 
 // Usage examples
 const response: ApiResponse<User> = await api.get('/users/1');
@@ -405,7 +405,7 @@ import {
   PAGINATION,
   NOTIFICATION_DURATION,
   DEBOUNCE_DELAY,
-} from '@longvhv/shared/constants';
+} from '@vhvplatform/shared/constants';
 
 // Examples
 const timeout = API_CONFIG.DEFAULT_TIMEOUT;         // 30000
@@ -461,17 +461,17 @@ packages/shared/
 
 ```tsx
 // ✅ Good - Chỉ import những gì cần
-import { capitalize } from '@longvhv/shared/utils';
+import { capitalize } from '@vhvplatform/shared/utils';
 
 // ❌ Bad - Import toàn bộ package
-import shared from '@longvhv/shared';
+import shared from '@vhvplatform/shared';
 ```
 
 ### 2. Sử dụng TypeScript types
 
 ```tsx
 // ✅ Good - Type-safe
-import type { ApiResponse } from '@longvhv/shared/types';
+import type { ApiResponse } from '@vhvplatform/shared/types';
 
 function fetchUser(id: string): Promise<ApiResponse<User>> {
   // ...
@@ -482,7 +482,7 @@ function fetchUser(id: string): Promise<ApiResponse<User>> {
 
 ```tsx
 // ✅ Good - Dùng constants
-import { STORAGE_KEYS } from '@longvhv/shared/constants';
+import { STORAGE_KEYS } from '@vhvplatform/shared/constants';
 localStorage.setItem(STORAGE_KEYS.AUTH_TOKEN, token);
 
 // ❌ Bad - Hard-code strings
@@ -492,7 +492,7 @@ localStorage.setItem('saas_auth_token', token);
 ### 4. Compose utilities
 
 ```tsx
-import { capitalize, truncate } from '@longvhv/shared/utils';
+import { capitalize, truncate } from '@vhvplatform/shared/utils';
 
 function formatTitle(title: string): string {
   return truncate(capitalize(title), 50);
@@ -505,7 +505,7 @@ function formatTitle(title: string): string {
 
 ```tsx
 import { useState } from 'react';
-import { isValidEmail, isRequired, getPasswordStrength } from '@longvhv/shared/utils';
+import { isValidEmail, isRequired, getPasswordStrength } from '@vhvplatform/shared/utils';
 
 function RegisterForm() {
   const [email, setEmail] = useState('');
@@ -545,8 +545,8 @@ function RegisterForm() {
 
 ```tsx
 import { useState, useEffect } from 'react';
-import { useDebounce } from '@longvhv/shared/hooks';
-import { formatCompactNumber } from '@longvhv/shared/utils';
+import { useDebounce } from '@vhvplatform/shared/hooks';
+import { formatCompactNumber } from '@vhvplatform/shared/utils';
 
 function UserSearch() {
   const [query, setQuery] = useState('');
@@ -575,7 +575,7 @@ function UserSearch() {
 ### Responsive layout
 
 ```tsx
-import { useIsMobile, useIsTablet, useIsDesktop } from '@longvhv/shared/hooks';
+import { useIsMobile, useIsTablet, useIsDesktop } from '@vhvplatform/shared/hooks';
 
 function Dashboard() {
   const isMobile = useIsMobile();
@@ -618,7 +618,7 @@ pnpm build
 
 ## ✅ Tóm tắt
 
-Package **@longvhv/shared** cung cấp:
+Package **@vhvplatform/shared** cung cấp:
 - ✅ 50+ utility functions
 - ✅ 6+ React hooks tái sử dụng
 - ✅ Comprehensive TypeScript types
@@ -639,7 +639,7 @@ Sử dụng shared library giúp:
 Phát hiện click bên ngoài element:
 
 ```tsx
-import { useClickOutside } from '@longvhv/shared/hooks';
+import { useClickOutside } from '@vhvplatform/shared/hooks';
 import { useRef } from 'react';
 
 function Dropdown() {
@@ -662,7 +662,7 @@ function Dropdown() {
 Track kích thước cửa sổ:
 
 ```tsx
-import { useWindowSize } from '@longvhv/shared/hooks';
+import { useWindowSize } from '@vhvplatform/shared/hooks';
 
 function WindowInfo() {
   const { width, height } = useWindowSize();
@@ -676,7 +676,7 @@ function WindowInfo() {
 Declarative interval hook:
 
 ```tsx
-import { useInterval } from '@longvhv/shared/hooks';
+import { useInterval } from '@vhvplatform/shared/hooks';
 
 function Clock() {
   const [time, setTime] = useState(new Date());
@@ -694,7 +694,7 @@ function Clock() {
 Lưu giá trị trước đó:
 
 ```tsx
-import { usePrevious } from '@longvhv/shared/hooks';
+import { usePrevious } from '@vhvplatform/shared/hooks';
 
 function Counter() {
   const [count, setCount] = useState(0);
@@ -715,7 +715,7 @@ function Counter() {
 Copy text vào clipboard:
 
 ```tsx
-import { useCopyToClipboard } from '@longvhv/shared/hooks';
+import { useCopyToClipboard } from '@vhvplatform/shared/hooks';
 
 function CopyButton({ text }: { text: string }) {
   const { copy, copied, error } = useCopyToClipboard();
@@ -733,7 +733,7 @@ function CopyButton({ text }: { text: string }) {
 Theo dõi trạng thái online/offline:
 
 ```tsx
-import { useOnlineStatus } from '@longvhv/shared/hooks';
+import { useOnlineStatus } from '@vhvplatform/shared/hooks';
 
 function NetworkStatus() {
   const isOnline = useOnlineStatus();
@@ -760,7 +760,7 @@ import {
   getDomain,
   isAbsoluteUrl,
   joinUrl 
-} from '@longvhv/shared/utils';
+} from '@vhvplatform/shared/utils';
 
 // Build URL with params
 const url = buildUrl('https://api.example.com/users', { page: 1, limit: 10 });
@@ -802,7 +802,7 @@ import {
   isOdd,
   sum,
   average 
-} from '@longvhv/shared/utils';
+} from '@vhvplatform/shared/utils';
 
 // Clamp value
 clamp(150, 0, 100);           // 100
@@ -847,7 +847,7 @@ import {
   darkenColor,
   randomColor,
   getContrastColor 
-} from '@longvhv/shared/utils';
+} from '@vhvplatform/shared/utils';
 
 // Hex to RGB
 hexToRgb('#ff5733');          // { r: 255, g: 87, b: 51 }
@@ -886,7 +886,7 @@ import {
   isVideoFile,
   isAudioFile,
   formatFileSize 
-} from '@longvhv/shared/utils';
+} from '@vhvplatform/shared/utils';
 
 // Download file
 downloadFile(blob, 'report.pdf');
@@ -955,11 +955,11 @@ formatFileSize(1048576);      // "1 MB"
 
 ```tsx
 // ❌ Không tối ưu - import toàn bộ
-import { capitalize } from '@longvhv/shared';
+import { capitalize } from '@vhvplatform/shared';
 
 // ✅ Tối ưu - import từ sub-path
-import { capitalize } from '@longvhv/shared/utils';
-import { useDebounce } from '@longvhv/shared/hooks';
+import { capitalize } from '@vhvplatform/shared/utils';
+import { useDebounce } from '@vhvplatform/shared/hooks';
 ```
 
 ### TypeScript Integration
@@ -967,7 +967,7 @@ import { useDebounce } from '@longvhv/shared/hooks';
 Sử dụng types để đảm bảo type safety:
 
 ```tsx
-import type { ApiResponse, PaginationMeta } from '@longvhv/shared/types';
+import type { ApiResponse, PaginationMeta } from '@vhvplatform/shared/types';
 
 const response: ApiResponse<User[]> = await api.get('/users');
 const meta: PaginationMeta = response.meta;
@@ -990,5 +990,5 @@ cd packages/shared
 pnpm build
 
 # Use in your modules
-import { formatCurrency, useDebounce, hexToRgb } from '@longvhv/shared';
+import { formatCurrency, useDebounce, hexToRgb } from '@vhvplatform/shared';
 ```

@@ -32,7 +32,7 @@ export async function createApp(name?: string) {
     {
       type: 'input',
       name: 'apiUrl',
-      message: 'API URL (from @longvhv/saas-framework-go):',
+      message: 'API URL (from @vhvplatform/go-framework):',
       default: 'http://localhost:8080',
     },
     {
@@ -84,10 +84,10 @@ export async function createApp(name?: string) {
         'type-check': 'tsc --noEmit',
       },
       dependencies: {
-        '@longvhv/core': 'workspace:*',
-        '@longvhv/api-client': 'workspace:*',
-        ...(enableAuth && { '@longvhv/auth': 'workspace:*' }),
-        '@longvhv/ui-components': 'workspace:*',
+        '@vhvplatform/core': 'workspace:*',
+        '@vhvplatform/api-client': 'workspace:*',
+        ...(enableAuth && { '@vhvplatform/auth': 'workspace:*' }),
+        '@vhvplatform/ui-components': 'workspace:*',
         react: '^18.2.0',
         'react-dom': '^18.2.0',
         'react-redux': '^9.0.4',
@@ -211,9 +211,9 @@ export default {
     // Create src/main.tsx with auto-discovery
     const mainTsx = `import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { Application, loadModulesFromGlob } from '@longvhv/core';
-import { ApiProvider } from '@longvhv/api-client';
-${enableAuth ? "import { authReducer } from '@longvhv/auth';" : ''}
+import { Application, loadModulesFromGlob } from '@vhvplatform/core';
+import { ApiProvider } from '@vhvplatform/api-client';
+${enableAuth ? "import { authReducer } from '@vhvplatform/auth';" : ''}
 import App from './App';
 import './index.css';
 
@@ -279,8 +279,8 @@ loadModules().then((modules) => {
 
     // Create src/App.tsx
     const appTsx = `import { Routes, Route, Link } from 'react-router-dom';
-${enableAuth ? "import { LoginForm, ProtectedRoute } from '@longvhv/auth';" : ''}
-import { Button, Card } from '@longvhv/ui-components';
+${enableAuth ? "import { LoginForm, ProtectedRoute } from '@vhvplatform/auth';" : ''}
+import { Button, Card } from '@vhvplatform/ui-components';
 
 function HomePage() {
   return (
@@ -381,7 +381,7 @@ Thumbs.db
     // Create README.md
     const readme = `# ${appName}
 
-A SaaS application built with @longvhv/saas-framework-react
+A SaaS application built with @vhvplatform/react-framework
 
 ## Getting Started
 
@@ -405,13 +405,13 @@ pnpm build
 - ✅ React Router for navigation
 ${enableAuth ? '- ✅ Authentication with JWT' : ''}
 ${enableOAuth ? `- ✅ OAuth support (${oauthProviders.join(', ')})` : ''}
-- ✅ Integration with @longvhv/saas-framework-go
+- ✅ Integration with @vhvplatform/go-framework
 
 ## API Configuration
 
 The application connects to: \`${apiUrl}\`
 
-Make sure your @longvhv/saas-framework-go backend is running.
+Make sure your @vhvplatform/go-framework backend is running.
 `;
 
     await fs.writeFile(path.join(appPath, 'README.md'), readme);

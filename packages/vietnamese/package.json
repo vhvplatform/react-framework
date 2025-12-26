@@ -1,5 +1,5 @@
 {
-  "name": "@longvhv/vietnamese",
+  "name": "@vhvplatform/vietnamese",
   "version": "1.0.0",
   "description": "Vietnamese language processing utilities",
   "main": "dist/index.js",
@@ -15,7 +15,7 @@
     "text-processing",
     "validation"
   ],
-  "author": "longvhv",
+  "author": "vhvplatform",
   "license": "MIT",
   "devDependencies": {
     "typescript": "^5.3.0"

@@ -1,12 +1,12 @@
 {
-  "name": "@longvhv/create-app",
+  "name": "@vhvplatform/create-app",
   "version": "1.0.0",
-  "description": "CLI tool to bootstrap new SaaS applications using @longvhv framework",
+  "description": "CLI tool to bootstrap new SaaS applications using @vhvplatform framework",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "bin": {
-    "create-longvhv-app": "./dist/index.js"
+    "create-vhvplatform-app": "./dist/index.js"
   },
   "exports": {
     ".": {
@@ -37,17 +37,17 @@
     "typescript",
     "scaffolding"
   ],
-  "author": "longvhv",
+  "author": "vhvplatform",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/longvhv/saas-framework-react.git",
+    "url": "https://github.com/vhvplatform/react-framework.git",
     "directory": "packages/create-app"
   },
   "bugs": {
-    "url": "https://github.com/longvhv/saas-framework-react/issues"
+    "url": "https://github.com/vhvplatform/react-framework/issues"
   },
-  "homepage": "https://github.com/longvhv/saas-framework-react#readme",
+  "homepage": "https://github.com/vhvplatform/react-framework#readme",
   "dependencies": {
     "commander": "^11.0.0",
     "inquirer": "^9.2.0",

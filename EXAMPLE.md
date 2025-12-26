@@ -43,9 +43,9 @@ my-saas-app/
 ```tsx
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { Application } from '@longvhv/core';
-import { ApiProvider } from '@longvhv/api-client';
-import { authReducer } from '@longvhv/auth';
+import { Application } from '@vhvplatform/core';
+import { ApiProvider } from '@vhvplatform/api-client';
+import { authReducer } from '@vhvplatform/auth';
 import App from './App';
 import './index.css';
 
@@ -54,7 +54,7 @@ import { dashboardModule } from './modules/dashboard';
 import { usersModule } from './modules/users';
 import { settingsModule } from './modules/settings';
 
-// API Configuration for @longvhv/saas-framework-go
+// API Configuration for @vhvplatform/go-framework
 const apiConfig = {
   baseURL: import.meta.env.VITE_API_URL || 'http://localhost:8080',
   getToken: () => localStorage.getItem('saas_auth_token'),
@@ -102,7 +102,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 
 ### modules/dashboard/index.ts
 ```tsx
-import { createModule } from '@longvhv/core';
+import { createModule } from '@vhvplatform/core';
 import { routes } from './routes';
 import dashboardReducer from './store/dashboardSlice';
 
@@ -122,7 +122,7 @@ export const dashboardModule = createModule({
 ### modules/dashboard/routes.tsx
 ```tsx
 import { RouteObject } from 'react-router-dom';
-import { ProtectedRoute } from '@longvhv/auth';
+import { ProtectedRoute } from '@vhvplatform/auth';
 import { Dashboard } from './components/Dashboard';
 
 export const routes: RouteObject[] = [
@@ -141,8 +141,8 @@ export const routes: RouteObject[] = [
 ```tsx
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Card, Button, Spinner } from '@longvhv/ui-components';
-import { useAuth } from '@longvhv/auth';
+import { Card, Button, Spinner } from '@vhvplatform/ui-components';
+import { useAuth } from '@vhvplatform/auth';
 import { fetchStats, selectDashboard } from '../store/dashboardSlice';
 
 export function Dashboard() {
@@ -199,7 +199,7 @@ export function Dashboard() {
 ### modules/dashboard/store/dashboardSlice.ts
 ```tsx
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { ApiClient } from '@longvhv/api-client';
+import { ApiClient } from '@vhvplatform/api-client';
 
 interface DashboardStats {
   totalUsers: number;
@@ -261,7 +261,7 @@ export const selectDashboard = (state: { dashboard: DashboardState }) =>
 
 ### modules/users/api.ts
 ```tsx
-import { useApi } from '@longvhv/api-client';
+import { useApi } from '@vhvplatform/api-client';
 
 export interface User {
   id: string;
@@ -307,7 +307,7 @@ export function useUsersApi() {
 ### modules/users/components/UserList.tsx
 ```tsx
 import { useEffect, useState } from 'react';
-import { Card, Button, Spinner } from '@longvhv/ui-components';
+import { Card, Button, Spinner } from '@vhvplatform/ui-components';
 import { useUsersApi, User } from '../api';
 
 export function UserList() {
@@ -395,8 +395,8 @@ export function UserList() {
 ### App.tsx with Auth
 ```tsx
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { LoginForm, ProtectedRoute, OAuthButton } from '@longvhv/auth';
-import { Card } from '@longvhv/ui-components';
+import { LoginForm, ProtectedRoute, OAuthButton } from '@vhvplatform/auth';
+import { Card } from '@vhvplatform/ui-components';
 import { Layout } from './components/Layout';
 
 function LoginPage() {
@@ -479,7 +479,7 @@ pnpm build
 pnpm preview
 ```
 
-## 7. Backend Integration (@longvhv/saas-framework-go)
+## 7. Backend Integration (@vhvplatform/go-framework)
 
 Make sure your Go backend is running with these endpoints:
 

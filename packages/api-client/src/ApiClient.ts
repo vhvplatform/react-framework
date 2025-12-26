@@ -2,7 +2,7 @@ import axios, { AxiosInstance, AxiosResponse } from 'axios';
 import { ApiClientConfig, ApiError, ApiResponse, RequestOptions } from './types';
 
 /**
- * API Client for communication with @longvhv/saas-framework-go backend
+ * API Client for communication with @vhvplatform/go-framework backend
  */
 export class ApiClient {
   private client: AxiosInstance;
@@ -134,7 +134,7 @@ export class ApiClient {
   private extractData<T>(response: AxiosResponse<ApiResponse<T>>): T {
     const { data } = response;
 
-    // Handle @longvhv/saas-framework-go response format
+    // Handle @vhvplatform/go-framework response format
     if (data.success === false) {
       throw new ApiError(
         data.message || 'Request failed',

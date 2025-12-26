@@ -1,8 +1,8 @@
 import inquirer from 'inquirer';
 import chalk from 'chalk';
 import ora from 'ora';
-import { AppImporter } from '@longvhv/app-adapter';
-import { TemplateRegistry } from '@longvhv/templates';
+import { AppImporter } from '@vhvplatform/app-adapter';
+import { TemplateRegistry } from '@vhvplatform/templates';
 
 interface ImportAppAnswers {
   repoUrl: string;

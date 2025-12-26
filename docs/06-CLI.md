@@ -1,13 +1,13 @@
-# @longvhv/cli
+# @vhvplatform/cli
 
-Complete documentation for @longvhv/cli package.
+Complete documentation for @vhvplatform/cli package.
 
 ## Overview
 Detailed package documentation with API reference, examples, and best practices.
 
 ## Installation
 ```bash
-pnpm add @longvhv/cli
+pnpm add @vhvplatform/cli
 ```
 
 ## Usage

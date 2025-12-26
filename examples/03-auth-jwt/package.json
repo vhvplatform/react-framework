@@ -9,12 +9,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@longvhv/core": "workspace:*",
-    "@longvhv/api-client": "workspace:*",
-    "@longvhv/auth": "workspace:*",
-    "@longvhv/ui-components": "workspace:*",
-    "@longvhv/shared": "workspace:*",
-    "@longvhv/i18n": "workspace:*",
+    "@vhvplatform/core": "workspace:*",
+    "@vhvplatform/api-client": "workspace:*",
+    "@vhvplatform/auth": "workspace:*",
+    "@vhvplatform/ui-components": "workspace:*",
+    "@vhvplatform/shared": "workspace:*",
+    "@vhvplatform/i18n": "workspace:*",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.20.0",

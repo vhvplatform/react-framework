@@ -41,7 +41,7 @@ export interface ApiClientConfig {
 }
 
 /**
- * API error response from @longvhv/saas-framework-go
+ * API error response from @vhvplatform/go-framework
  */
 export interface ApiErrorResponse {
   /**
@@ -83,7 +83,7 @@ export class ApiError extends Error {
 }
 
 /**
- * API success response wrapper from @longvhv/saas-framework-go
+ * API success response wrapper from @vhvplatform/go-framework
  */
 export interface ApiResponse<T = unknown> {
   /**

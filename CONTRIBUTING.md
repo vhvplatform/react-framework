@@ -5,7 +5,7 @@ We welcome contributions to the SaaS Framework React! This document provides gui
 ## 🚀 Getting Started
 
 1. Fork the repository
-2. Clone your fork: `git clone https://github.com/YOUR_USERNAME/saas-framework-react.git`
+2. Clone your fork: `git clone https://github.com/vhvplatform/react-framework.git`
 3. Install dependencies: `pnpm install`
 4. Build packages: `pnpm build`
 
@@ -24,11 +24,11 @@ We welcome contributions to the SaaS Framework React! This document provides gui
 
 The monorepo contains these packages:
 
-- `@longvhv/core` - Core framework functionality
-- `@longvhv/api-client` - HTTP client for API integration
-- `@longvhv/auth` - Authentication components and logic
-- `@longvhv/ui-components` - Reusable UI components
-- `@longvhv/cli` - Command-line tools
+- `@vhvplatform/core` - Core framework functionality
+- `@vhvplatform/api-client` - HTTP client for API integration
+- `@vhvplatform/auth` - Authentication components and logic
+- `@vhvplatform/ui-components` - Reusable UI components
+- `@vhvplatform/cli` - Command-line tools
 
 ### Coding Standards
 

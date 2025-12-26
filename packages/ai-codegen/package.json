@@ -1,5 +1,5 @@
 {
-  "name": "@longvhv/ai-codegen",
+  "name": "@vhvplatform/ai-codegen",
   "version": "1.0.0",
   "description": "AI-powered code generation for React components and Go API",
   "type": "module",

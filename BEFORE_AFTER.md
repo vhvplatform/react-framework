@@ -85,7 +85,7 @@ Developer B working on users (simultaneously):
 
 ```tsx
 // src/main.tsx - One line loads all modules!
-import { loadModulesFromGlob } from '@longvhv/core';
+import { loadModulesFromGlob } from '@vhvplatform/core';
 
 const modules = await loadModulesFromGlob(
   import.meta.glob('./modules/*/index.ts')
@@ -160,7 +160,7 @@ Modules completed: 6+ modules
 // src/main.tsx
 - import { dashboardModule } from './modules/dashboard';
 - import { usersModule } from './modules/users';
-+ import { loadModulesFromGlob } from '@longvhv/core';
++ import { loadModulesFromGlob } from '@vhvplatform/core';
 
 + const modules = await loadModulesFromGlob(
 +   import.meta.glob('./modules/*/index.ts')

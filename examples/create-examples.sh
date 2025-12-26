@@ -4,11 +4,11 @@
 create_example() {
     local name=$1
     local description=$2
-    
+
     echo "Creating $name..."
     mkdir -p "$name/src"
     mkdir -p "$name/public"
-    
+
     # Create package.json
     cat > "$name/package.json" << EOF
 {
@@ -22,12 +22,12 @@ create_example() {
     "preview": "vite preview"
   },
   "dependencies": {
-    "@longvhv/core": "workspace:*",
-    "@longvhv/api-client": "workspace:*",
-    "@longvhv/auth": "workspace:*",
-    "@longvhv/ui-components": "workspace:*",
-    "@longvhv/shared": "workspace:*",
-    "@longvhv/i18n": "workspace:*",
+    "@vhvplatform/core": "workspace:*",
+    "@vhvplatform/api-client": "workspace:*",
+    "@vhvplatform/auth": "workspace:*",
+    "@vhvplatform/ui-components": "workspace:*",
+    "@vhvplatform/shared": "workspace:*",
+    "@vhvplatform/i18n": "workspace:*",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.20.0",
@@ -45,7 +45,7 @@ create_example() {
   }
 }
 EOF
-    
+
     # Create tsconfig.json
     cat > "$name/tsconfig.json" << EOF
 {
@@ -67,7 +67,7 @@ EOF
   ]
 }
 EOF
-    
+
     # Create vite.config.ts
     cat > "$name/vite.config.ts" << EOF
 import { defineConfig } from 'vite';
@@ -82,7 +82,7 @@ export default defineConfig({
   },
 });
 EOF
-    
+
     # Create tailwind.config.js
     cat > "$name/tailwind.config.js" << EOF
 /** @type {import('tailwindcss').Config} */
@@ -97,7 +97,7 @@ export default {
   plugins: [],
 }
 EOF
-    
+
     # Create postcss.config.js
     cat > "$name/postcss.config.js" << EOF
 export default {
@@ -107,7 +107,7 @@ export default {
   },
 }
 EOF
-    
+
     # Create index.html
     cat > "$name/index.html" << EOF
 <!DOCTYPE html>
@@ -123,7 +123,7 @@ EOF
   </body>
 </html>
 EOF
-    
+
     # Create src/index.css
     cat > "$name/src/index.css" << EOF
 @tailwind base;

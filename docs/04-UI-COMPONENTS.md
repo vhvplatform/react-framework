@@ -1,13 +1,13 @@
-# @longvhv/ui-components
+# @vhvplatform/ui-components
 
-Complete documentation for @longvhv/ui-components package.
+Complete documentation for @vhvplatform/ui-components package.
 
 ## Overview
 Detailed package documentation with API reference, examples, and best practices.
 
 ## Installation
 ```bash
-pnpm add @longvhv/ui-components
+pnpm add @vhvplatform/ui-components
 ```
 
 ## Usage

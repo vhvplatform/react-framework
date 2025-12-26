@@ -1,5 +1,5 @@
 {
-  "name": "@longvhv/templates",
+  "name": "@vhvplatform/templates",
   "version": "1.0.0",
   "description": "Template registry and management system for SaaS applications",
   "type": "module",

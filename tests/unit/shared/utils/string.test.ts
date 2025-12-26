@@ -7,7 +7,7 @@ import {
   toSnakeCase,
   pluralize,
   getInitials,
-} from '@longvhv/shared/utils';
+} from '@vhvplatform/shared/utils';
 
 describe('String Utils', () => {
   describe('capitalize', () => {

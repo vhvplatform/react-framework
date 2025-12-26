@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { useNotifications } from '@longvhv/notifications';
+import { useNotifications } from '@vhvplatform/notifications';
 import toast from 'react-hot-toast';
 import { renderHook } from '@testing-library/react';
 

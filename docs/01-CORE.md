@@ -1,13 +1,13 @@
-# @longvhv/core
+# @vhvplatform/core
 
-Complete documentation for @longvhv/core package.
+Complete documentation for @vhvplatform/core package.
 
 ## Overview
 Detailed package documentation with API reference, examples, and best practices.
 
 ## Installation
 ```bash
-pnpm add @longvhv/core
+pnpm add @vhvplatform/core
 ```
 
 ## Usage

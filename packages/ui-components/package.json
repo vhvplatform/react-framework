@@ -1,5 +1,5 @@
 {
-  "name": "@longvhv/ui-components",
+  "name": "@vhvplatform/ui-components",
   "version": "1.0.0",
   "description": "UI components for SaaS applications with Tailwind CSS",
   "type": "module",

@@ -1,5 +1,5 @@
 {
-  "name": "@longvhv/notifications",
+  "name": "@vhvplatform/notifications",
   "version": "1.0.0",
   "description": "Toast notification system with react-hot-toast",
   "main": "dist/index.js",
@@ -16,7 +16,7 @@
     "alerts",
     "messages"
   ],
-  "author": "longvhv",
+  "author": "vhvplatform",
   "license": "MIT",
   "peerDependencies": {
     "react": "^18.2.0",

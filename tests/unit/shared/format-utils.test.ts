@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { formatCurrency, formatNumber, formatPercent, formatFileSize } from '@longvhv/shared';
+import { formatCurrency, formatNumber, formatPercent, formatFileSize } from '@vhvplatform/shared';
 
 describe('Shared Utilities - Format Functions', () => {
   describe('formatCurrency', () => {

@@ -2,17 +2,17 @@
 
 ## Overview
 
-Successfully created a comprehensive React + Vite framework for building multiple SaaS applications in a monorepo architecture, fully integrated with @longvhv/saas-framework-go backend.
+Successfully created a comprehensive React + Vite framework for building multiple SaaS applications in a monorepo architecture, fully integrated with @vhvplatform/go-framework backend.
 
 ## ✅ What Was Implemented
 
 ### 1. Monorepo Structure
 - **pnpm workspaces** for efficient package management
-- 5 packages: `@longvhv/core`, `@longvhv/api-client`, `@longvhv/auth`, `@longvhv/ui-components`, `@longvhv/cli`
+- 5 packages: `@vhvplatform/core`, `@vhvplatform/api-client`, `@vhvplatform/auth`, `@vhvplatform/ui-components`, `@vhvplatform/cli`
 - Project references for TypeScript compilation
 - Shared configuration files (ESLint, Prettier, EditorConfig)
 
-### 2. Core Package (@longvhv/core)
+### 2. Core Package (@vhvplatform/core)
 **Purpose**: Foundation for modular SaaS applications
 
 **Features**:
@@ -28,8 +28,8 @@ Successfully created a comprehensive React + Vite framework for building multipl
 - Dynamic route registration from modules
 - Automatic Redux reducer combination
 
-### 3. API Client Package (@longvhv/api-client)
-**Purpose**: HTTP communication with @longvhv/saas-framework-go backend
+### 3. API Client Package (@vhvplatform/api-client)
+**Purpose**: HTTP communication with @vhvplatform/go-framework backend
 
 **Features**:
 - Axios-based client with interceptors
@@ -46,7 +46,7 @@ Successfully created a comprehensive React + Vite framework for building multipl
 - Automatic token refresh support
 - Response format handling
 
-### 4. Auth Package (@longvhv/auth)
+### 4. Auth Package (@vhvplatform/auth)
 **Purpose**: Complete authentication solution
 
 **Features**:
@@ -61,7 +61,7 @@ Successfully created a comprehensive React + Vite framework for building multipl
 - `LoginForm` - Pre-built login component
 - `OAuthButton` - OAuth provider buttons
 
-**Backend Integration** (@longvhv/saas-framework-go):
+**Backend Integration** (@vhvplatform/go-framework):
 - `POST /api/auth/login` - User login
 - `POST /api/auth/register` - User registration
 - `POST /api/auth/logout` - User logout
@@ -76,7 +76,7 @@ Successfully created a comprehensive React + Vite framework for building multipl
 - Loading and error states
 - LocalStorage synchronization
 
-### 5. UI Components Package (@longvhv/ui-components)
+### 5. UI Components Package (@vhvplatform/ui-components)
 **Purpose**: Reusable Tailwind CSS components
 
 **Components**:
@@ -102,7 +102,7 @@ Successfully created a comprehensive React + Vite framework for building multipl
   - 4 colors (primary, secondary, white, gray)
   - Optional text
 
-### 6. CLI Package (@longvhv/cli)
+### 6. CLI Package (@vhvplatform/cli)
 **Purpose**: Code generation and scaffolding
 
 **Commands**:
@@ -291,7 +291,7 @@ pnpm cli create-module users
 pnpm build
 ```
 
-## 🔗 Integration with @longvhv/saas-framework-go
+## 🔗 Integration with @vhvplatform/go-framework
 
 The framework is designed to work seamlessly with the Go backend:
 
@@ -336,7 +336,7 @@ The SaaS Framework React is now complete and ready for building production SaaS 
 
 - ✅ Complete monorepo setup
 - ✅ All core packages implemented
-- ✅ Full @longvhv/saas-framework-go integration
+- ✅ Full @vhvplatform/go-framework integration
 - ✅ CLI tools for rapid development
 - ✅ Comprehensive documentation
 - ✅ Production-ready build system

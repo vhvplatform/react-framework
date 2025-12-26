@@ -200,7 +200,7 @@ importers:
 
   packages/auth:
     dependencies:
-      '@longvhv/api-client':
+      '@vhvplatform/api-client':
         specifier: workspace:*
         version: link:../api-client
       '@reduxjs/toolkit':
@@ -241,13 +241,13 @@ importers:
 
   packages/cli:
     dependencies:
-      '@longvhv/ai-codegen':
+      '@vhvplatform/ai-codegen':
         specifier: workspace:*
         version: link:../ai-codegen
-      '@longvhv/app-adapter':
+      '@vhvplatform/app-adapter':
         specifier: workspace:*
         version: link:../app-adapter
-      '@longvhv/templates':
+      '@vhvplatform/templates':
         specifier: workspace:*
         version: link:../templates
       chalk:
@@ -297,7 +297,7 @@ importers:
 
   packages/context:
     dependencies:
-      '@longvhv/api-client':
+      '@vhvplatform/api-client':
         specifier: workspace:*
         version: link:../api-client
       react:
@@ -381,10 +381,10 @@ importers:
 
   packages/crud:
     dependencies:
-      '@longvhv/api-client':
+      '@vhvplatform/api-client':
         specifier: workspace:*
         version: link:../api-client
-      '@longvhv/shared':
+      '@vhvplatform/shared':
         specifier: workspace:*
         version: link:../shared
       react:
@@ -400,7 +400,7 @@ importers:
 
   packages/forms:
     dependencies:
-      '@longvhv/ui-components':
+      '@vhvplatform/ui-components':
         specifier: workspace:*
         version: link:../ui-components
       react:

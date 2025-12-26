@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { ModuleRegistry } from '@longvhv/core';
+import { ModuleRegistry } from '@vhvplatform/core';
 
 describe('Core Package - ModuleRegistry', () => {
   let registry: ModuleRegistry;

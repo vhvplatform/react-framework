@@ -1,7 +1,7 @@
 {
-  "name": "@longvhv/config",
+  "name": "@vhvplatform/config",
   "version": "1.0.0",
-  "description": "Shared configuration presets for @longvhv framework applications",
+  "description": "Shared configuration presets for @vhvplatform framework applications",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -35,17 +35,17 @@
     "saas",
     "framework"
   ],
-  "author": "longvhv",
+  "author": "vhvplatform",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/longvhv/saas-framework-react.git",
+    "url": "https://github.com/vhvplatform/react-framework.git",
     "directory": "packages/config"
   },
   "bugs": {
-    "url": "https://github.com/longvhv/saas-framework-react/issues"
+    "url": "https://github.com/vhvplatform/react-framework/issues"
   },
-  "homepage": "https://github.com/longvhv/saas-framework-react#readme",
+  "homepage": "https://github.com/vhvplatform/react-framework#readme",
   "devDependencies": {
     "@types/node": "^20.10.6",
     "typescript": "^5.3.0"

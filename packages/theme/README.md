@@ -1,4 +1,4 @@
-# @longvhv/theme
+# @vhvplatform/theme
 
 Theme management with dark/light mode support for the SaaS Framework.
 
@@ -14,7 +14,7 @@ Theme management with dark/light mode support for the SaaS Framework.
 ## Installation
 
 ```bash
-pnpm add @longvhv/theme
+pnpm add @vhvplatform/theme
 ```
 
 ## Usage
@@ -22,7 +22,7 @@ pnpm add @longvhv/theme
 ### Setup Theme Provider
 
 ```tsx
-import { ThemeProvider } from '@longvhv/theme';
+import { ThemeProvider } from '@vhvplatform/theme';
 
 function App() {
   return (
@@ -36,7 +36,7 @@ function App() {
 ### Use Theme Hook
 
 ```tsx
-import { useTheme } from '@longvhv/theme';
+import { useTheme } from '@vhvplatform/theme';
 
 function MyComponent() {
   const { theme, mode, setMode, toggleMode, isDark } = useTheme();
@@ -57,7 +57,7 @@ function MyComponent() {
 ### Custom Theme
 
 ```tsx
-import { ThemeProvider, Theme } from '@longvhv/theme';
+import { ThemeProvider, Theme } from '@vhvplatform/theme';
 
 const customTheme: Partial<Theme> = {
   colors: {
@@ -78,7 +78,7 @@ function App() {
 ### Utility Hooks
 
 ```tsx
-import { useIsDark, useToggleTheme } from '@longvhv/theme';
+import { useIsDark, useToggleTheme } from '@vhvplatform/theme';
 
 function ThemeToggle() {
   const isDark = useIsDark();

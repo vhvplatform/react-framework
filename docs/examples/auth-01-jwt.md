@@ -26,7 +26,7 @@ Edit `src/store.ts`:
 
 ```typescript
 import { configureStore } from '@reduxjs/toolkit';
-import { authReducer } from '@longvhv/auth';
+import { authReducer } from '@vhvplatform/auth';
 
 export const store = configureStore({
   reducer: {
@@ -45,9 +45,9 @@ Create `src/components/LoginForm.tsx`:
 ```typescript
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { login } from '@longvhv/auth';
-import { useApi } from '@longvhv/api-client';
-import { Button, Input, Card } from '@longvhv/ui-components';
+import { login } from '@vhvplatform/auth';
+import { useApi } from '@vhvplatform/api-client';
+import { Button, Input, Card } from '@vhvplatform/ui-components';
 
 export const LoginForm: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -129,8 +129,8 @@ Create `src/components/ProtectedRoute.tsx`:
 ```typescript
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-import { useAuth } from '@longvhv/auth';
-import { Spinner } from '@longvhv/ui-components';
+import { useAuth } from '@vhvplatform/auth';
+import { Spinner } from '@vhvplatform/ui-components';
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
@@ -162,10 +162,10 @@ Create `src/components/Dashboard.tsx`:
 ```typescript
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { logout } from '@longvhv/auth';
-import { useAuth } from '@longvhv/auth';
-import { Button, Card } from '@longvhv/ui-components';
-import { useApi } from '@longvhv/api-client';
+import { logout } from '@vhvplatform/auth';
+import { useAuth } from '@vhvplatform/auth';
+import { Button, Card } from '@vhvplatform/ui-components';
+import { useApi } from '@vhvplatform/api-client';
 
 export const Dashboard: React.FC = () => {
   const { user } = useAuth();
@@ -222,7 +222,7 @@ Edit `src/App.tsx`:
 ```typescript
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { useAuth } from '@longvhv/auth';
+import { useAuth } from '@vhvplatform/auth';
 import { LoginForm } from './components/LoginForm';
 import { Dashboard } from './components/Dashboard';
 import { ProtectedRoute } from './components/ProtectedRoute';
@@ -266,8 +266,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-import { Application } from '@longvhv/core';
-import { ApiProvider } from '@longvhv/api-client';
+import { Application } from '@vhvplatform/core';
+import { ApiProvider } from '@vhvplatform/api-client';
 import { store } from './store';
 import { App } from './App';
 import './index.css';

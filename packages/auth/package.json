@@ -1,5 +1,5 @@
 {
-  "name": "@longvhv/auth",
+  "name": "@vhvplatform/auth",
   "version": "1.0.0",
   "description": "Authentication package for SaaS applications with JWT and OAuth support",
   "type": "module",
@@ -28,7 +28,7 @@
     "typescript": "^5.3.3"
   },
   "peerDependencies": {
-    "@longvhv/api-client": "workspace:*",
+    "@vhvplatform/api-client": "workspace:*",
     "react": "^18.2.0"
   }
 }

@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect } from 'react';
-import { useApi } from '@longvhv/api-client';
+import { useApi } from '@vhvplatform/api-client';
 import {
   CrudState,
   CrudActions,
@@ -113,7 +113,7 @@ export function useCrud<T extends { id?: any }, CreateDto = Partial<T>, UpdateDt
 
       try {
         const newItem = await apiClient.post<T>(baseEndpoint, data);
-        
+
         setState((prev) => ({
           ...prev,
           items: [newItem, ...prev.items],
@@ -142,7 +142,7 @@ export function useCrud<T extends { id?: any }, CreateDto = Partial<T>, UpdateDt
 
       try {
         const updatedItem = await apiClient.put<T>(`${baseEndpoint}/${id}`, data);
-        
+
         setState((prev) => ({
           ...prev,
           items: prev.items.map((item) =>
@@ -172,7 +172,7 @@ export function useCrud<T extends { id?: any }, CreateDto = Partial<T>, UpdateDt
 
       try {
         await apiClient.delete(`${baseEndpoint}/${id}`);
-        
+
         setState((prev) => ({
           ...prev,
           items: prev.items.filter((item) => item[idField] !== id),

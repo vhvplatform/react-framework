@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { authReducer } from '@longvhv/auth';
+import { authReducer } from '@vhvplatform/auth';
 
 export const store = configureStore({
   reducer: {

@@ -59,21 +59,21 @@ pm2 startup
 ```bash
 # Clone repository
 cd /var/www
-sudo git clone https://github.com/longvhv/saas-framework-react.git
-cd saas-framework-react
+sudo git clone https://github.com/vhvplatform/react-framework.git
+cd react-framework
 
 # Install & build
 pnpm install --frozen-lockfile
 pnpm build
 
 # Start with PM2
-pm2 start npm --name "saas-framework" -- start
+pm2 start npm --name "react-framework" -- start
 pm2 save
 ```
 
 ### 5. Configure Nginx
 
-Create `/etc/nginx/sites-available/saas-framework`:
+Create `/etc/nginx/sites-available/react-framework`:
 
 ```nginx
 server {
@@ -93,7 +93,7 @@ server {
 
 Enable site:
 ```bash
-sudo ln -s /etc/nginx/sites-available/saas-framework /etc/nginx/sites-enabled/
+sudo ln -s /etc/nginx/sites-available/react-framework /etc/nginx/sites-enabled/
 sudo nginx -t
 sudo systemctl reload nginx
 ```
@@ -108,7 +108,7 @@ sudo certbot --nginx -d your-domain.com
 
 ## Environment Configuration
 
-Create `/var/www/saas-framework-react/.env.production`:
+Create `/var/www/react-framework/.env.production`:
 
 ```bash
 NODE_ENV=production
@@ -131,7 +131,7 @@ pm2 monit           # Monitor
 ### Update Deployment
 
 ```bash
-cd /var/www/saas-framework-react
+cd /var/www/react-framework
 git pull
 pnpm install
 pnpm build
@@ -143,9 +143,9 @@ pm2 restart all
 ```bash
 # Backup script
 #!/bin/bash
-BACKUP_DIR="/backup/saas-framework"
+BACKUP_DIR="/backup/react-framework"
 DATE=$(date +%Y%m%d-%H%M%S)
-tar -czf $BACKUP_DIR/backup-$DATE.tar.gz /var/www/saas-framework-react
+tar -czf $BACKUP_DIR/backup-$DATE.tar.gz /var/www/react-framework
 ```
 
 ## Security

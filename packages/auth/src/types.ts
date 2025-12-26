@@ -1,5 +1,5 @@
 /**
- * User interface from @longvhv/saas-framework-go
+ * User interface from @vhvplatform/go-framework
  */
 export interface User {
   id: string;
@@ -61,7 +61,7 @@ export interface RegisterCredentials {
 }
 
 /**
- * Login response from @longvhv/saas-framework-go
+ * Login response from @vhvplatform/go-framework
  */
 export interface LoginResponse {
   user: User;

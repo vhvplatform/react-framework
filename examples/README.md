@@ -110,7 +110,7 @@ pnpm dev
 
 ```bash
 # Ensure you're in the monorepo root
-cd /path/to/saas-framework-react
+cd /path/to/react-framework
 
 # Build all packages first
 pnpm install
@@ -138,8 +138,8 @@ Some examples require the backend API:
 
 ```bash
 # Clone backend repository
-git clone https://github.com/longvhv/saas-framework-go.git
-cd saas-framework-go
+git clone https://github.com/vhvplatform/go-framework.git
+cd go-framework
 
 # Start with Docker
 docker-compose up -d
@@ -224,7 +224,7 @@ pnpm dev
 
 Ensure backend is running:
 ```bash
-cd path/to/saas-framework-go
+cd path/to/go-framework
 docker-compose ps
 ```
 

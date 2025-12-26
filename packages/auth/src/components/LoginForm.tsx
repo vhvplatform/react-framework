@@ -29,7 +29,7 @@ export interface LoginFormProps {
 
 /**
  * Login Form component
- * Integrated with @longvhv/saas-framework-go authentication
+ * Integrated with @vhvplatform/go-framework authentication
  */
 export function LoginForm({
   onSuccess,

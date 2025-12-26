@@ -1,5 +1,5 @@
 {
-  "name": "@longvhv/query",
+  "name": "@vhvplatform/query",
   "version": "1.0.0",
   "description": "React Query integration for server state management",
   "main": "dist/index.js",
@@ -16,7 +16,7 @@
     "server-state",
     "async"
   ],
-  "author": "longvhv",
+  "author": "vhvplatform",
   "license": "MIT",
   "peerDependencies": {
     "react": "^18.2.0",

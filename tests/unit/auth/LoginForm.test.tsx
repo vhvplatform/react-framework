@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import { LoginForm } from '@longvhv/auth';
+import { LoginForm } from '@vhvplatform/auth';
 
 describe('LoginForm Component', () => {
   it('should render login form', () => {

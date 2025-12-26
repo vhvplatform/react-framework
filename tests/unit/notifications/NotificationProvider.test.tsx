@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import { NotificationProvider } from '@longvhv/notifications';
+import { NotificationProvider } from '@vhvplatform/notifications';
 
 describe('NotificationProvider', () => {
   it('should render without crashing', () => {

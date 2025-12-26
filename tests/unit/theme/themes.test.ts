@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { lightTheme, darkTheme } from '@longvhv/theme';
+import { lightTheme, darkTheme } from '@vhvplatform/theme';
 
 describe('Theme Definitions', () => {
   describe('lightTheme', () => {

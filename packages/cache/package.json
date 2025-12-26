@@ -1,5 +1,5 @@
 {
-  "name": "@longvhv/cache",
+  "name": "@vhvplatform/cache",
   "version": "1.0.0",
   "description": "Multi-layer caching system with Redis, Browser Cache, and RAM Cache support",
   "main": "dist/index.js",
@@ -18,7 +18,7 @@
     "sessionstorage",
     "indexeddb"
   ],
-  "author": "longvhv",
+  "author": "vhvplatform",
   "license": "MIT",
   "peerDependencies": {
     "react": "^18.2.0"

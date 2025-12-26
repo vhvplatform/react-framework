@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
-import { Application } from '@longvhv/core';
+import { Application } from '@vhvplatform/core';
 
 const createMockStore = () => {
   return configureStore({

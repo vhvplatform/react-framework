@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useCallback, useEffect, ReactNode } from 'react';
-import { useApi } from '@longvhv/api-client';
+import { useApi } from '@vhvplatform/api-client';
 import {
   ContextValue,
   ContextProviderConfig,
@@ -196,7 +196,7 @@ export function AppContextProvider({ children, config }: AppContextProviderProps
   const hasPermission = useCallback(
     (resource: string, action: string): boolean => {
       if (!state.user) return false;
-      
+
       return state.user.permissions.some(
         (perm) => perm.resource === resource && perm.actions.includes(action)
       );
@@ -208,7 +208,7 @@ export function AppContextProvider({ children, config }: AppContextProviderProps
   const hasRole = useCallback(
     (role: UserRole | UserRole[]): boolean => {
       if (!state.user) return false;
-      
+
       const roles = Array.isArray(role) ? role : [role];
       return roles.includes(state.user.role);
     },
@@ -219,7 +219,7 @@ export function AppContextProvider({ children, config }: AppContextProviderProps
   const switchTenant = useCallback(
     async (tenantId: string | number) => {
       setState((prev) => ({ ...prev, loading: true }));
-      
+
       try {
         await apiClient.post('/api/tenant/switch', { tenantId });
         await refresh();
@@ -236,7 +236,7 @@ export function AppContextProvider({ children, config }: AppContextProviderProps
   const switchSite = useCallback(
     async (siteId: string | number) => {
       setState((prev) => ({ ...prev, loading: true }));
-      
+
       try {
         await apiClient.post('/api/site/switch', { siteId });
         await refresh();
@@ -290,7 +290,7 @@ export function AppContextProvider({ children, config }: AppContextProviderProps
 
 export function useAppContext(): ContextValue {
   const context = useContext(AppContext);
-  
+
   if (!context) {
     throw new Error('useAppContext must be used within AppContextProvider');
   }

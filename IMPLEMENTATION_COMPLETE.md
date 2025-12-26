@@ -10,16 +10,16 @@ Successfully implemented a comprehensive, production-ready React + Vite framewor
 
 | #   | Package                    | Status      | Description                      |
 | --- | -------------------------- | ----------- | -------------------------------- |
-| 1   | @longvhv/core              | ✅ Existing | Application lifecycle management |
-| 2   | @longvhv/api-client        | ✅ Existing | HTTP client with Axios           |
-| 3   | @longvhv/auth              | ✅ Existing | JWT + OAuth authentication       |
-| 4   | @longvhv/ui-components     | ✅ Existing | Tailwind CSS components          |
-| 5   | @longvhv/cli               | ✅ Existing | CLI tools                        |
-| 6   | **@longvhv/testing**       | ✅ **NEW**  | **Vitest + Testing Library**     |
-| 7   | **@longvhv/theme**         | ✅ **NEW**  | **Dark/light mode**              |
-| 8   | @longvhv/forms             | ✅ Existing | React Hook Form + Zod            |
-| 9   | **@longvhv/notifications** | ✅ **NEW**  | **Toast notifications**          |
-| 10  | **@longvhv/query**         | ✅ **NEW**  | **React Query**                  |
+| 1   | @vhvplatform/core              | ✅ Existing | Application lifecycle management |
+| 2   | @vhvplatform/api-client        | ✅ Existing | HTTP client with Axios           |
+| 3   | @vhvplatform/auth              | ✅ Existing | JWT + OAuth authentication       |
+| 4   | @vhvplatform/ui-components     | ✅ Existing | Tailwind CSS components          |
+| 5   | @vhvplatform/cli               | ✅ Existing | CLI tools                        |
+| 6   | **@vhvplatform/testing**       | ✅ **NEW**  | **Vitest + Testing Library**     |
+| 7   | **@vhvplatform/theme**         | ✅ **NEW**  | **Dark/light mode**              |
+| 8   | @vhvplatform/forms             | ✅ Existing | React Hook Form + Zod            |
+| 9   | **@vhvplatform/notifications** | ✅ **NEW**  | **Toast notifications**          |
+| 10  | **@vhvplatform/query**         | ✅ **NEW**  | **React Query**                  |
 
 ### 2. Tech Stack ✅
 
@@ -155,7 +155,7 @@ Successfully implemented a comprehensive, production-ready React + Vite framewor
 
 ### New Packages Created
 
-#### @longvhv/testing
+#### @vhvplatform/testing
 
 - Vitest setup with browser mocks
 - Testing Library custom render
@@ -164,7 +164,7 @@ Successfully implemented a comprehensive, production-ready React + Vite framewor
 - **Lines of code**: ~200
 - **Test coverage**: Mock utilities
 
-#### @longvhv/theme
+#### @vhvplatform/theme
 
 - React Context-based theme system
 - Dark/light/system mode support
@@ -174,7 +174,7 @@ Successfully implemented a comprehensive, production-ready React + Vite framewor
 - **Lines of code**: ~300
 - **Features**: Full theming system
 
-#### @longvhv/notifications
+#### @vhvplatform/notifications
 
 - react-hot-toast integration
 - Success/error/warning/info types
@@ -184,7 +184,7 @@ Successfully implemented a comprehensive, production-ready React + Vite framewor
 - **Lines of code**: ~150
 - **Features**: Complete notification system
 
-#### @longvhv/query
+#### @vhvplatform/query
 
 - React Query integration
 - Custom hooks (useFetch, useMutate, useOptimistic)
@@ -274,7 +274,7 @@ const { data, isLoading } = useFetch('users', () => api.get('/users'));
 ### Testing
 
 ```tsx
-import { render, screen } from '@longvhv/testing';
+import { render, screen } from '@vhvplatform/testing';
 render(<MyComponent />);
 expect(screen.getByText('Hello')).toBeInTheDocument();
 ```
@@ -338,7 +338,7 @@ $ pnpm type-check
 ## 📦 Monorepo Structure
 
 ```
-saas-framework-react/
+react-framework/
 ├── packages/
 │   ├── core/              ✅ Existing
 │   ├── api-client/        ✅ Existing

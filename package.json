@@ -1,5 +1,5 @@
 {
-  "name": "@longvhv/saas-framework-react",
+  "name": "@vhvplatform/react-framework",
   "version": "1.0.0",
   "private": true,
   "description": "A comprehensive React + Vite framework for building multiple SaaS applications",
@@ -38,7 +38,7 @@
     "redux",
     "monorepo"
   ],
-  "author": "longvhv",
+  "author": "vhvplatform",
   "license": "MIT",
   "devDependencies": {
     "@changesets/cli": "^2.27.1",

@@ -1,5 +1,5 @@
 {
-  "name": "@longvhv/testing",
+  "name": "@vhvplatform/testing",
   "version": "1.0.0",
   "description": "Testing utilities with Vitest and Testing Library helpers",
   "main": "dist/index.js",
@@ -17,7 +17,7 @@
     "test-utils",
     "helpers"
   ],
-  "author": "longvhv",
+  "author": "vhvplatform",
   "license": "MIT",
   "peerDependencies": {
     "react": "^18.2.0",

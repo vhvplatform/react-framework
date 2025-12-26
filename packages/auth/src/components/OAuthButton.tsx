@@ -59,7 +59,7 @@ function getProviderColors(provider: OAuthProvider): {
 
 /**
  * OAuth Button component
- * Redirects to @longvhv/saas-framework-go OAuth authorization endpoint
+ * Redirects to @vhvplatform/go-framework OAuth authorization endpoint
  */
 export function OAuthButton({ config, text, className = '', style = {} }: OAuthButtonProps) {
   const providerName = getProviderName(config.provider);

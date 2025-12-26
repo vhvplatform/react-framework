@@ -1,13 +1,13 @@
-# @longvhv/auth
+# @vhvplatform/auth
 
-Complete documentation for @longvhv/auth package.
+Complete documentation for @vhvplatform/auth package.
 
 ## Overview
 Detailed package documentation with API reference, examples, and best practices.
 
 ## Installation
 ```bash
-pnpm add @longvhv/auth
+pnpm add @vhvplatform/auth
 ```
 
 ## Usage

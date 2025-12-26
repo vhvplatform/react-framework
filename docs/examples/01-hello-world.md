@@ -25,7 +25,7 @@ Edit `src/main.tsx`:
 ```typescript
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { Application } from '@longvhv/core';
+import { Application } from '@vhvplatform/core';
 import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 
@@ -105,7 +105,7 @@ src/modules/home/
 ### Update main.tsx
 
 ```typescript
-import { loadModulesFromGlob } from '@longvhv/core';
+import { loadModulesFromGlob } from '@vhvplatform/core';
 
 // Auto-load modules
 const modules = await loadModulesFromGlob(

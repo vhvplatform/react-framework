@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
-import { ThemeProvider, useTheme } from '@longvhv/theme';
-import { mockLocalStorage } from '@longvhv/testing';
+import { ThemeProvider, useTheme } from '@vhvplatform/theme';
+import { mockLocalStorage } from '@vhvplatform/testing';
 
 // Test component that uses the theme
 const TestComponent = () => {

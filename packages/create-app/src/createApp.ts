@@ -266,7 +266,7 @@ export async function createApp(name: string, options: CreateAppOptions) {
     try {
       await execa('git', ['init'], { cwd: appPath });
       await execa('git', ['add', '.'], { cwd: appPath });
-      await execa('git', ['commit', '-m', 'chore: initial commit from create-longvhv-app'], {
+      await execa('git', ['commit', '-m', 'chore: initial commit from create-vhvplatform-app'], {
         cwd: appPath,
       });
       spinner.succeed(chalk.green('Git repository initialized'));
@@ -289,7 +289,7 @@ export async function createApp(name: string, options: CreateAppOptions) {
     console.log(chalk.cyan(`  2. ${config.packageManager} run dev`));
   }
   console.log(chalk.white('\n📚 Documentation:'));
-  console.log(chalk.gray('  https://github.com/longvhv/saas-framework-react\n'));
+  console.log(chalk.gray('  https://github.com/vhvplatform/react-framework\n'));
   console.log(chalk.green('Happy coding! 🚀\n'));
 }
 
@@ -322,7 +322,7 @@ async function createAppStructure(appPath: string, config: AppConfig, options: C
     version: '0.1.0',
     private: true,
     type: 'module',
-    description: `SaaS application built with the @longvhv framework`,
+    description: `SaaS application built with the @vhvplatform framework`,
     author: '',
     license: 'MIT',
     scripts: {
@@ -339,14 +339,14 @@ async function createAppStructure(appPath: string, config: AppConfig, options: C
       'type-check': 'tsc --noEmit',
     },
     dependencies: {
-      '@longvhv/core': config.frameworkVersion,
-      '@longvhv/api-client': config.frameworkVersion,
-      '@longvhv/auth': config.frameworkVersion,
-      '@longvhv/ui-components': config.frameworkVersion,
-      '@longvhv/theme': config.frameworkVersion,
-      '@longvhv/forms': config.frameworkVersion,
-      '@longvhv/notifications': config.frameworkVersion,
-      '@longvhv/query': config.frameworkVersion,
+      '@vhvplatform/core': config.frameworkVersion,
+      '@vhvplatform/api-client': config.frameworkVersion,
+      '@vhvplatform/auth': config.frameworkVersion,
+      '@vhvplatform/ui-components': config.frameworkVersion,
+      '@vhvplatform/theme': config.frameworkVersion,
+      '@vhvplatform/forms': config.frameworkVersion,
+      '@vhvplatform/notifications': config.frameworkVersion,
+      '@vhvplatform/query': config.frameworkVersion,
       react: '^18.2.0',
       'react-dom': '^18.2.0',
       'react-router-dom': '^6.20.0',
@@ -380,7 +380,7 @@ async function createAppStructure(appPath: string, config: AppConfig, options: C
   // Create .npmrc if using private registry
   if (config.registry !== 'https://registry.npmjs.org') {
     log('Creating .npmrc for private registry', options);
-    const npmrc = `@longvhv:registry=${config.registry}
+    const npmrc = `@vhvplatform:registry=${config.registry}
 ${config.registry.replace('https://', '//')}/:_authToken=\${NPM_TOKEN}`;
     await fs.writeFile(path.join(appPath, '.npmrc'), npmrc);
   }
@@ -388,12 +388,12 @@ ${config.registry.replace('https://', '//')}/:_authToken=\${NPM_TOKEN}`;
   // Create main.tsx
   const mainTsx = `import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { Application } from '@longvhv/core';
-import { ApiProvider } from '@longvhv/api-client';
-import { ThemeProvider } from '@longvhv/theme';
-import { NotificationProvider } from '@longvhv/notifications';
-import { QueryProvider } from '@longvhv/query';
-import { authReducer } from '@longvhv/auth';
+import { Application } from '@vhvplatform/core';
+import { ApiProvider } from '@vhvplatform/api-client';
+import { ThemeProvider } from '@vhvplatform/theme';
+import { NotificationProvider } from '@vhvplatform/notifications';
+import { QueryProvider } from '@vhvplatform/query';
+import { authReducer } from '@vhvplatform/auth';
 import './index.css';
 
 const app = new Application({
@@ -532,7 +532,7 @@ Thumbs.db
   // Create README.md
   const readme = `# ${config.name}
 
-SaaS application built with @longvhv framework.
+SaaS application built with @vhvplatform framework.
 
 ## Getting Started
 
@@ -551,12 +551,12 @@ npm run dev
 
 ## Framework
 
-This app uses [@longvhv/saas-framework-react](https://github.com/longvhv/saas-framework-react) v${config.frameworkVersion}.
+This app uses [@vhvplatform/react-framework](https://github.com/vhvplatform/react-framework) v${config.frameworkVersion}.
 
 ## Documentation
 
-- [Framework Docs](https://github.com/longvhv/saas-framework-react)
-- [API Reference](https://github.com/longvhv/saas-framework-react/docs)
+- [Framework Docs](https://github.com/vhvplatform/react-framework)
+- [API Reference](https://github.com/vhvplatform/react-framework/docs)
 `;
 
   await fs.writeFile(path.join(appPath, 'README.md'), readme);
@@ -749,30 +749,30 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    
+
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: 'npm'
-      
+
       - name: Install dependencies
         run: npm ci
         env:
           NODE_AUTH_TOKEN: \${{ secrets.NPM_TOKEN }}
-      
+
       - name: Type check
         run: npm run type-check
-      
+
       - name: Lint
         run: npm run lint
-      
+
       - name: Test
         run: npm test
-      
+
       - name: Build
         run: npm run build`;
 
@@ -790,7 +790,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Deploy to Vercel
         uses: amondnet/vercel-action@v25
         with:
@@ -819,31 +819,31 @@ jobs:
     permissions:
       contents: read
       packages: write
-    
+
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: 'npm'
-      
+
       - name: Install dependencies
         run: npm ci
         env:
           NODE_AUTH_TOKEN: \${{ secrets.NPM_TOKEN }}
-      
+
       - name: Build application
         run: npm run build
-      
+
       - name: Log in to Container Registry
         uses: docker/login-action@v3
         with:
           registry: \${{ env.REGISTRY }}
           username: \${{ github.actor }}
           password: \${{ secrets.GITHUB_TOKEN }}
-      
+
       - name: Extract metadata
         id: meta
         uses: docker/metadata-action@v5
@@ -853,7 +853,7 @@ jobs:
             type=ref,event=branch
             type=sha,prefix={{branch}}-
             type=semver,pattern={{version}}
-      
+
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
@@ -861,17 +861,17 @@ jobs:
           push: true
           tags: \${{ steps.meta.outputs.tags }}
           labels: \${{ steps.meta.outputs.labels }}
-      
+
       - name: Setup kubectl
         uses: azure/setup-kubectl@v3
         with:
           version: 'latest'
-      
+
       - name: Configure kubectl
         run: |
           mkdir -p $HOME/.kube
           echo "${'$'}{{ secrets.KUBECONFIG }}" | base64 -d > $HOME/.kube/config
-      
+
       - name: Deploy to Kubernetes
         run: |
           kubectl set image deployment/${config.name} ${config.name}=${'$'}{{ env.REGISTRY }}/${'$'}{{ env.IMAGE_NAME }}:sha-${'$'}{{ github.sha }} -n ${config.k8sNamespace}

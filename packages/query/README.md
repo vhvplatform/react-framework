@@ -1,4 +1,4 @@
-# @longvhv/query
+# @vhvplatform/query
 
 React Query integration for server state management in the SaaS Framework.
 
@@ -15,7 +15,7 @@ React Query integration for server state management in the SaaS Framework.
 ## Installation
 
 ```bash
-pnpm add @longvhv/query @tanstack/react-query
+pnpm add @vhvplatform/query @tanstack/react-query
 ```
 
 ## Usage
@@ -23,7 +23,7 @@ pnpm add @longvhv/query @tanstack/react-query
 ### Setup Query Provider
 
 ```tsx
-import { QueryProvider } from '@longvhv/query';
+import { QueryProvider } from '@vhvplatform/query';
 
 function App() {
   return (
@@ -37,8 +37,8 @@ function App() {
 ### Fetch Data
 
 ```tsx
-import { useFetch } from '@longvhv/query';
-import { api } from '@longvhv/api-client';
+import { useFetch } from '@vhvplatform/query';
+import { api } from '@vhvplatform/api-client';
 
 function UserList() {
   const { data, isLoading, error } = useFetch(
@@ -62,8 +62,8 @@ function UserList() {
 ### Mutations
 
 ```tsx
-import { useMutate, useInvalidateQueries } from '@longvhv/query';
-import { api } from '@longvhv/api-client';
+import { useMutate, useInvalidateQueries } from '@vhvplatform/query';
+import { api } from '@vhvplatform/api-client';
 
 function CreateUser() {
   const invalidate = useInvalidateQueries();
@@ -88,8 +88,8 @@ function CreateUser() {
 ### Optimistic Updates
 
 ```tsx
-import { useOptimisticMutation } from '@longvhv/query';
-import { api } from '@longvhv/api-client';
+import { useOptimisticMutation } from '@vhvplatform/query';
+import { api } from '@vhvplatform/api-client';
 
 function UpdateUser() {
   const { mutate } = useOptimisticMutation(
@@ -108,8 +108,8 @@ function UpdateUser() {
 ### Pagination
 
 ```tsx
-import { useFetch, paginationKey } from '@longvhv/query';
-import { api } from '@longvhv/api-client';
+import { useFetch, paginationKey } from '@vhvplatform/query';
+import { api } from '@vhvplatform/api-client';
 
 function PaginatedList() {
   const [page, setPage] = useState(1);
@@ -136,7 +136,7 @@ function PaginatedList() {
 ### Search & Filter
 
 ```tsx
-import { useFetch, filterKey, searchKey } from '@longvhv/query';
+import { useFetch, filterKey, searchKey } from '@vhvplatform/query';
 
 function SearchableList() {
   const [search, setSearch] = useState('');
@@ -160,7 +160,7 @@ function SearchableList() {
 ### Prefetch Data
 
 ```tsx
-import { usePrefetch } from '@longvhv/query';
+import { usePrefetch } from '@vhvplatform/query';
 
 function UserCard({ userId }) {
   const prefetch = usePrefetch();
@@ -240,7 +240,7 @@ await prefetch('users', fetchFunction);
 ### Custom Query Client
 
 ```tsx
-import { QueryClient, QueryProvider } from '@longvhv/query';
+import { QueryClient, QueryProvider } from '@vhvplatform/query';
 
 const customQueryClient = new QueryClient({
   defaultOptions: {

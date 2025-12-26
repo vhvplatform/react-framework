@@ -7,7 +7,7 @@ import {
   suppressConsole,
   delay,
   testData,
-} from '@longvhv/testing';
+} from '@vhvplatform/testing';
 
 describe('Testing Utilities', () => {
   describe('waitForCondition', () => {

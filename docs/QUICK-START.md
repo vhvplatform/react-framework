@@ -6,8 +6,8 @@ Get started with SaaS Framework React in 5 minutes.
 
 ```bash
 # Clone & install
-git clone https://github.com/longvhv/saas-framework-react.git
-cd saas-framework-react
+git clone https://github.com/vhvplatform/react-framework.git
+cd react-framework
 pnpm install
 pnpm build
 ```
@@ -54,7 +54,7 @@ The CLI creates:
 
 ```typescript
 // src/main.tsx
-import { I18nProvider } from '@longvhv/i18n';
+import { I18nProvider } from '@vhvplatform/i18n';
 
 <I18nProvider config={{ defaultLanguage: 'vi' }}>
   <Application modules={modules}>
@@ -67,7 +67,7 @@ import { I18nProvider } from '@longvhv/i18n';
 
 ```typescript
 // src/App.tsx
-import { useAuth } from '@longvhv/auth';
+import { useAuth } from '@vhvplatform/auth';
 
 function App() {
   const { user, login, logout } = useAuth();
@@ -92,7 +92,7 @@ function App() {
 ### Data Fetching with CRUD
 
 ```typescript
-import { useCrud, CrudTable } from '@longvhv/crud';
+import { useCrud, CrudTable } from '@vhvplatform/crud';
 
 function Users() {
   const crud = useCrud({ resource: 'users', autoFetch: true });
@@ -104,7 +104,7 @@ function Users() {
 ### Role-Based Access
 
 ```typescript
-import { useRoles } from '@longvhv/context';
+import { useRoles } from '@vhvplatform/context';
 
 function AdminPanel() {
   const { isAdmin } = useRoles();

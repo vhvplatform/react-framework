@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useApi } from '@longvhv/api-client';
+import { useApi } from '@vhvplatform/api-client';
 import { unwrapResult } from '@reduxjs/toolkit';
 import {
   login,

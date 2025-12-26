@@ -1,13 +1,13 @@
-# @longvhv/api-client
+# @vhvplatform/api-client
 
-Complete documentation for @longvhv/api-client package.
+Complete documentation for @vhvplatform/api-client package.
 
 ## Overview
 Detailed package documentation with API reference, examples, and best practices.
 
 ## Installation
 ```bash
-pnpm add @longvhv/api-client
+pnpm add @vhvplatform/api-client
 ```
 
 ## Usage

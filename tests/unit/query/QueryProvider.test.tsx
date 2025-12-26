@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { QueryClient } from '@tanstack/react-query';
-import { QueryProvider, defaultQueryClient } from '@longvhv/query';
+import { QueryProvider, defaultQueryClient } from '@vhvplatform/query';
 
 describe('QueryProvider', () => {
   it('should render children', () => {

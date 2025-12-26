@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { createModule } from '@longvhv/core';
+import { createModule } from '@vhvplatform/core';
 
 describe('Core Package - createModule', () => {
   it('should create a module with required fields', () => {

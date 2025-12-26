@@ -1,6 +1,6 @@
 # 🚀 SaaS Framework React
 
-A comprehensive React + Vite framework for building multiple SaaS applications in a monorepo architecture. Fully integrated with [@longvhv/saas-framework-go](https://github.com/longvhv/saas-framework-go) backend.
+A comprehensive React + Vite framework for building multiple SaaS applications in a monorepo architecture. Fully integrated with [@vhvplatform/go-framework](https://github.com/vhvplatform/go-framework) backend.
 
 ## ✨ Features
 
@@ -16,7 +16,7 @@ A comprehensive React + Vite framework for building multiple SaaS applications i
 - 📝 **Forms** - Advanced form management with validation
 - 🖼️ **Media Processing** - Image, video, Excel, and PDF processing
 - 🇻🇳 **Vietnamese Utils** - Text processing, validation, and formatting for Vietnamese
-- 🌐 **API Integration** - Seamless integration with @longvhv/saas-framework-go backend
+- 🌐 **API Integration** - Seamless integration with @vhvplatform/go-framework backend
 - 🎨 **UI Components** - Pre-built Tailwind CSS components
 - 📦 **Monorepo** - Manage multiple packages with pnpm workspaces
 - 🛠️ **CLI Tools** - Generate apps and modules with interactive commands
@@ -26,7 +26,7 @@ A comprehensive React + Vite framework for building multiple SaaS applications i
 
 ## 📦 Packages (13 Total)
 
-### @longvhv/core
+### @vhvplatform/core
 
 Core framework functionality including:
 
@@ -37,16 +37,16 @@ Core framework functionality including:
 - Auto-discovery system
 - Hot Module Replacement support
 
-### @longvhv/api-client
+### @vhvplatform/api-client
 
-HTTP client for @longvhv/saas-framework-go backend:
+HTTP client for @vhvplatform/go-framework backend:
 
 - Axios-based with interceptors
 - Automatic JWT token handling
 - Request/Response transformation
 - Error handling and 401 redirects
 
-### @longvhv/auth
+### @vhvplatform/auth
 
 Authentication package with:
 
@@ -58,7 +58,7 @@ Authentication package with:
 - Protected route component
 - useAuth hook
 
-### @longvhv/ui-components
+### @vhvplatform/ui-components
 
 Tailwind CSS components:
 
@@ -67,7 +67,7 @@ Tailwind CSS components:
 - Input (with label and error handling)
 - Spinner
 
-### @longvhv/shared (New!)
+### @vhvplatform/shared (New!)
 
 Shared utilities and helpers:
 
@@ -78,7 +78,7 @@ Shared utilities and helpers:
 
 See [SHARED_LIBRARY.md](./SHARED_LIBRARY.md) for complete documentation.
 
-### @longvhv/cli
+### @vhvplatform/cli
 
 Command-line tools:
 
@@ -91,14 +91,14 @@ Command-line tools:
 
 - Node.js >= 18
 - pnpm >= 8
-- @longvhv/saas-framework-go backend running
+- @vhvplatform/go-framework backend running
 
 ### Installation
 
 ```bash
 # Clone the repository
-git clone https://github.com/longvhv/saas-framework-react.git
-cd saas-framework-react
+git clone https://github.com/vhvplatform/react-framework.git
+cd react-framework
 
 # Install dependencies
 pnpm install
@@ -140,7 +140,7 @@ pnpm cli create-module analytics
 
 ```tsx
 // src/main.tsx - Auto-discovery setup
-import { loadModulesFromGlob } from '@longvhv/core';
+import { loadModulesFromGlob } from '@vhvplatform/core';
 
 const modules = await loadModulesFromGlob(import.meta.glob('./modules/*/index.ts'));
 
@@ -169,7 +169,7 @@ pnpm cli create-app
 The CLI will prompt you for:
 
 - Application name
-- API URL (your @longvhv/saas-framework-go backend)
+- API URL (your @vhvplatform/go-framework backend)
 - Authentication options (JWT, OAuth)
 - OAuth providers (Google, GitHub)
 
@@ -198,9 +198,9 @@ The CLI will prompt you for:
 // src/main.tsx
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { Application } from '@longvhv/core';
-import { ApiProvider } from '@longvhv/api-client';
-import { authReducer } from '@longvhv/auth';
+import { Application } from '@vhvplatform/core';
+import { ApiProvider } from '@vhvplatform/api-client';
+import { authReducer } from '@vhvplatform/auth';
 import App from './App';
 
 const apiConfig = {
@@ -242,7 +242,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 
 ```tsx
 // src/modules/dashboard/index.ts
-import { createModule } from '@longvhv/core';
+import { createModule } from '@vhvplatform/core';
 import { routes } from './routes';
 import dashboardReducer from './store/dashboardSlice';
 
@@ -262,8 +262,8 @@ export const dashboardModule = createModule({
 
 ```tsx
 // src/components/Profile.tsx
-import { useAuth } from '@longvhv/auth';
-import { Button } from '@longvhv/ui-components';
+import { useAuth } from '@vhvplatform/auth';
+import { Button } from '@vhvplatform/ui-components';
 
 export function Profile() {
   const { user, logout, isAuthenticated } = useAuth();
@@ -289,7 +289,7 @@ export function Profile() {
 ```tsx
 // src/App.tsx
 import { Routes, Route } from 'react-router-dom';
-import { ProtectedRoute } from '@longvhv/auth';
+import { ProtectedRoute } from '@vhvplatform/auth';
 import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
 
@@ -314,8 +314,8 @@ export default function App() {
 
 ```tsx
 // src/pages/Login.tsx
-import { LoginForm, OAuthButton } from '@longvhv/auth';
-import { Card } from '@longvhv/ui-components';
+import { LoginForm, OAuthButton } from '@vhvplatform/auth';
+import { Card } from '@vhvplatform/ui-components';
 
 export default function Login() {
   return (
@@ -344,7 +344,7 @@ export default function Login() {
 
 ```tsx
 // src/modules/users/api.ts
-import { useApi } from '@longvhv/api-client';
+import { useApi } from '@vhvplatform/api-client';
 
 export function useUsers() {
   const apiClient = useApi();
@@ -385,7 +385,7 @@ Redux Toolkit is used for global state management:
 
 ### API Integration
 
-The framework integrates seamlessly with @longvhv/saas-framework-go:
+The framework integrates seamlessly with @vhvplatform/go-framework:
 
 **Authentication Endpoints:**
 
@@ -420,7 +420,7 @@ The framework integrates seamlessly with @longvhv/saas-framework-go:
 All components use Tailwind CSS and support theming:
 
 ```tsx
-import { Button, Card, Input, Spinner } from '@longvhv/ui-components';
+import { Button, Card, Input, Spinner } from '@vhvplatform/ui-components';
 
 // Button variants
 <Button variant="primary">Primary</Button>
@@ -512,7 +512,7 @@ Found a bug? Please open an issue on GitHub.
 
 ## 📞 Support
 
-For support, email support@longvhv.com or join our Slack channel.
+For support, email support@vhvplatform.com or join our Slack channel.
 
 ## 🙏 Acknowledgments
 
@@ -526,9 +526,9 @@ Built with:
 - Tailwind CSS 3
 - Axios
 
-Integrated with [@longvhv/saas-framework-go](https://github.com/longvhv/saas-framework-go) backend framework.
+Integrated with [@vhvplatform/go-framework](https://github.com/vhvplatform/go-framework) backend framework.
 
-### @longvhv/i18n
+### @vhvplatform/i18n
 
 Internationalization support:
 
@@ -541,7 +541,7 @@ Internationalization support:
 - Hooks: useI18n, useTranslation
 - Utils: formatDate, formatCurrency
 
-### @longvhv/crud
+### @vhvplatform/crud
 
 Complete CRUD operations:
 
@@ -552,7 +552,7 @@ Complete CRUD operations:
 - Built-in validators
 - Auto-fetch, pagination support
 
-### @longvhv/cache
+### @vhvplatform/cache
 
 Multi-layer caching system:
 
@@ -562,7 +562,7 @@ Multi-layer caching system:
 - Batch operations
 - Statistics tracking
 
-### @longvhv/context
+### @vhvplatform/context
 
 Multi-tenant context management:
 
@@ -573,7 +573,7 @@ Multi-tenant context management:
 - Hooks: useCurrentUser, useCurrentTenant, usePermissions
 - Features: switchTenant, hasPermission, hasRole
 
-### @longvhv/forms
+### @vhvplatform/forms
 
 Advanced form management:
 
@@ -583,7 +583,7 @@ Advanced form management:
 - Dirty and touched state tracking
 - TypeScript support
 
-### @longvhv/media
+### @vhvplatform/media
 
 Media file processing:
 
@@ -592,7 +592,7 @@ Media file processing:
 - **Excel**: read/write, export, CSV conversion, multi-sheet
 - **PDF**: page count, text extraction (ready for integration)
 
-### @longvhv/vietnamese
+### @vhvplatform/vietnamese
 
 Vietnamese language utilities:
 
@@ -605,7 +605,7 @@ Vietnamese language utilities:
 ### Multi-Language (i18n)
 
 ```tsx
-import { I18nProvider, useTranslation, LanguageSwitcher } from '@longvhv/i18n';
+import { I18nProvider, useTranslation, LanguageSwitcher } from '@vhvplatform/i18n';
 
 function App() {
   return (
@@ -629,7 +629,7 @@ function MyComponent() {
 ### Multi-Tenant Context
 
 ```tsx
-import { AppContextProvider, useCurrentUser, useCurrentTenant } from '@longvhv/context';
+import { AppContextProvider, useCurrentUser, useCurrentTenant } from '@vhvplatform/context';
 
 function App() {
   return (
@@ -659,7 +659,7 @@ function Dashboard() {
 ### CRUD Operations
 
 ```tsx
-import { useCrud, CrudTable } from '@longvhv/crud';
+import { useCrud, CrudTable } from '@vhvplatform/crud';
 
 function Users() {
   const crud = useCrud({
@@ -692,7 +692,7 @@ import {
   vietnameseToSlug,
   isValidVietnamesePhone,
   formatVietnameseCurrency,
-} from '@longvhv/vietnamese';
+} from '@vhvplatform/vietnamese';
 
 vietnameseToSlug('Xin chào Việt Nam'); // "xin-chao-viet-nam"
 isValidVietnamesePhone('0987654321'); // true
@@ -702,7 +702,7 @@ formatVietnameseCurrency(1000000); // "1.000.000₫"
 ### Media Processing
 
 ```tsx
-import { resizeImage, extractVideoThumbnail, readExcelFile } from '@longvhv/media';
+import { resizeImage, extractVideoThumbnail, readExcelFile } from '@vhvplatform/media';
 
 // Image
 const resized = await resizeImage(file, { width: 800, quality: 0.9 });
@@ -751,7 +751,7 @@ The framework uses a modular architecture where each module:
 ### Auto-Discovery System
 
 ```tsx
-import { loadModulesFromGlob } from '@longvhv/core';
+import { loadModulesFromGlob } from '@vhvplatform/core';
 
 const modules = await loadModulesFromGlob(import.meta.glob('./modules/*/index.ts'));
 ```
@@ -759,7 +759,7 @@ const modules = await loadModulesFromGlob(import.meta.glob('./modules/*/index.ts
 ### Development Utilities
 
 ```tsx
-import { validateModule, logModuleInfo, setupModuleDev } from '@longvhv/core';
+import { validateModule, logModuleInfo, setupModuleDev } from '@vhvplatform/core';
 
 // Validate module
 const validation = validateModule(myModule);
@@ -776,7 +776,7 @@ const { module, cleanup } = setupModuleDev({
 
 ## 🌐 Backend Integration
 
-Fully compatible with [@longvhv/saas-framework-go](https://github.com/longvhv/saas-framework-go):
+Fully compatible with [@vhvplatform/go-framework](https://github.com/vhvplatform/go-framework):
 
 **API Endpoints:**
 

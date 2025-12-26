@@ -2,13 +2,13 @@
 
 ## Overview
 
-The @longvhv framework supports multi-repository architecture where each SaaS application lives in its own repository and consumes framework packages via npm.
+The @vhvplatform framework supports multi-repository architecture where each SaaS application lives in its own repository and consumes framework packages via npm.
 
 ## Architecture
 
 ### Framework Repository
 
-- Contains all framework packages (`@longvhv/*`)
+- Contains all framework packages (`@vhvplatform/*`)
 - Published to npm registry (public or private)
 - Centralized maintenance and updates
 - Semantic versioning for all packages
@@ -28,7 +28,7 @@ The @longvhv framework supports multi-repository architecture where each SaaS ap
 The easiest way to create a new SaaS application:
 
 ```bash
-npx @longvhv/create-app my-saas-app
+npx @vhvplatform/create-app my-saas-app
 ```
 
 This creates a new repository with:
@@ -61,7 +61,7 @@ The CLI will ask you to choose:
 #### CLI Options
 
 ```bash
-npx @longvhv/create-app my-saas-app \
+npx @vhvplatform/create-app my-saas-app \
   --template blank \
   --version latest \
   --registry https://registry.npmjs.org \
@@ -82,18 +82,18 @@ cd my-saas-app
 npm init -y
 
 # Install framework packages
-npm install @longvhv/core \
-            @longvhv/auth \
-            @longvhv/api-client \
-            @longvhv/ui-components \
-            @longvhv/theme \
-            @longvhv/forms \
-            @longvhv/notifications \
-            @longvhv/query
+npm install @vhvplatform/core \
+            @vhvplatform/auth \
+            @vhvplatform/api-client \
+            @vhvplatform/ui-components \
+            @vhvplatform/theme \
+            @vhvplatform/forms \
+            @vhvplatform/notifications \
+            @vhvplatform/query
 
 # Install dev dependencies
 npm install --save-dev \
-            @longvhv/config \
+            @vhvplatform/config \
             @vitejs/plugin-react \
             typescript \
             vite \
@@ -191,7 +191,7 @@ Default configuration in root `package.json`:
 Create `.npmrc`:
 
 ```bash
-@longvhv:registry=https://npm.pkg.github.com
+@vhvplatform:registry=https://npm.pkg.github.com
 //npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
 ```
 
@@ -200,14 +200,14 @@ Create `.npmrc`:
 When using `create-app` with GitHub Packages:
 
 ```bash
-npx @longvhv/create-app my-app \
+npx @vhvplatform/create-app my-app \
   --registry https://npm.pkg.github.com
 ```
 
 This creates `.npmrc`:
 
 ```bash
-@longvhv:registry=https://npm.pkg.github.com
+@vhvplatform:registry=https://npm.pkg.github.com
 //npm.pkg.github.com/:_authToken=${NPM_TOKEN}
 ```
 
@@ -231,14 +231,14 @@ export NPM_TOKEN=your_github_token
 For enterprise/custom registries:
 
 ```bash
-npx @longvhv/create-app my-app \
+npx @vhvplatform/create-app my-app \
   --registry https://npm.company.com
 ```
 
 In `.npmrc`:
 
 ```bash
-@longvhv:registry=https://npm.company.com
+@vhvplatform:registry=https://npm.company.com
 //npm.company.com/:_authToken=${NPM_TOKEN}
 ```
 
@@ -247,29 +247,29 @@ In `.npmrc`:
 ### Check for Updates
 
 ```bash
-# Check outdated @longvhv packages
-npm outdated @longvhv/*
+# Check outdated @vhvplatform packages
+npm outdated @vhvplatform/*
 ```
 
 ### Update All Framework Packages
 
 ```bash
 # Update to latest versions
-npm update @longvhv/*
+npm update @vhvplatform/*
 
 # Or update each package individually
-npm install @longvhv/core@latest
-npm install @longvhv/auth@latest
+npm install @vhvplatform/core@latest
+npm install @vhvplatform/auth@latest
 ```
 
 ### Update to Specific Version
 
 ```bash
 # Install exact version
-npm install @longvhv/core@1.2.3 --save-exact
+npm install @vhvplatform/core@1.2.3 --save-exact
 
 # Install semver range
-npm install @longvhv/core@^1.2.0
+npm install @vhvplatform/core@^1.2.0
 ```
 
 ### Lock Critical Dependencies
@@ -278,12 +278,12 @@ For production stability:
 
 ```bash
 # Use exact versions
-npm install --save-exact @longvhv/core@1.2.3
+npm install --save-exact @vhvplatform/core@1.2.3
 
 # Or in package.json
 {
   "dependencies": {
-    "@longvhv/core": "1.2.3"
+    "@vhvplatform/core": "1.2.3"
   }
 }
 ```
@@ -307,7 +307,7 @@ Applications can version independently:
   "name": "my-saas-app",
   "version": "2.5.3",
   "dependencies": {
-    "@longvhv/core": "^1.0.0"
+    "@vhvplatform/core": "^1.0.0"
   }
 }
 ```
@@ -610,7 +610,7 @@ Required GitHub secrets:
 
 ```bash
 # 1. Create application
-npx @longvhv/create-app my-microservice
+npx @vhvplatform/create-app my-microservice
 cd my-microservice
 
 # 2. Build Docker image
@@ -690,7 +690,7 @@ Document all changes in changesets:
 
 ```markdown
 ---
-'@longvhv/core': minor
+'@vhvplatform/core': minor
 ---
 
 Add support for lazy loading modules
@@ -720,8 +720,8 @@ Use exact versions for stability:
 ```json
 {
   "dependencies": {
-    "@longvhv/core": "1.2.3",
-    "@longvhv/auth": "1.2.3"
+    "@vhvplatform/core": "1.2.3",
+    "@vhvplatform/auth": "1.2.3"
   }
 }
 ```
@@ -768,9 +768,9 @@ Use semantic version ranges wisely:
 ```json
 {
   "dependencies": {
-    "@longvhv/core": "^1.2.0", // ✅ Accepts minor/patch updates
-    "@longvhv/auth": "~1.2.0", // ✅ Accepts only patch updates
-    "@longvhv/api-client": "1.2.0" // ⚠️ Exact version, no auto-updates
+    "@vhvplatform/core": "^1.2.0", // ✅ Accepts minor/patch updates
+    "@vhvplatform/auth": "~1.2.0", // ✅ Accepts only patch updates
+    "@vhvplatform/api-client": "1.2.0" // ⚠️ Exact version, no auto-updates
   }
 }
 ```
@@ -909,10 +909,10 @@ Check `.npmrc` configuration:
 npm config list
 
 # Set scoped registry
-npm config set @longvhv:registry https://npm.pkg.github.com
+npm config set @vhvplatform:registry https://npm.pkg.github.com
 
 # Or in .npmrc
-@longvhv:registry=https://npm.pkg.github.com
+@vhvplatform:registry=https://npm.pkg.github.com
 ```
 
 ### Build Failures
@@ -927,7 +927,7 @@ rm -rf node_modules package-lock.json
 npm install
 
 # Check for breaking changes
-npm outdated @longvhv/*
+npm outdated @vhvplatform/*
 
 # Review CHANGELOG for migration guide
 ```
@@ -943,7 +943,7 @@ npm outdated @longvhv/*
 npm install react@^18.2.0 react-dom@^18.2.0
 
 # Or check package.json for required peers
-npm info @longvhv/core peerDependencies
+npm info @vhvplatform/core peerDependencies
 ```
 
 ## Example Workflow
@@ -951,7 +951,7 @@ npm info @longvhv/core peerDependencies
 ### 1. Create New Feature in Framework
 
 ```bash
-cd saas-framework-react
+cd react-framework
 
 # Create feature branch
 git checkout -b feature/add-analytics
@@ -961,7 +961,7 @@ git checkout -b feature/add-analytics
 
 # Create changeset
 pnpm changeset
-# Select: @longvhv/analytics - minor
+# Select: @vhvplatform/analytics - minor
 # Summary: "Add analytics tracking support"
 
 # Commit and push
@@ -995,10 +995,10 @@ pnpm release
 cd my-saas-app
 
 # Check for updates
-npm outdated @longvhv/*
+npm outdated @vhvplatform/*
 
 # Update to latest
-npm install @longvhv/analytics@latest
+npm install @vhvplatform/analytics@latest
 
 # Test the update
 npm test
@@ -1023,7 +1023,7 @@ cd my-existing-app
 git init
 
 # Copy app code
-cp -r ../saas-framework-react/examples/my-app/* .
+cp -r ../react-framework/examples/my-app/* .
 ```
 
 ### Step 2: Update Dependencies
@@ -1033,8 +1033,8 @@ Replace workspace dependencies with npm packages:
 ```json
 {
   "dependencies": {
-    "@longvhv/core": "workspace:*"  // ❌ Remove
-    "@longvhv/core": "^1.0.0"       // ✅ Add
+    "@vhvplatform/core": "workspace:*"  // ❌ Remove
+    "@vhvplatform/core": "^1.0.0"       // ✅ Add
   }
 }
 ```
@@ -1059,12 +1059,12 @@ npm test
 - [Semantic Versioning](https://semver.org/)
 - [npm Publishing Guide](https://docs.npmjs.com/packages-and-modules/contributing-packages-to-the-registry)
 - [GitHub Packages](https://docs.github.com/en/packages)
-- [Framework Documentation](https://github.com/longvhv/saas-framework-react)
+- [Framework Documentation](https://github.com/vhvplatform/react-framework)
 
 ## Support
 
 For issues or questions:
 
-- **Framework Issues**: [GitHub Issues](https://github.com/longvhv/saas-framework-react/issues)
-- **Documentation**: [Framework Docs](https://github.com/longvhv/saas-framework-react/docs)
-- **Community**: [Discussions](https://github.com/longvhv/saas-framework-react/discussions)
+- **Framework Issues**: [GitHub Issues](https://github.com/vhvplatform/react-framework/issues)
+- **Documentation**: [Framework Docs](https://github.com/vhvplatform/react-framework/docs)
+- **Community**: [Discussions](https://github.com/vhvplatform/react-framework/discussions)

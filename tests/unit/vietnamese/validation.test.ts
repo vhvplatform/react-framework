@@ -5,7 +5,7 @@ import {
   isValidVietnameseTaxCode,
   isValidVietnamesePostalCode,
   isValidVietnameseName,
-} from '@longvhv/vietnamese';
+} from '@vhvplatform/vietnamese';
 
 describe('Vietnamese Validation', () => {
   describe('isValidVietnamesePhone', () => {
@@ -38,7 +38,7 @@ describe('Vietnamese Validation', () => {
     it('should validate correct ID cards', () => {
       // Old CMND (9 digits)
       expect(isValidVietnameseIDCard('123456789')).toBe(true);
-      
+
       // New CCCD (12 digits)
       expect(isValidVietnameseIDCard('001234567890')).toBe(true);
     });
@@ -58,7 +58,7 @@ describe('Vietnamese Validation', () => {
     it('should validate correct tax codes', () => {
       // Individual (10 digits)
       expect(isValidVietnameseTaxCode('0123456789')).toBe(true);
-      
+
       // Company (10 or 13 digits)
       expect(isValidVietnameseTaxCode('0123456789')).toBe(true);
       expect(isValidVietnameseTaxCode('0123456789001')).toBe(true);

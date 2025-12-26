@@ -29,7 +29,7 @@ Complete internationalization (i18n) system for the SaaS Framework with support 
 ## Installation
 
 ```bash
-pnpm add @longvhv/i18n
+pnpm add @vhvplatform/i18n
 ```
 
 ## Quick Start
@@ -37,7 +37,7 @@ pnpm add @longvhv/i18n
 ### 1. Setup Provider
 
 ```tsx
-import { I18nProvider } from '@longvhv/i18n';
+import { I18nProvider } from '@vhvplatform/i18n';
 
 function App() {
   return (
@@ -57,7 +57,7 @@ function App() {
 ### 2. Use Translations
 
 ```tsx
-import { useTranslation } from '@longvhv/i18n';
+import { useTranslation } from '@vhvplatform/i18n';
 
 function MyComponent() {
   const { t } = useTranslation();
@@ -75,7 +75,7 @@ function MyComponent() {
 ### 3. Language Switcher
 
 ```tsx
-import { LanguageSwitcher, LanguageToggle } from '@longvhv/i18n';
+import { LanguageSwitcher, LanguageToggle } from '@vhvplatform/i18n';
 
 function Header() {
   return (
@@ -177,7 +177,7 @@ t('validation.minLength', { min: 8 });
 ### Custom Translations
 
 ```tsx
-import { useI18n } from '@longvhv/i18n';
+import { useI18n } from '@vhvplatform/i18n';
 
 function MyComponent() {
   const { addTranslations } = useI18n();
@@ -204,7 +204,7 @@ function MyComponent() {
 ### Language Detection
 
 ```tsx
-import { detectUserLanguage, getBrowserLanguage } from '@longvhv/i18n';
+import { detectUserLanguage, getBrowserLanguage } from '@vhvplatform/i18n';
 
 // Detect from localStorage > browser > default
 const userLang = detectUserLanguage('app_language', 'en');
@@ -221,7 +221,7 @@ import {
   getLanguageName, 
   getLanguageFlag,
   SUPPORTED_LANGUAGES 
-} from '@longvhv/i18n';
+} from '@vhvplatform/i18n';
 
 // Get metadata
 const metadata = getLanguageMetadata('vi');
@@ -243,7 +243,7 @@ SUPPORTED_LANGUAGES.forEach(lang => {
 ### Format Utilities
 
 ```tsx
-import { formatDate, formatCurrency, formatNumber } from '@longvhv/i18n';
+import { formatDate, formatCurrency, formatNumber } from '@vhvplatform/i18n';
 
 const { language } = useI18n();
 
@@ -269,7 +269,7 @@ formatNumber(1234567.89, language);
 ### Programmatic Language Change
 
 ```tsx
-import { useLanguage } from '@longvhv/i18n';
+import { useLanguage } from '@vhvplatform/i18n';
 
 function LanguageManager() {
   const [language, setLanguage] = useLanguage();
@@ -380,8 +380,8 @@ authPassword: 'Password',
 ### Complete Authentication Form
 
 ```tsx
-import { useTranslation } from '@longvhv/i18n';
-import { Button, Input } from '@longvhv/ui-components';
+import { useTranslation } from '@vhvplatform/i18n';
+import { Button, Input } from '@vhvplatform/ui-components';
 
 function LoginForm() {
   const { t } = useTranslation();
@@ -423,7 +423,7 @@ function LoginForm() {
 ### Multi-Language Dashboard
 
 ```tsx
-import { useTranslation, LanguageSwitcher } from '@longvhv/i18n';
+import { useTranslation, LanguageSwitcher } from '@vhvplatform/i18n';
 
 function Dashboard() {
   const { t } = useTranslation();
@@ -455,7 +455,7 @@ function Dashboard() {
 Full TypeScript support with type-safe translation keys:
 
 ```tsx
-import { Language, TranslationDictionary, I18nConfig } from '@longvhv/i18n';
+import { Language, TranslationDictionary, I18nConfig } from '@vhvplatform/i18n';
 
 // Type-safe language
 const lang: Language = 'vi';

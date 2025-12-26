@@ -2,7 +2,7 @@ import type { Meta } from '@storybook/react';
 
 /**
  * Welcome to the SaaS Framework React UI Component Library!
- * 
+ *
  * This Storybook showcases all the reusable UI components built with React, TypeScript, and Tailwind CSS.
  */
 const meta = {
@@ -55,7 +55,7 @@ Navigate through the sidebar to explore each component:
 ## 🎯 Getting Started
 
 \`\`\`tsx
-import { Button, Card, Input, Spinner } from '@longvhv/ui-components';
+import { Button, Card, Input, Spinner } from '@vhvplatform/ui-components';
 
 function MyApp() {
   return (
@@ -77,7 +77,7 @@ Each component includes:
 
 ## 🔗 Links
 
-- [GitHub Repository](https://github.com/longvhv/saas-framework-react)
+- [GitHub Repository](https://github.com/vhvplatform/react-framework)
 - [Package Documentation](../../README.md)
 - [Contributing Guide](../../CONTRIBUTING.md)
 
@@ -158,9 +158,9 @@ export const Welcome = {
         <h2 className="text-2xl font-bold text-gray-900 mb-4">Quick Start</h2>
         <div className="bg-white p-4 rounded border border-gray-300 font-mono text-sm">
           <div className="text-gray-600">// Install the package</div>
-          <div className="text-blue-600 mb-3">npm install @longvhv/ui-components</div>
+          <div className="text-blue-600 mb-3">npm install @vhvplatform/ui-components</div>
           <div className="text-gray-600">// Import and use components</div>
-          <div className="text-purple-600">import {'{ Button, Card }'} from '@longvhv/ui-components';</div>
+          <div className="text-purple-600">import {'{ Button, Card }'} from '@vhvplatform/ui-components';</div>
         </div>
       </div>
 

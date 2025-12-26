@@ -24,8 +24,8 @@ This example needs the backend API running:
 
 ```bash
 # In another terminal
-git clone https://github.com/longvhv/saas-framework-go.git
-cd saas-framework-go
+git clone https://github.com/vhvplatform/go-framework.git
+cd go-framework
 docker-compose up -d
 ```
 

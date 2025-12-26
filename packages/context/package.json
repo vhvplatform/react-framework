@@ -1,5 +1,5 @@
 {
-  "name": "@longvhv/context",
+  "name": "@vhvplatform/context",
   "version": "1.0.0",
   "description": "Multi-tenant context management with user, site, and application information",
   "main": "dist/index.js",
@@ -17,11 +17,11 @@
     "application",
     "saas"
   ],
-  "author": "longvhv",
+  "author": "vhvplatform",
   "license": "MIT",
   "peerDependencies": {
     "react": "^18.2.0",
-    "@longvhv/api-client": "workspace:*"
+    "@vhvplatform/api-client": "workspace:*"
   },
   "devDependencies": {
     "@types/react": "^18.2.0",

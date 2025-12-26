@@ -1,11 +1,11 @@
-# @longvhv/config
+# @vhvplatform/config
 
-Shared configuration presets for @longvhv framework applications.
+Shared configuration presets for @vhvplatform framework applications.
 
 ## Installation
 
 ```bash
-npm install --save-dev @longvhv/config
+npm install --save-dev @vhvplatform/config
 ```
 
 ## Usage
@@ -16,14 +16,14 @@ Create `.eslintrc.js` in your project:
 
 ```javascript
 module.exports = {
-  extends: ['@longvhv/config/eslint'],
+  extends: ['@vhvplatform/config/eslint'],
 };
 ```
 
 Or in `eslint.config.js`:
 
 ```javascript
-import config from '@longvhv/config/eslint';
+import config from '@vhvplatform/config/eslint';
 
 export default config;
 ```
@@ -33,7 +33,7 @@ export default config;
 Create `prettier.config.js` in your project:
 
 ```javascript
-import config from '@longvhv/config/prettier';
+import config from '@vhvplatform/config/prettier';
 
 export default config;
 ```
@@ -42,7 +42,7 @@ Or in `package.json`:
 
 ```json
 {
-  "prettier": "@longvhv/config/prettier"
+  "prettier": "@vhvplatform/config/prettier"
 }
 ```
 
@@ -52,7 +52,7 @@ Create `tsconfig.json` in your project:
 
 ```json
 {
-  "extends": "@longvhv/config/tsconfig",
+  "extends": "@vhvplatform/config/tsconfig",
   "compilerOptions": {
     "outDir": "./dist",
     "rootDir": "./src"
@@ -69,7 +69,7 @@ Create `tsconfig.json` in your project:
 - TypeScript recommended rules
 - React recommended rules
 - React Hooks rules
-- Custom rules for @longvhv framework
+- Custom rules for @vhvplatform framework
 
 ### Prettier
 
@@ -92,7 +92,7 @@ Create `tsconfig.json` in your project:
 You can override any configuration in your local config files:
 
 ```javascript
-import baseConfig from '@longvhv/config/eslint';
+import baseConfig from '@vhvplatform/config/eslint';
 
 export default {
   ...baseConfig,

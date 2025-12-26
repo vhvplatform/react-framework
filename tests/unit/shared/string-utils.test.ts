@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { capitalize, slugify, truncate, pluralize, getInitials } from '@longvhv/shared';
+import { capitalize, slugify, truncate, pluralize, getInitials } from '@vhvplatform/shared';
 
 describe('Shared Utilities - String Functions', () => {
   describe('capitalize', () => {

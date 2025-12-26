@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { renderHook } from '@testing-library/react';
-import { useCrud } from '@longvhv/crud';
-import { ApiProvider } from '@longvhv/api-client';
+import { useCrud } from '@vhvplatform/crud';
+import { ApiProvider } from '@vhvplatform/api-client';
 
 const createWrapper = () => {
   const Wrapper = ({ children }: { children: React.ReactNode }) => (

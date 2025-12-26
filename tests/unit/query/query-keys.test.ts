@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { paginationKey, filterKey, searchKey, combineKeys } from '@longvhv/query';
+import { paginationKey, filterKey, searchKey, combineKeys } from '@vhvplatform/query';
 
 describe('Query Key Utilities', () => {
   describe('paginationKey', () => {

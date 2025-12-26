@@ -1,13 +1,13 @@
-# @longvhv/shared
+# @vhvplatform/shared
 
-Complete documentation for @longvhv/shared package.
+Complete documentation for @vhvplatform/shared package.
 
 ## Overview
 Detailed package documentation with API reference, examples, and best practices.
 
 ## Installation
 ```bash
-pnpm add @longvhv/shared
+pnpm add @vhvplatform/shared
 ```
 
 ## Usage

@@ -23,7 +23,7 @@ pnpm dev
 
 ```bash
 # Start backend API
-cd ../saas-framework-go
+cd ../go-framework
 docker-compose up -d
 ```
 

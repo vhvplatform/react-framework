@@ -3,7 +3,7 @@ import chalk from 'chalk';
 import ora from 'ora';
 import fs from 'fs/promises';
 import path from 'path';
-import { TemplateRegistry } from '@longvhv/templates';
+import { TemplateRegistry } from '@vhvplatform/templates';
 
 interface CloneAppAnswers {
   templateName: string;
@@ -101,9 +101,9 @@ export async function cloneApp(templateName?: string, appName?: string) {
         'type-check': 'tsc --noEmit',
       },
       dependencies: {
-        '@longvhv/core': 'workspace:*',
-        '@longvhv/api-client': 'workspace:*',
-        '@longvhv/ui-components': 'workspace:*',
+        '@vhvplatform/core': 'workspace:*',
+        '@vhvplatform/api-client': 'workspace:*',
+        '@vhvplatform/ui-components': 'workspace:*',
         ...config.dependencies,
         react: '^18.2.0',
         'react-dom': '^18.2.0',

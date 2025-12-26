@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { I18nManager } from '@longvhv/i18n';
+import { I18nManager } from '@vhvplatform/i18n';
 
 describe('I18n Package - I18nManager', () => {
   let manager: I18nManager;

@@ -17,9 +17,9 @@ const packageJson = JSON.parse(readFileSync(join(__dirname, '../package.json'), 
 const program = new Command();
 
 program
-  .name('create-longvhv-app')
+  .name('create-vhvplatform-app')
   .version(packageJson.version, '-v, --version', 'Output the current version')
-  .description('Create a new SaaS application using @longvhv framework')
+  .description('Create a new SaaS application using @vhvplatform framework')
   .argument('[app-name]', 'Application name')
   .option('--template <name>', 'Template to use (blank, crm, admin-dashboard, integration-portal)')
   .option('--framework-version <version>', 'Framework version (default: latest)')
@@ -30,7 +30,7 @@ program
   .option('--verbose', 'Enable verbose logging')
   .action(async (appName, options) => {
     try {
-      console.log(chalk.blue.bold('\n🚀 Create @longvhv SaaS App\n'));
+      console.log(chalk.blue.bold('\n🚀 Create @vhvplatform SaaS App\n'));
 
       let name = appName;
 

@@ -1,4 +1,4 @@
-# @longvhv/testing
+# @vhvplatform/testing
 
 Testing utilities with Vitest and Testing Library helpers for the SaaS Framework.
 
@@ -14,7 +14,7 @@ Testing utilities with Vitest and Testing Library helpers for the SaaS Framework
 ## Installation
 
 ```bash
-pnpm add -D @longvhv/testing
+pnpm add -D @vhvplatform/testing
 ```
 
 ## Usage
@@ -22,7 +22,7 @@ pnpm add -D @longvhv/testing
 ### Test Utilities
 
 ```typescript
-import { waitForCondition, delay, testData } from '@longvhv/testing';
+import { waitForCondition, delay, testData } from '@vhvplatform/testing';
 
 // Wait for a condition
 await waitForCondition(() => element.classList.contains('active'));
@@ -38,7 +38,7 @@ const name = testData.name();
 ### Mocking
 
 ```typescript
-import { mockLocalStorage, mockSessionStorage, createMockResponse } from '@longvhv/testing';
+import { mockLocalStorage, mockSessionStorage, createMockResponse } from '@vhvplatform/testing';
 
 // Mock localStorage
 mockLocalStorage();
@@ -53,7 +53,7 @@ const response = createMockResponse({ id: 1, name: 'Test' });
 ### React Testing
 
 ```typescript
-import { render, screen, waitFor } from '@longvhv/testing';
+import { render, screen, waitFor } from '@vhvplatform/testing';
 
 test('renders component', () => {
   render(<MyComponent />);

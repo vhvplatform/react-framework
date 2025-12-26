@@ -17,8 +17,8 @@ Complete guide for setting up SaaS Framework React on your local machine.
 
 ```bash
 # Clone repository
-git clone https://github.com/longvhv/saas-framework-react.git
-cd saas-framework-react
+git clone https://github.com/vhvplatform/react-framework.git
+cd react-framework
 
 # Run automated setup
 chmod +x scripts/setup-dev.sh
@@ -37,8 +37,8 @@ The script will:
 ### 1. Clone & Install
 
 ```bash
-git clone https://github.com/longvhv/saas-framework-react.git
-cd saas-framework-react
+git clone https://github.com/vhvplatform/react-framework.git
+cd react-framework
 pnpm install
 ```
 
@@ -173,7 +173,7 @@ pnpm dev --port 3000
 ## Getting Help
 
 - [Troubleshooting Guide](./TROUBLESHOOTING.md)
-- [GitHub Issues](https://github.com/longvhv/saas-framework-react/issues)
+- [GitHub Issues](https://github.com/vhvplatform/react-framework/issues)
 - [Example Apps](../EXAMPLE.md)
 
 ---

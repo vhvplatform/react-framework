@@ -3,7 +3,7 @@ import chalk from 'chalk';
 import ora from 'ora';
 import fs from 'fs-extra';
 import path from 'path';
-import { AIService, CodeRefiner, ModificationType } from '@longvhv/ai-codegen';
+import { AIService, CodeRefiner, ModificationType } from '@vhvplatform/ai-codegen';
 
 /**
  * Refine/upgrade AI-generated code

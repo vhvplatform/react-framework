@@ -5,7 +5,7 @@ import {
   titleCaseVietnamese,
   hasVietnameseCharacters,
   sortVietnamese,
-} from '@longvhv/vietnamese';
+} from '@vhvplatform/vietnamese';
 
 describe('Vietnamese Text Utils', () => {
   describe('removeVietnameseTones', () => {

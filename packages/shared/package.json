@@ -1,5 +1,5 @@
 {
-  "name": "@longvhv/shared",
+  "name": "@vhvplatform/shared",
   "version": "1.0.0",
   "description": "Shared utilities, hooks, types, and helpers for SaaS applications",
   "type": "module",

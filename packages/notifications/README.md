@@ -1,4 +1,4 @@
-# @longvhv/notifications
+# @vhvplatform/notifications
 
 Toast notification system with react-hot-toast integration for the SaaS Framework.
 
@@ -14,7 +14,7 @@ Toast notification system with react-hot-toast integration for the SaaS Framewor
 ## Installation
 
 ```bash
-pnpm add @longvhv/notifications react-hot-toast
+pnpm add @vhvplatform/notifications react-hot-toast
 ```
 
 ## Usage
@@ -22,7 +22,7 @@ pnpm add @longvhv/notifications react-hot-toast
 ### Setup Notification Provider
 
 ```tsx
-import { NotificationProvider } from '@longvhv/notifications';
+import { NotificationProvider } from '@vhvplatform/notifications';
 
 function App() {
   return (
@@ -37,7 +37,7 @@ function App() {
 ### Use Notifications Hook
 
 ```tsx
-import { useNotifications } from '@longvhv/notifications';
+import { useNotifications } from '@vhvplatform/notifications';
 
 function MyComponent() {
   const notifications = useNotifications();
@@ -72,7 +72,7 @@ function MyComponent() {
 ### Promise Notifications
 
 ```tsx
-import { useNotifications } from '@longvhv/notifications';
+import { useNotifications } from '@vhvplatform/notifications';
 
 function MyComponent() {
   const notifications = useNotifications();

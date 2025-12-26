@@ -1,8 +1,8 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import { renderHook } from '@testing-library/react';
-import { ThemeProvider } from '@longvhv/theme';
-import { useIsDark, useToggleTheme } from '@longvhv/theme';
-import { mockLocalStorage } from '@longvhv/testing';
+import { ThemeProvider } from '@vhvplatform/theme';
+import { useIsDark, useToggleTheme } from '@vhvplatform/theme';
+import { mockLocalStorage } from '@vhvplatform/testing';
 
 const createWrapper = (defaultMode: 'light' | 'dark' | 'system' = 'light') => {
   const Wrapper = ({ children }: { children: React.ReactNode }) => (

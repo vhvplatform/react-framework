@@ -545,9 +545,9 @@ class UserList extends StatelessWidget {
 - **responsive**: Make responsive for all screen sizes
 - **tests**: Generate test files (Vitest/Testing Library)
 
-## Integration with saas-framework-go
+## Integration with go-framework
 
-The Go API code generated is compatible with the [saas-framework-go](https://github.com/longvhv/saas-framework-go) project.
+The Go API code generated is compatible with the [go-framework](https://github.com/vhvplatform/go-framework) project.
 
 ### Integration Steps
 
@@ -561,7 +561,7 @@ pnpm cli gen
 2. Copy generated files to your Go project:
 
 ```bash
-# In saas-framework-go project
+# In go-framework project
 cp generated/*.go ./api/
 ```
 
@@ -584,9 +584,9 @@ go mod tidy
 go run main.go
 ```
 
-## Integration with saas-framework-flutter
+## Integration with flutter-framework
 
-The Flutter code generated is compatible with the [saas-framework-flutter](https://github.com/longvhv/saas-framework-flutter) project.
+The Flutter code generated is compatible with the [flutter-framework](https://github.com/vhvplatform/flutter-framework) project.
 
 ### Integration Steps
 
@@ -600,7 +600,7 @@ pnpm cli gen
 2. Copy generated files to your Flutter project:
 
 ```bash
-# In saas-framework-flutter project
+# In flutter-framework project
 cp generated/*.dart ./lib/widgets/
 cp generated/*_screen.dart ./lib/screens/
 cp generated/api_client.dart ./lib/services/
@@ -700,7 +700,7 @@ this.model = config.model || 'gpt-4-turbo-preview'; // Default, best quality
 ### Programmatic Usage
 
 ```typescript
-import { AIService, CodeGenerator } from '@longvhv/ai-codegen';
+import { AIService, CodeGenerator } from '@vhvplatform/ai-codegen';
 
 const aiService = new AIService({
   provider: 'openai',

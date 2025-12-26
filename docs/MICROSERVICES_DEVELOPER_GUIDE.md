@@ -1,6 +1,6 @@
 # Microservices Developer Guide
 
-Complete guide for developing, testing, and deploying microservices using the @longvhv framework with Kubernetes.
+Complete guide for developing, testing, and deploying microservices using the @vhvplatform framework with Kubernetes.
 
 ## Table of Contents
 
@@ -50,7 +50,7 @@ Ensure you have access to:
 - **Source Code Repository**: GitHub/GitLab account with appropriate permissions
 - **Container Registry**: Access to push Docker images (GitHub Container Registry, Docker Hub, or private registry)
 - **Kubernetes Cluster**: kubectl configured to access your cluster
-- **NPM Registry**: Access to @longvhv packages (public or private npm registry)
+- **NPM Registry**: Access to @vhvplatform packages (public or private npm registry)
 
 ### Verify Kubernetes Access
 
@@ -73,15 +73,15 @@ kubectl config current-context
 
 ```bash
 # Install globally
-npm install -g @longvhv/create-app
+npm install -g @vhvplatform/create-app
 
 # Or use npx (no installation required)
-npx @longvhv/create-app --version
+npx @vhvplatform/create-app --version
 ```
 
 ### 2. Configure NPM Registry (if using private registry)
 
-For private @longvhv packages:
+For private @vhvplatform packages:
 
 ```bash
 # Login to npm registry
@@ -95,7 +95,7 @@ Create `.npmrc` in your home directory:
 
 ```bash
 # For GitHub Packages
-@longvhv:registry=https://npm.pkg.github.com
+@vhvplatform:registry=https://npm.pkg.github.com
 //npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
 ```
 
@@ -135,7 +135,7 @@ docker login ghcr.io  # or docker.io
 cd ~/projects
 
 # Create new microservice
-npx @longvhv/create-app my-microservice
+npx @vhvplatform/create-app my-microservice
 
 # The CLI will prompt you with options:
 ```
@@ -262,7 +262,7 @@ my-microservice/
 npm install
 
 # This will install:
-# - @longvhv/* framework packages
+# - @vhvplatform/* framework packages
 # - React and React Router
 # - Development tools (ESLint, Prettier, TypeScript)
 # - Build tools (Vite, Vitest)
@@ -423,7 +423,7 @@ Test API integration:
 
 ```typescript
 // src/services/api.test.ts
-import { apiClient } from '@longvhv/api-client';
+import { apiClient } from '@vhvplatform/api-client';
 
 describe('API Integration', () => {
   it('fetches user data', async () => {
@@ -1230,7 +1230,7 @@ istioctl dashboard kiali
    npm outdated
    
    # Update framework packages
-   npm update @longvhv/*
+   npm update @vhvplatform/*
    
    # Update all dependencies
    npm update
@@ -1492,19 +1492,19 @@ git pull origin <branch>
 - [Istio Documentation](https://istio.io/latest/docs/)
 - [Docker Best Practices](https://docs.docker.com/develop/dev-best-practices/)
 - [12-Factor App Methodology](https://12factor.net/)
-- [@longvhv Framework Documentation](https://github.com/longvhv/saas-framework-react)
+- [@vhvplatform Framework Documentation](https://github.com/vhvplatform/react-framework)
 
 ---
 
 ## Getting Help
 
-- **Framework Issues**: [GitHub Issues](https://github.com/longvhv/saas-framework-react/issues)
+- **Framework Issues**: [GitHub Issues](https://github.com/vhvplatform/react-framework/issues)
 - **Kubernetes Issues**: Check logs and events first
 - **Team Chat**: Slack/Discord channel
-- **Documentation**: https://github.com/longvhv/saas-framework-react/docs
+- **Documentation**: https://github.com/vhvplatform/react-framework/docs
 
 ---
 
 **Last Updated**: December 2024  
 **Version**: 1.0.0  
-**Maintainer**: @longvhv
+**Maintainer**: @vhvplatform

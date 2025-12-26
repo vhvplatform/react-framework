@@ -11,8 +11,8 @@ Deploy SaaS Framework React using Docker and Docker Compose.
 
 ```bash
 # Clone repository
-git clone https://github.com/longvhv/saas-framework-react.git
-cd saas-framework-react
+git clone https://github.com/vhvplatform/react-framework.git
+cd react-framework
 
 # Deploy with Docker Compose
 docker-compose up -d
@@ -76,7 +76,7 @@ services:
     restart: unless-stopped
 
   api:
-    image: longvhv/saas-framework-go:latest
+    image: vhvplatform/go-framework:latest
     ports:
       - "8080:8080"
     environment:

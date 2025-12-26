@@ -309,7 +309,7 @@ Each story includes:
 ## 📁 File Structure
 
 ```
-saas-framework-react/
+react-framework/
 ├── .storybook/
 │   ├── main.ts                 # Main configuration
 │   ├── preview.ts              # Preview settings

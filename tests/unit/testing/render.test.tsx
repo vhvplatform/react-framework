@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { render, screen } from '@longvhv/testing';
+import { render, screen } from '@vhvplatform/testing';
 
 describe('Testing Render Utilities', () => {
   describe('renderWithProviders', () => {

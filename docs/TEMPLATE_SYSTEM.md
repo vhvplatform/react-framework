@@ -8,7 +8,7 @@ The SaaS Framework Template System enables developers to import existing React a
 
 The template system consists of three main packages:
 
-### 1. @longvhv/templates
+### 1. @vhvplatform/templates
 
 Manages the template registry and provides CRUD operations for templates.
 
@@ -24,7 +24,7 @@ Manages the template registry and provides CRUD operations for templates.
 - Template CRUD operations
 - Template listing and searching
 
-### 2. @longvhv/app-adapter
+### 2. @vhvplatform/app-adapter
 
 Analyzes and adapts existing applications into framework-compatible format.
 
@@ -59,7 +59,7 @@ The app-adapter supports a wide range of React project structures:
   - TypeScript, ESLint, Prettier configs
   - PostCSS configs
 
-### 3. @longvhv/cli (Enhanced)
+### 3. @vhvplatform/cli (Enhanced)
 
 CLI commands for template management and app creation.
 
@@ -371,8 +371,8 @@ export SAAS_TEMPLATES_DIR=/path/to/templates
 Use the packages directly in your code:
 
 ```typescript
-import { TemplateRegistry } from '@longvhv/templates';
-import { AppImporter } from '@longvhv/app-adapter';
+import { TemplateRegistry } from '@vhvplatform/templates';
+import { AppImporter } from '@vhvplatform/app-adapter';
 
 // Initialize registry
 const registry = new TemplateRegistry('./templates');
@@ -396,7 +396,7 @@ const templates = registry.listTemplates();
 Extend the analysis capabilities:
 
 ```typescript
-import { AppAnalyzer } from '@longvhv/app-adapter';
+import { AppAnalyzer } from '@vhvplatform/app-adapter';
 
 class CustomAnalyzer extends AppAnalyzer {
   async analyzeCustomFeature(appPath: string) {

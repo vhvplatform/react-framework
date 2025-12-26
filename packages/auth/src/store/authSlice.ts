@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import { ApiClient } from '@longvhv/api-client';
+import { ApiClient } from '@vhvplatform/api-client';
 import {
   AuthState,
   User,
@@ -75,7 +75,7 @@ function clearAuthFromStorage(): void {
 
 /**
  * Login async thunk
- * Calls @longvhv/saas-framework-go /api/auth/login endpoint
+ * Calls @vhvplatform/go-framework /api/auth/login endpoint
  */
 export const login = createAsyncThunk<
   LoginResponse,
@@ -92,7 +92,7 @@ export const login = createAsyncThunk<
 
 /**
  * Register async thunk
- * Calls @longvhv/saas-framework-go /api/auth/register endpoint
+ * Calls @vhvplatform/go-framework /api/auth/register endpoint
  */
 export const register = createAsyncThunk<
   LoginResponse,
@@ -109,7 +109,7 @@ export const register = createAsyncThunk<
 
 /**
  * OAuth callback async thunk
- * Calls @longvhv/saas-framework-go /api/auth/oauth/callback endpoint
+ * Calls @vhvplatform/go-framework /api/auth/oauth/callback endpoint
  */
 export const oauthCallback = createAsyncThunk<
   LoginResponse,
@@ -129,7 +129,7 @@ export const oauthCallback = createAsyncThunk<
 
 /**
  * Logout async thunk
- * Calls @longvhv/saas-framework-go /api/auth/logout endpoint
+ * Calls @vhvplatform/go-framework /api/auth/logout endpoint
  */
 export const logout = createAsyncThunk<void, { apiClient: ApiClient }>(
   'auth/logout',
@@ -145,7 +145,7 @@ export const logout = createAsyncThunk<void, { apiClient: ApiClient }>(
 
 /**
  * Fetch current user async thunk
- * Calls @longvhv/saas-framework-go /api/auth/me endpoint
+ * Calls @vhvplatform/go-framework /api/auth/me endpoint
  */
 export const fetchCurrentUser = createAsyncThunk<
   User,
