@@ -463,7 +463,7 @@ pnpm cli refine
 # - Full-stack applications
 ```
 
-See [Template System Quick Start](./docs/TEMPLATE_QUICK_START.md) and [AI Code Generation Guide](./docs/AI_CODE_GENERATION.md) for more details.
+See [Template System Quick Start](./docs/guides/TEMPLATE_QUICK_START.md) and [AI Code Generation Guide](./docs/guides/AI_CODE_GENERATION.md) for more details.
 
 ### Create a Module
 
@@ -758,31 +758,40 @@ pnpm changeset:publish
 
 ## 📖 Documentation
 
+📚 **[Complete Documentation](./docs/README.md)** - Browse all documentation organized by topic
+
 ### Quick Start Guides
 
-- [Quick Start](./docs/QUICK-START.md) - Get started in 5 minutes
-- [Multi-Repo Architecture](./docs/MULTI_REPO.md) - Deploy apps in separate repositories
-- **[Microservices Developer Guide](./docs/MICROSERVICES_DEVELOPER_GUIDE.md)** - Complete guide for developing and deploying microservices on Kubernetes (NEW!)
-- [Template System](./docs/TEMPLATE_QUICK_START.md) - Create reusable templates
-- [AI Code Generation](./docs/AI_CODE_GENERATION.md) - Generate code with AI
+- [Quick Start](./docs/setup/QUICK-START.md) - Get started in 5 minutes
+- [Development Environment Setup](./docs/setup/SETUP-DEV.md) - Set up your dev environment
+- [Docker Setup](./docs/setup/SETUP-DOCKER.md) - Run with Docker
+- [Server Setup](./docs/setup/SETUP-SERVER.md) - Deploy to production
+
+### Guides & Tutorials
+
+- [AI Code Generation](./docs/guides/AI_CODE_GENERATION.md) - Generate code with AI
+- [Template System Quick Start](./docs/guides/TEMPLATE_QUICK_START.md) - Create reusable templates
+- [Template System Guide](./docs/guides/TEMPLATE_SYSTEM.md) - Advanced template features
+- [Storybook Setup](./docs/guides/STORYBOOK_SETUP.md) - Component development with Storybook
+
+### Architecture & Implementation
+
+- **[Microservices Developer Guide](./docs/architecture/MICROSERVICES_DEVELOPER_GUIDE.md)** - Complete guide for microservices on Kubernetes
+- [Multi-Repo Architecture](./docs/architecture/MULTI_REPO.md) - Deploy apps in separate repositories
+- [Implementation Summary](./docs/architecture/IMPLEMENTATION_SUMMARY.md) - Framework implementation overview
+- [Parallel Development](./docs/architecture/PARALLEL_DEVELOPMENT.md) - Team collaboration strategies
 
 ### Package Documentation
 
-Each package includes comprehensive README documentation:
+- [Framework Overview](./docs/packages/00-OVERVIEW.md) - Architecture and package overview
+- [Core Package](./docs/packages/01-CORE.md) - Core framework functionality
+- [API Client](./docs/packages/02-API-CLIENT.md) - HTTP client and API integration
+- [Authentication](./docs/packages/03-AUTH.md) - JWT and OAuth authentication
+- [UI Components](./docs/packages/04-UI-COMPONENTS.md) - Pre-built React components
+- [Shared Utilities](./docs/packages/05-SHARED.md) - Shared utilities and helpers
+- [CLI Tools](./docs/packages/06-CLI.md) - Command-line interface
 
-- Installation instructions
-- API reference
-- Usage examples
-- Type definitions
-
-See individual package READMEs for detailed documentation.
-
-### Advanced Topics
-
-- [Setup Development Environment](./docs/SETUP-DEV.md)
-- [Docker Setup](./docs/SETUP-DOCKER.md)
-- [Server Setup](./docs/SETUP-SERVER.md)
-- [Template System](./docs/TEMPLATE_SYSTEM.md)
+Each package also includes its own README with installation instructions, API reference, usage examples, and type definitions.
 
 ## 🛡️ Security
 
