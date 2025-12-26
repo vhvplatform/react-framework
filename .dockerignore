@@ -1,0 +1,76 @@
+# Dependencies
+node_modules
+.pnpm-store
+npm-debug.log
+yarn-error.log
+pnpm-debug.log
+
+# Build artifacts
+dist
+build
+.next
+out
+coverage
+
+# Environment files
+.env
+.env.local
+.env.*.local
+*.env
+
+# Git
+.git
+.gitignore
+.gitattributes
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Documentation
+README.md
+docs
+*.md
+
+# CI/CD
+.github
+.gitlab-ci.yml
+
+# K8s and deployment
+k8s
+helm
+docker-compose.yml
+*.yaml
+*.yml
+
+# Config files
+.editorconfig
+.prettierrc
+.eslintrc.json
+.prettierignore
+.eslintignore
+
+# Test files
+tests
+*.test.ts
+*.test.tsx
+*.spec.ts
+*.spec.tsx
+__tests__
+__mocks__
+
+# Logs
+*.log
+logs
+
+# Temporary files
+tmp
+temp
+.tmp

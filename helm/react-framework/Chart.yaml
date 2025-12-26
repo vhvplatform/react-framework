@@ -1,0 +1,17 @@
+apiVersion: v2
+name: react-framework
+description: A Helm chart for React Framework microservice
+type: application
+version: 1.0.0
+appVersion: "1.0.0"
+keywords:
+  - saas
+  - microservice
+  - react
+  - frontend
+maintainers:
+  - name: vhvplatform
+    email: platform@vhv.com
+home: https://github.com/vhvplatform/react-framework
+sources:
+  - https://github.com/vhvplatform/react-framework

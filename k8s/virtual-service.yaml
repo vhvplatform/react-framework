@@ -1,0 +1,46 @@
+# Istio VirtualService for traffic management
+# Enables advanced routing, retries, and timeouts
+
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: react-framework
+  namespace: default
+  labels:
+    app: react-framework
+spec:
+  hosts:
+  - react-framework
+  - react-framework.default.svc.cluster.local
+  - react-framework.yourdomain.com
+  gateways:
+  - react-framework-gateway
+  http:
+  - match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        host: react-framework
+        port:
+          number: 80
+      weight: 100
+    timeout: 30s
+    retries:
+      attempts: 3
+      perTryTimeout: 10s
+      retryOn: 5xx,reset,connect-failure,refused-stream
+    corsPolicy:
+      allowOrigins:
+      - exact: "*"
+      allowMethods:
+      - GET
+      - POST
+      - PUT
+      - DELETE
+      - OPTIONS
+      allowHeaders:
+      - authorization
+      - content-type
+      - x-requested-with
+      maxAge: "24h"

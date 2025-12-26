@@ -1,0 +1,172 @@
+# Kubernetes Deployment Configuration
+# Aligned with go-infrastructure microservice standards
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: react-framework
+  namespace: default
+  labels:
+    app: react-framework
+    tier: frontend
+    version: v1
+    managed-by: kubernetes
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: react-framework
+      tier: frontend
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: react-framework
+        tier: frontend
+        version: v1
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "3000"
+        prometheus.io/path: "/metrics"
+    spec:
+      serviceAccountName: react-framework
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        fsGroup: 1000
+      containers:
+      - name: react-framework
+        image: ghcr.io/vhvplatform/react-framework:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 3000
+          name: http
+          protocol: TCP
+        env:
+        - name: NODE_ENV
+          value: "production"
+        - name: VITE_API_URL
+          valueFrom:
+            configMapKeyRef:
+              name: react-framework-config
+              key: api-url
+        - name: LOG_LEVEL
+          valueFrom:
+            configMapKeyRef:
+              name: react-framework-config
+              key: log-level
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 3000
+            scheme: HTTP
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          successThreshold: 1
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 3000
+            scheme: HTTP
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          timeoutSeconds: 3
+          successThreshold: 1
+          failureThreshold: 3
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: false
+          runAsNonRoot: true
+          runAsUser: 1000
+          capabilities:
+            drop:
+            - ALL
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: react-framework
+  namespace: default
+  labels:
+    app: react-framework
+    tier: frontend
+spec:
+  type: ClusterIP
+  sessionAffinity: ClientIP
+  sessionAffinityConfig:
+    clientIP:
+      timeoutSeconds: 10800
+  ports:
+  - port: 80
+    targetPort: 3000
+    protocol: TCP
+    name: http
+  selector:
+    app: react-framework
+    tier: frontend
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: react-framework
+  namespace: default
+  labels:
+    app: react-framework
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: react-framework-config
+  namespace: default
+  labels:
+    app: react-framework
+data:
+  api-url: "http://go-api-service/api"
+  log-level: "info"
+  app-name: "react-framework"
+  app-version: "1.0.0"
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: react-framework
+  namespace: default
+  labels:
+    app: react-framework
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/rate-limit: "100"
+spec:
+  tls:
+  - hosts:
+    - react-framework.yourdomain.com
+    secretName: react-framework-tls
+  rules:
+  - host: react-framework.yourdomain.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: react-framework
+            port:
+              number: 80
