@@ -177,18 +177,8 @@ export const WithIcon: Story = {
   args: {
     children: (
       <>
-        <svg
-          className="-ml-1 mr-2 h-5 w-5"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M12 4v16m8-8H4"
-          />
+        <svg className="-ml-1 mr-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
         </svg>
         Add Item
       </>
@@ -200,6 +190,9 @@ export const WithIcon: Story = {
  * All variants showcase
  */
 export const AllVariants: Story = {
+  args: {
+    children: 'Button',
+  },
   render: () => (
     <div className="flex flex-col gap-4" style={{ width: '300px' }}>
       <Button variant="primary">Primary</Button>
@@ -223,6 +216,9 @@ export const AllVariants: Story = {
  * All sizes showcase
  */
 export const AllSizes: Story = {
+  args: {
+    children: 'Button',
+  },
   render: () => (
     <div className="flex flex-col gap-4 items-start">
       <Button size="sm">Small</Button>
