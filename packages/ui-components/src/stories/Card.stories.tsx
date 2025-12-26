@@ -229,6 +229,9 @@ export const StatsCard: Story = {
  * All shadow sizes
  */
 export const AllShadows: Story = {
+  args: {
+    children: 'Card content',
+  },
   render: () => (
     <div className="grid grid-cols-2 gap-4" style={{ width: '600px' }}>
       <Card shadow="none">
