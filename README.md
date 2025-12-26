@@ -7,6 +7,11 @@
 
 A comprehensive, production-ready React + Vite framework for building multiple SaaS applications. Supports both **monorepo** and **multi-repo** architectures. Built with modern best practices, full TypeScript support, and enterprise-grade tooling.
 
+## 🌐 Language
+
+- **English** (This document)
+- [Tiếng Việt](README.vi.md)
+
 ## 🎯 Architecture Options
 
 ### Monorepo (Default)

@@ -2,15 +2,22 @@
 
 Welcome to the comprehensive documentation for the VHV Platform React Framework.
 
+## 🌐 Other Languages
+
+- **English** (This document)
+- [Tiếng Việt](README.vi.md)
+
 ## 📖 Table of Contents
 
 ### 🚀 Getting Started
+
 - [Quick Start Guide](setup/QUICK-START.md) - Get up and running quickly
 - [Development Setup](setup/SETUP-DEV.md) - Set up your development environment
 - [Docker Setup](setup/SETUP-DOCKER.md) - Run the framework with Docker
 - [Server Setup](setup/SETUP-SERVER.md) - Deploy to a server
 
 ### 📦 Package Documentation
+
 - [Overview](packages/00-OVERVIEW.md) - Framework overview and architecture
 - [Core Package](packages/01-CORE.md) - Core framework functionality
 - [API Client](packages/02-API-CLIENT.md) - HTTP client and API integration
@@ -20,6 +27,7 @@ Welcome to the comprehensive documentation for the VHV Platform React Framework.
 - [CLI Tools](packages/06-CLI.md) - Command-line interface tools
 
 ### 📘 Guides & Tutorials
+
 - [Examples Index](guides/EXAMPLES-INDEX.md) - Browse all examples
 - [Example Tutorial](guides/EXAMPLE.md) - Detailed example walkthrough
 - [AI Code Generation](guides/AI_CODE_GENERATION.md) - Use AI to generate code
@@ -28,6 +36,7 @@ Welcome to the comprehensive documentation for the VHV Platform React Framework.
 - [Storybook Setup](guides/STORYBOOK_SETUP.md) - Set up and use Storybook
 
 ### 🏗️ Architecture & Implementation
+
 - [Implementation Summary](architecture/IMPLEMENTATION_SUMMARY.md) - Overview of the implementation
 - [Implementation Complete](architecture/IMPLEMENTATION_COMPLETE.md) - Complete implementation details
 - [Microservices Developer Guide](architecture/MICROSERVICES_DEVELOPER_GUIDE.md) - Building microservices
@@ -38,13 +47,16 @@ Welcome to the comprehensive documentation for the VHV Platform React Framework.
 - [Enhancements](architecture/ENHANCEMENTS.md) - Feature enhancements and roadmap
 
 ### 🔒 Security
+
 - [Security Summary](security/SECURITY_SUMMARY.md) - Security overview and best practices
 - [Security Analysis](security/SECURITY_ANALYSIS.md) - Detailed security analysis
 
 ### 🤝 Contributing
+
 - [Contributing Guide](contributing/CONTRIBUTING.md) - How to contribute to the project
 
 ### 📝 Examples
+
 - [Hello World Example](examples/01-hello-world.md) - Basic hello world app
 - [JWT Authentication Example](examples/auth-01-jwt.md) - JWT authentication implementation
 
