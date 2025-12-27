@@ -253,16 +253,16 @@ export function AppContextProvider({ children, config }: AppContextProviderProps
   // Load from storage on mount
   useEffect(() => {
     loadFromStorage();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []); // Only run once on mount
+  }, [loadFromStorage]); // loadFromStorage is memoized with useCallback
 
   // Auto-fetch on mount
   useEffect(() => {
     if (autoFetch) {
       refresh();
     }
+    // Only run when autoFetch changes or on mount
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []); // Only run once on mount
+  }, [autoFetch]); // refresh changes would cause unwanted re-fetches
 
   // Save to storage when state changes
   useEffect(() => {
