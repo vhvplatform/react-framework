@@ -11,10 +11,13 @@ Welcome to the comprehensive documentation for the VHV Platform React Framework.
 
 ### 🚀 Getting Started
 
+- [Installation Guide](../INSTALLATION.md) - **Complete installation guide with multiple methods**
 - [Quick Start Guide](setup/QUICK-START.md) - Get up and running quickly
 - [Development Setup](setup/SETUP-DEV.md) - Set up your development environment
 - [Docker Setup](setup/SETUP-DOCKER.md) - Run the framework with Docker
 - [Server Setup](setup/SETUP-SERVER.md) - Deploy to a server
+- [Troubleshooting](setup/TROUBLESHOOTING.md) - **Common issues and solutions**
+- [Configuration Presets](CONFIGURATION_PRESETS.md) - **Pre-configured setups for common scenarios**
 
 ### 📦 Package Documentation
 

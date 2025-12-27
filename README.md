@@ -369,16 +369,50 @@ pnpm >= 8.0.0
 
 ### Installation
 
+Multiple installation methods available. Choose the one that fits your needs:
+
+#### Quick Setup (Recommended)
+
 ```bash
 # Clone the repository
 git clone https://github.com/longvhv/saas-framework-react.git
 cd saas-framework-react
 
-# Install dependencies
-pnpm install
+# Run automated setup (choose: quick, development, or production)
+./scripts/setup.sh development
 
-# Build all packages
+# Verify installation
+./scripts/verify-installation.sh
+```
+
+#### Alternative Methods
+
+```bash
+# Method 1: Enhanced development setup
+./scripts/setup-dev.sh
+
+# Method 2: Quick exploration (minimal install)
+./scripts/setup-quick.sh
+
+# Method 3: Manual installation
+pnpm install
 pnpm build
+```
+
+📖 **[Complete Installation Guide](INSTALLATION.md)** - Detailed instructions for all installation methods
+
+### Verification
+
+After installation, verify everything is working:
+
+```bash
+# Run verification script
+./scripts/verify-installation.sh
+
+# Check specific components
+pnpm type-check  # TypeScript validation
+pnpm lint        # Code quality
+pnpm test        # Run tests
 ```
 
 ### Development
