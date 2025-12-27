@@ -144,11 +144,12 @@ describe('Testing Utilities', () => {
 
   describe('suppressConsole', () => {
     it('should suppress console.error', () => {
-      const restore = suppressConsole();
       const errorSpy = vi.spyOn(console, 'error');
-
+      
+      const restore = suppressConsole();
+      
       console.error('test error');
-      expect(errorSpy).not.toHaveBeenCalled();
+      expect(errorSpy).toHaveBeenCalledTimes(0);
 
       restore();
       console.error('test error');
@@ -158,11 +159,12 @@ describe('Testing Utilities', () => {
     });
 
     it('should suppress console.warn', () => {
-      const restore = suppressConsole();
       const warnSpy = vi.spyOn(console, 'warn');
+      
+      const restore = suppressConsole();
 
       console.warn('test warning');
-      expect(warnSpy).not.toHaveBeenCalled();
+      expect(warnSpy).toHaveBeenCalledTimes(0);
 
       restore();
       console.warn('test warning');

@@ -25,11 +25,11 @@ describe('Vietnamese Text Utils', () => {
     });
 
     it('should handle all Vietnamese characters', () => {
-      expect(removeVietnameseTones('áàảãạăắằẳẵặâấầẩẫậ')).toBe('aaaaaaaaaaaaaaaa');
-      expect(removeVietnameseTones('éèẻẽẹêếềểễệ')).toBe('eeeeeeeeee');
+      expect(removeVietnameseTones('áàảãạăắằẳẵặâấầẩẫậ')).toBe('aaaaaaaaaaaaaaaaa'); // 17 a's
+      expect(removeVietnameseTones('éèẻẽẹêếềểễệ')).toBe('eeeeeeeeeee'); // 11 e's
       expect(removeVietnameseTones('íìỉĩị')).toBe('iiiii');
-      expect(removeVietnameseTones('óòỏõọôốồổỗộơớờởỡợ')).toBe('oooooooooooooooo');
-      expect(removeVietnameseTones('úùủũụưứừửữự')).toBe('uuuuuuuuuuu');
+      expect(removeVietnameseTones('óòỏõọôốồổỗộơớờởỡợ')).toBe('ooooooooooooooooo'); // 17 o's
+      expect(removeVietnameseTones('úùủũụưứừửữự')).toBe('uuuuuuuuuuu'); // 11 u's
       expect(removeVietnameseTones('ýỳỷỹỵ')).toBe('yyyyy');
       expect(removeVietnameseTones('đ')).toBe('d');
     });

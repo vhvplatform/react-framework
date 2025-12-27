@@ -27,9 +27,9 @@ export function toSnakeCase(str: string): string {
   return str.replace(/([a-z])([A-Z])/g, '$1_$2').replace(/[\s-]+/g, '_').toLowerCase();
 }
 
-export function truncate(str: string, maxLength: number): string {
+export function truncate(str: string, maxLength: number, suffix: string = '...'): string {
   if (!str || str.length <= maxLength) return str;
-  return str.slice(0, maxLength - 3) + '...';
+  return str.slice(0, maxLength).trimEnd() + suffix;
 }
 
 export function randomString(length: number = 10): string {
@@ -41,8 +41,9 @@ export function randomString(length: number = 10): string {
   return result;
 }
 
-export function pluralize(word: string, count: number): string {
+export function pluralize(word: string, count: number, customPlural?: string): string {
   if (count === 1) return word;
+  if (customPlural) return customPlural;
   if (word.endsWith('y')) return word.slice(0, -1) + 'ies';
   if (word.endsWith('s') || word.endsWith('x') || word.endsWith('ch') || word.endsWith('sh')) return word + 'es';
   return word + 's';
@@ -50,5 +51,9 @@ export function pluralize(word: string, count: number): string {
 
 export function getInitials(name: string): string {
   if (!name) return '';
-  return name.split(' ').map((part) => part.charAt(0).toUpperCase()).join('').slice(0, 2);
+  const parts = name.trim().split(/\s+/).filter(part => part.length > 0);
+  if (parts.length === 0) return '';
+  if (parts.length === 1) return parts[0].charAt(0).toUpperCase();
+  // Return first and last initial
+  return parts[0].charAt(0).toUpperCase() + parts[parts.length - 1].charAt(0).toUpperCase();
 }
