@@ -4,6 +4,17 @@ Get started with SaaS Framework React in 5 minutes.
 
 ## 1. Setup (2 minutes)
 
+### Automated Setup (Recommended)
+
+```bash
+# Clone & setup in one command
+git clone https://github.com/vhvplatform/react-framework.git
+cd react-framework
+./scripts/setup.sh development
+```
+
+### Manual Setup
+
 ```bash
 # Clone & install
 git clone https://github.com/vhvplatform/react-framework.git
@@ -11,6 +22,15 @@ cd react-framework
 pnpm install
 pnpm build
 ```
+
+### Verify Installation
+
+```bash
+# Run verification script
+./scripts/verify-installation.sh
+```
+
+📖 **[Complete Installation Guide](../../INSTALLATION.md)** - Multiple installation methods and troubleshooting
 
 ## 2. Create App (1 minute)
 

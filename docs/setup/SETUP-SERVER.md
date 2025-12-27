@@ -11,15 +11,46 @@ Deploy SaaS Framework React to production server with Nginx, PM2, and SSL.
 
 ## Quick Deployment (Automated)
 
+### Method 1: Full Server Setup
+
 ```bash
-# On your local machine
+# On your local machine, copy script to server
 scp scripts/setup-server.sh user@your-server.com:~/
+
+# SSH to server
 ssh user@your-server.com
 
-# On server
-chmod +x setup-server.sh
+# Run automated setup (installs Node.js, pnpm, Nginx, PM2, Certbot)
 sudo ./setup-server.sh
 ```
+
+### Method 2: Customized Setup
+
+```bash
+# SSH to server
+ssh user@your-server.com
+
+# Run with options
+sudo ./setup-server.sh --no-nginx      # Skip Nginx installation
+sudo ./setup-server.sh --no-pm2        # Skip PM2 installation
+sudo ./setup-server.sh --no-certbot    # Skip Certbot installation
+sudo ./setup-server.sh --skip-confirm  # Skip confirmation prompts
+sudo ./setup-server.sh --help          # Show all options
+```
+
+### What Gets Installed
+
+The automated script installs:
+- ✅ Node.js 18.x
+- ✅ pnpm package manager
+- ✅ Nginx web server (optional)
+- ✅ PM2 process manager (optional)
+- ✅ Certbot for SSL/TLS (optional)
+- ✅ UFW firewall configuration
+- ✅ Deployment directory structure
+- ✅ Configuration templates
+
+📖 **[Complete Installation Guide](../../INSTALLATION.md)** - All deployment methods and options
 
 ## Manual Deployment
 

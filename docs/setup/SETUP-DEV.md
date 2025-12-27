@@ -15,22 +15,58 @@ Complete guide for setting up SaaS Framework React on your local machine.
 
 ## Quick Setup (Automated)
 
+### Method 1: Unified Setup Script
+
 ```bash
 # Clone repository
 git clone https://github.com/vhvplatform/react-framework.git
 cd react-framework
 
 # Run automated setup
-chmod +x scripts/setup-dev.sh
-./scripts/setup-dev.sh
+./scripts/setup.sh development
 ```
 
 The script will:
 ✅ Check prerequisites
-✅ Install dependencies (336 packages)
+✅ Install dependencies
 ✅ Build all packages
 ✅ Run validation
 ✅ Create .env file
+✅ Setup Git hooks
+
+### Method 2: Enhanced Development Script
+
+```bash
+# Clone repository
+git clone https://github.com/vhvplatform/react-framework.git
+cd react-framework
+
+# Run development setup
+./scripts/setup-dev.sh
+
+# Or with options
+./scripts/setup-dev.sh --skip-build       # Skip package build
+./scripts/setup-dev.sh --skip-validation  # Skip validation checks
+./scripts/setup-dev.sh --help             # Show all options
+```
+
+### Method 3: Quick Exploration
+
+For minimal installation to quickly explore the framework:
+
+```bash
+# Clone repository
+git clone https://github.com/vhvplatform/react-framework.git
+cd react-framework
+
+# Quick install
+./scripts/setup-quick.sh
+
+# Then complete setup when ready
+./scripts/setup.sh development
+```
+
+📖 **[Complete Installation Guide](../../INSTALLATION.md)** - All installation methods and options
 
 ## Manual Setup
 
