@@ -1,3 +1,4 @@
+import { memo, useMemo } from 'react';
 import { CrudTableConfig } from '../types';
 import { Button } from '@vhvplatform/ui-components';
 
@@ -5,16 +6,37 @@ interface CrudTableProps<T> {
   data: T[];
   config: CrudTableConfig<T>;
   loading?: boolean;
+  /**
+   * Edit callback - should be wrapped in useCallback for optimal performance
+   * @example
+   * const handleEdit = useCallback((item) => { ... }, [dependencies]);
+   */
   onEdit?: (item: T) => void;
+  /**
+   * Delete callback - should be wrapped in useCallback for optimal performance
+   * @example
+   * const handleDelete = useCallback((item) => { ... }, [dependencies]);
+   */
   onDelete?: (item: T) => void;
+  /**
+   * View callback - should be wrapped in useCallback for optimal performance
+   * @example
+   * const handleView = useCallback((item) => { ... }, [dependencies]);
+   */
   onView?: (item: T) => void;
   selected?: Set<any>;
+  /**
+   * Toggle select callback - should be wrapped in useCallback for optimal performance
+   */
   onToggleSelect?: (item: T) => void;
+  /**
+   * Toggle select all callback - should be wrapped in useCallback for optimal performance
+   */
   onToggleSelectAll?: () => void;
   isAllSelected?: boolean;
 }
 
-export function CrudTable<T extends { id?: any }>({
+function CrudTableComponent<T extends { id?: any }>({
   data,
   config,
   loading = false,
@@ -26,11 +48,23 @@ export function CrudTable<T extends { id?: any }>({
   onToggleSelectAll,
   isAllSelected = false,
 }: CrudTableProps<T>) {
-  const { columns, selectable, actions, emptyMessage = 'No data available', loadingRows = 5 } = config;
+  const {
+    columns,
+    selectable,
+    actions,
+    emptyMessage = 'No data available',
+    loadingRows = 5,
+  } = config;
 
-  const hasActions = actions && (actions.edit || actions.delete || actions.view || actions.custom);
+  const hasActions = useMemo(
+    () => actions && (actions.edit || actions.delete || actions.view || actions.custom),
+    [actions]
+  );
 
-  if (loading) {
+  // Memoize loading skeleton to prevent re-render
+  const loadingSkeleton = useMemo(() => {
+    if (!loading) return null;
+
     return (
       <div className="overflow-x-auto">
         <table className="min-w-full divide-y divide-gray-200">
@@ -72,6 +106,10 @@ export function CrudTable<T extends { id?: any }>({
         </table>
       </div>
     );
+  }, [loading, selectable, columns, hasActions, loadingRows]);
+
+  if (loading) {
+    return loadingSkeleton;
   }
 
   if (data.length === 0) {
@@ -115,60 +153,101 @@ export function CrudTable<T extends { id?: any }>({
         </thead>
         <tbody className="bg-white divide-y divide-gray-200">
           {data.map((item, rowIdx) => (
-            <tr key={rowIdx} className="hover:bg-gray-50">
-              {selectable && (
-                <td className="px-6 py-4">
-                  <input
-                    type="checkbox"
-                    checked={selected?.has(item.id)}
-                    onChange={() => onToggleSelect?.(item)}
-                    className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                  />
-                </td>
-              )}
-              {columns.map((col, colIdx) => {
-                const value = typeof col.key === 'string' ? (item as any)[col.key] : item[col.key];
-                return (
-                  <td key={colIdx} className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                    {col.render ? col.render(value, item) : String(value || '-')}
-                  </td>
-                );
-              })}
-              {hasActions && (
-                <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                  <div className="flex gap-2 justify-end">
-                    {actions.view && (
-                      <Button size="sm" variant="secondary" onClick={() => onView?.(item)}>
-                        View
-                      </Button>
-                    )}
-                    {actions.edit && (
-                      <Button size="sm" variant="primary" onClick={() => onEdit?.(item)}>
-                        Edit
-                      </Button>
-                    )}
-                    {actions.delete && (
-                      <Button size="sm" variant="danger" onClick={() => onDelete?.(item)}>
-                        Delete
-                      </Button>
-                    )}
-                    {actions.custom?.map((action, idx) => (
-                      <Button
-                        key={idx}
-                        size="sm"
-                        variant="secondary"
-                        onClick={() => action.onClick(item)}
-                      >
-                        {action.label}
-                      </Button>
-                    ))}
-                  </div>
-                </td>
-              )}
-            </tr>
+            <TableRow
+              key={item.id ?? rowIdx}
+              item={item}
+              columns={columns}
+              selectable={selectable}
+              selected={selected}
+              onToggleSelect={onToggleSelect}
+              hasActions={hasActions}
+              actions={actions}
+              onView={onView}
+              onEdit={onEdit}
+              onDelete={onDelete}
+            />
           ))}
         </tbody>
       </table>
     </div>
   );
 }
+
+// Memoized table row component to prevent unnecessary re-renders
+interface TableRowProps<T> {
+  item: T;
+  columns: any[];
+  selectable?: boolean;
+  selected?: Set<any>;
+  onToggleSelect?: (item: T) => void;
+  hasActions: boolean;
+  actions: any;
+  onView?: (item: T) => void;
+  onEdit?: (item: T) => void;
+  onDelete?: (item: T) => void;
+}
+
+const TableRow = memo(function TableRow<T extends { id?: any }>({
+  item,
+  columns,
+  selectable,
+  selected,
+  onToggleSelect,
+  hasActions,
+  actions,
+  onView,
+  onEdit,
+  onDelete,
+}: TableRowProps<T>) {
+  return (
+    <tr className="hover:bg-gray-50">
+      {selectable && (
+        <td className="px-6 py-4">
+          <input
+            type="checkbox"
+            checked={selected?.has(item.id)}
+            onChange={() => onToggleSelect?.(item)}
+            className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+          />
+        </td>
+      )}
+      {columns.map((col, colIdx) => {
+        const value = typeof col.key === 'string' ? (item as any)[col.key] : item[col.key];
+        return (
+          <td key={colIdx} className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+            {col.render ? col.render(value, item) : String(value || '-')}
+          </td>
+        );
+      })}
+      {hasActions && (
+        <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+          <div className="flex gap-2 justify-end">
+            {actions.view && (
+              <Button size="sm" variant="secondary" onClick={() => onView?.(item)}>
+                View
+              </Button>
+            )}
+            {actions.edit && (
+              <Button size="sm" variant="primary" onClick={() => onEdit?.(item)}>
+                Edit
+              </Button>
+            )}
+            {actions.delete && (
+              <Button size="sm" variant="danger" onClick={() => onDelete?.(item)}>
+                Delete
+              </Button>
+            )}
+            {actions.custom?.map((action: any, idx: number) => (
+              <Button key={idx} size="sm" variant="secondary" onClick={() => action.onClick(item)}>
+                {action.label}
+              </Button>
+            ))}
+          </div>
+        </td>
+      )}
+    </tr>
+  );
+}) as <T extends { id?: any }>(props: TableRowProps<T>) => JSX.Element;
+
+// Export memoized component with proper generic typing
+export const CrudTable = memo(CrudTableComponent) as typeof CrudTableComponent;

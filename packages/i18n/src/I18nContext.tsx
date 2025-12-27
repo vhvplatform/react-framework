@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useCallback, useEffect, ReactNode } from 'react';
+import { createContext, useContext, useState, useCallback, useEffect, useMemo, ReactNode } from 'react';
 import { I18nManager } from './I18nManager';
 import { I18nConfig, I18nContextValue, Language, TranslationDictionary } from './types';
 
@@ -104,17 +104,17 @@ export function useI18n(): I18nContextValue {
 }
 
 /**
- * Hook to get translation function
+ * Hook to get translation function - memoized
  */
 export function useTranslation() {
   const { t, language } = useI18n();
-  return { t, language };
+  return useMemo(() => ({ t, language }), [t, language]);
 }
 
 /**
- * Hook to get language
+ * Hook to get language - memoized
  */
 export function useLanguage() {
   const { language, setLanguage } = useI18n();
-  return [language, setLanguage] as const;
+  return useMemo(() => [language, setLanguage] as const, [language, setLanguage]);
 }

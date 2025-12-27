@@ -77,6 +77,11 @@ export interface CacheConfig {
   debug?: boolean;
 
   /**
+   * Maximum number of entries (for memory cache)
+   */
+  maxSize?: number;
+
+  /**
    * Serialize function
    */
   serialize?: (value: any) => string;
