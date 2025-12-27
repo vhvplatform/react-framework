@@ -1,4 +1,4 @@
-import { memo, useMemo, useCallback } from 'react';
+import { memo, useMemo } from 'react';
 import { CrudTableConfig } from '../types';
 import { Button } from '@vhvplatform/ui-components';
 
@@ -6,11 +6,32 @@ interface CrudTableProps<T> {
   data: T[];
   config: CrudTableConfig<T>;
   loading?: boolean;
+  /**
+   * Edit callback - should be wrapped in useCallback for optimal performance
+   * @example
+   * const handleEdit = useCallback((item) => { ... }, [dependencies]);
+   */
   onEdit?: (item: T) => void;
+  /**
+   * Delete callback - should be wrapped in useCallback for optimal performance
+   * @example
+   * const handleDelete = useCallback((item) => { ... }, [dependencies]);
+   */
   onDelete?: (item: T) => void;
+  /**
+   * View callback - should be wrapped in useCallback for optimal performance
+   * @example
+   * const handleView = useCallback((item) => { ... }, [dependencies]);
+   */
   onView?: (item: T) => void;
   selected?: Set<any>;
+  /**
+   * Toggle select callback - should be wrapped in useCallback for optimal performance
+   */
   onToggleSelect?: (item: T) => void;
+  /**
+   * Toggle select all callback - should be wrapped in useCallback for optimal performance
+   */
   onToggleSelectAll?: () => void;
   isAllSelected?: boolean;
 }
@@ -27,7 +48,13 @@ function CrudTableComponent<T extends { id?: any }>({
   onToggleSelectAll,
   isAllSelected = false,
 }: CrudTableProps<T>) {
-  const { columns, selectable, actions, emptyMessage = 'No data available', loadingRows = 5 } = config;
+  const {
+    columns,
+    selectable,
+    actions,
+    emptyMessage = 'No data available',
+    loadingRows = 5,
+  } = config;
 
   const hasActions = useMemo(
     () => actions && (actions.edit || actions.delete || actions.view || actions.custom),
@@ -37,7 +64,7 @@ function CrudTableComponent<T extends { id?: any }>({
   // Memoize loading skeleton to prevent re-render
   const loadingSkeleton = useMemo(() => {
     if (!loading) return null;
-    
+
     return (
       <div className="overflow-x-auto">
         <table className="min-w-full divide-y divide-gray-200">
@@ -211,12 +238,7 @@ const TableRow = memo(function TableRow<T extends { id?: any }>({
               </Button>
             )}
             {actions.custom?.map((action: any, idx: number) => (
-              <Button
-                key={idx}
-                size="sm"
-                variant="secondary"
-                onClick={() => action.onClick(item)}
-              >
+              <Button key={idx} size="sm" variant="secondary" onClick={() => action.onClick(item)}>
                 {action.label}
               </Button>
             ))}

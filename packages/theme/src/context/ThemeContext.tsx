@@ -102,21 +102,14 @@ export function ThemeProvider({
 
     // Batch CSS variable updates for better performance
     requestAnimationFrame(() => {
-      // Merge all style updates into single object
-      const allStyles = {
-        ...Object.entries(theme.colors).reduce(
-          (acc, [key, value]) => ({ ...acc, [`--color-${key}`]: value }),
-          {}
-        ),
-        ...Object.entries(theme.spacing).reduce(
-          (acc, [key, value]) => ({ ...acc, [`--spacing-${key}`]: value }),
-          {}
-        ),
-      };
+      // Set CSS variables for colors
+      Object.entries(theme.colors).forEach(([key, value]) => {
+        root.style.setProperty(`--color-${key}`, value);
+      });
 
-      // Apply all styles in a single loop
-      Object.entries(allStyles).forEach(([key, value]) => {
-        root.style.setProperty(key, value);
+      // Set CSS variables for spacing
+      Object.entries(theme.spacing).forEach(([key, value]) => {
+        root.style.setProperty(`--spacing-${key}`, value);
       });
     });
   }, [theme, actualTheme]);

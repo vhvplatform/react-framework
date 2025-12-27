@@ -50,15 +50,21 @@ export function chunk<T>(arr: T[], size: number): T[][] {
 /**
  * Optimized flatten function using iterative approach instead of recursion
  * Prevents stack overflow for deeply nested arrays
+ * Uses stack-based iteration with O(n) complexity
  */
 export function flatten<T>(arr: (T | T[])[]): T[] {
   const result: T[] = [];
-  const stack = [...arr];
+  const stack: (T | T[])[] = [];
+
+  // Initialize stack with items in reverse order
+  for (let i = arr.length - 1; i >= 0; i--) {
+    stack.push(arr[i]);
+  }
 
   while (stack.length > 0) {
     const item = stack.pop();
     if (Array.isArray(item)) {
-      // Push array items back to stack in reverse order to maintain order
+      // Push array items in reverse order to maintain correct output order
       for (let i = item.length - 1; i >= 0; i--) {
         stack.push(item[i]);
       }
