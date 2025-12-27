@@ -18,12 +18,15 @@ export function uniqueBy<T>(arr: T[], key: keyof T): T[] {
 }
 
 export function groupBy<T>(arr: T[], key: keyof T): Record<string, T[]> {
-  return arr.reduce((acc, item) => {
-    const groupKey = String(item[key]);
-    if (!acc[groupKey]) acc[groupKey] = [];
-    acc[groupKey].push(item);
-    return acc;
-  }, {} as Record<string, T[]>);
+  return arr.reduce(
+    (acc, item) => {
+      const groupKey = String(item[key]);
+      if (!acc[groupKey]) acc[groupKey] = [];
+      acc[groupKey].push(item);
+      return acc;
+    },
+    {} as Record<string, T[]>
+  );
 }
 
 export function sortBy<T>(arr: T[], key: keyof T, order: 'asc' | 'desc' = 'asc'): T[] {
@@ -51,17 +54,19 @@ export function chunk<T>(arr: T[], size: number): T[][] {
 export function flatten<T>(arr: (T | T[])[]): T[] {
   const result: T[] = [];
   const stack = [...arr];
-  
+
   while (stack.length > 0) {
     const item = stack.pop();
     if (Array.isArray(item)) {
       // Push array items back to stack in reverse order to maintain order
-      stack.push(...item);
+      for (let i = item.length - 1; i >= 0; i--) {
+        stack.push(item[i]);
+      }
     } else if (item !== undefined) {
-      result.unshift(item as T);
+      result.push(item as T);
     }
   }
-  
+
   return result;
 }
 

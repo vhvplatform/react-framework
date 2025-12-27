@@ -24,7 +24,7 @@ export function ThemeProvider({
   // Load saved theme mode
   const loadThemeMode = useCallback((): ThemeMode => {
     if (typeof window === 'undefined') return defaultMode;
-    
+
     try {
       const saved = localStorage.getItem(storageKey) as ThemeMode;
       if (saved === 'light' || saved === 'dark' || saved === 'system') {
@@ -33,7 +33,7 @@ export function ThemeProvider({
     } catch (error) {
       console.error('[theme] Failed to load theme mode:', error);
     }
-    
+
     return defaultMode;
   }, [defaultMode, storageKey]);
 
@@ -41,15 +41,12 @@ export function ThemeProvider({
   const [systemTheme, setSystemTheme] = useState<'light' | 'dark'>(getSystemTheme);
 
   // Determine actual theme based on mode - memoized
-  const actualTheme = useMemo(
-    () => (mode === 'system' ? systemTheme : mode),
-    [mode, systemTheme]
-  );
-  
+  const actualTheme = useMemo(() => (mode === 'system' ? systemTheme : mode), [mode, systemTheme]);
+
   // Get theme object - memoized
   const theme: Theme = useMemo(() => {
     const baseTheme = actualTheme === 'dark' ? darkTheme : lightTheme;
-    return customTheme 
+    return customTheme
       ? { ...baseTheme, ...customTheme, colors: { ...baseTheme.colors, ...customTheme.colors } }
       : baseTheme;
   }, [actualTheme, customTheme]);
@@ -58,7 +55,7 @@ export function ThemeProvider({
   const setMode = useCallback(
     (newMode: ThemeMode) => {
       setModeState(newMode);
-      
+
       try {
         localStorage.setItem(storageKey, newMode);
       } catch (error) {
@@ -82,7 +79,7 @@ export function ThemeProvider({
     if (typeof window === 'undefined') return;
 
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    
+
     const handleChange = (e: MediaQueryListEvent | MediaQueryList) => {
       setSystemTheme(e.matches ? 'dark' : 'light');
     };
@@ -93,26 +90,33 @@ export function ThemeProvider({
     return () => mediaQuery.removeEventListener('change', handleChange);
   }, []);
 
-  // Apply theme to document - optimized with useMemo for CSS variable updates
+  // Apply theme to document - optimized with batch CSS variable updates
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
     const root = document.documentElement;
-    
+
     // Set theme class
     root.classList.remove('light', 'dark');
     root.classList.add(actualTheme);
-    
+
     // Batch CSS variable updates for better performance
     requestAnimationFrame(() => {
-      // Set CSS variables for colors
-      Object.entries(theme.colors).forEach(([key, value]) => {
-        root.style.setProperty(`--color-${key}`, value);
-      });
+      // Merge all style updates into single object
+      const allStyles = {
+        ...Object.entries(theme.colors).reduce(
+          (acc, [key, value]) => ({ ...acc, [`--color-${key}`]: value }),
+          {}
+        ),
+        ...Object.entries(theme.spacing).reduce(
+          (acc, [key, value]) => ({ ...acc, [`--spacing-${key}`]: value }),
+          {}
+        ),
+      };
 
-      // Set CSS variables for spacing
-      Object.entries(theme.spacing).forEach(([key, value]) => {
-        root.style.setProperty(`--spacing-${key}`, value);
+      // Apply all styles in a single loop
+      Object.entries(allStyles).forEach(([key, value]) => {
+        root.style.setProperty(key, value);
       });
     });
   }, [theme, actualTheme]);
@@ -137,10 +141,10 @@ export function ThemeProvider({
  */
 export function useTheme(): ThemeContextValue {
   const context = useContext(ThemeContext);
-  
+
   if (!context) {
     throw new Error('useTheme must be used within ThemeProvider');
   }
-  
+
   return context;
 }
