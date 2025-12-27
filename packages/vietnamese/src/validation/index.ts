@@ -68,9 +68,18 @@ export function isValidVietnamesePostalCode(postalCode: string): boolean {
  * Validate Vietnamese name
  */
 export function isValidVietnameseName(name: string): boolean {
-  // Vietnamese names can contain letters, spaces, and Vietnamese characters
-  const vietnameseNameRegex = /^[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵýỷỹ\s]+$/;
-  return vietnameseNameRegex.test(name.trim());
+  const trimmed = name.trim();
+  
+  // Check minimum length (at least 3 characters)
+  if (trimmed.length < 3) return false;
+  
+  // Vietnamese names can contain letters, spaces, Vietnamese characters, hyphens and apostrophes
+  const vietnameseNameRegex = /^[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵýỷỹ\s'-]+$/;
+  
+  // Check if name contains numbers
+  if (/\d/.test(trimmed)) return false;
+  
+  return vietnameseNameRegex.test(trimmed);
 }
 
 /**

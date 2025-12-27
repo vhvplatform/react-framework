@@ -77,16 +77,18 @@ describe('Validation Utils', () => {
 
   describe('getPasswordStrength', () => {
     it('should return weak for simple passwords', () => {
-      expect(getPasswordStrength('password')).toBe('weak');
-      expect(getPasswordStrength('12345678')).toBe('weak');
+      expect(getPasswordStrength('password').level).toBe('weak');
+      expect(getPasswordStrength('12345678').level).toBe('weak');
     });
 
     it('should return medium for moderate passwords', () => {
-      expect(getPasswordStrength('Password1')).toBe('medium');
+      expect(getPasswordStrength('Password1').level).toBe('medium');
     });
 
     it('should return strong for complex passwords', () => {
-      expect(getPasswordStrength('MyP@ssw0rd123')).toBe('strong');
+      const result = getPasswordStrength('MyP@ssw0rd123');
+      expect(result.level).toMatch(/^(strong|very-strong)$/);
+      expect(result.score).toBeGreaterThanOrEqual(5);
     });
   });
 

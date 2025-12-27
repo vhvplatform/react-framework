@@ -22,10 +22,12 @@ export function removeVietnameseTones(text: string): string {
   let result = text;
   
   Object.entries(VIETNAMESE_TONES).forEach(([base, variants]) => {
-    variants.forEach((variant) => {
-      const regex = new RegExp(variant, 'gi');
+    variants.forEach((variant, index) => {
+      if (index === 0) return; // Skip the base character itself
+      const regex = new RegExp(variant, 'g');
       result = result.replace(regex, (match) => {
-        return match === variant ? base : base.toUpperCase();
+        // Preserve case: if original is uppercase, return uppercase base
+        return match === match.toUpperCase() ? base.toUpperCase() : base;
       });
     });
   });
@@ -39,7 +41,7 @@ export function removeVietnameseTones(text: string): string {
 export function vietnameseToSlug(text: string): string {
   let str = removeVietnameseTones(text);
   str = str.toLowerCase();
-  str = str.replace(/[^a-z0-9\s-]/g, '');
+  str = str.replace(/[^a-z0-9\s-]/g, ' '); // Replace special chars with space instead of removing
   str = str.trim();
   str = str.replace(/\s+/g, '-');
   str = str.replace(/-+/g, '-');
@@ -155,7 +157,7 @@ export function sortVietnamese(
   arr: string[],
   ascending: boolean = true
 ): string[] {
-  return arr.sort((a, b) => {
+  return [...arr].sort((a, b) => {
     const aProcessed = removeVietnameseTones(a).toLowerCase();
     const bProcessed = removeVietnameseTones(b).toLowerCase();
     
