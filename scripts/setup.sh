@@ -106,6 +106,7 @@ print_status "Installing dependencies..."
 if [ "$SETUP_MODE" = "quick" ]; then
   # Quick mode: install only core dependencies
   print_warning "Quick mode: Installing core dependencies only"
+  print_warning "Note: Some packages may require build scripts to function properly"
   pnpm install --prod --ignore-scripts
 else
   # Full installation

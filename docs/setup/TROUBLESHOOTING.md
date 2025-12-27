@@ -18,11 +18,13 @@ Common issues and solutions for SaaS Framework React installation and developmen
 **Problem:** Getting "Node.js version not supported" error
 
 **Solution:**
+
 ```bash
 # Check current version
 node --version
 
 # Install correct version using nvm (recommended)
+# Verify script URL from official nvm GitHub: https://github.com/nvm-sh/nvm
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
 nvm install 18
 nvm use 18
@@ -35,6 +37,7 @@ nvm use 18
 **Problem:** `pnpm: command not found`
 
 **Solution:**
+
 ```bash
 # Install pnpm globally
 npm install -g pnpm
@@ -48,6 +51,7 @@ npx pnpm install
 **Problem:** `pnpm install` fails with errors
 
 **Solution:**
+
 ```bash
 # Clear cache and retry
 pnpm store prune
@@ -66,6 +70,7 @@ pnpm install --legacy-peer-deps
 **Problem:** EACCES or permission denied errors during installation
 
 **Solution:**
+
 ```bash
 # For npm/pnpm global packages
 sudo chown -R $(whoami) ~/.npm
@@ -83,6 +88,7 @@ chmod +x scripts/*.sh
 **Problem:** Installation takes too long
 
 **Solution:**
+
 ```bash
 # Use faster network
 # Check if behind proxy/firewall
@@ -104,6 +110,7 @@ pnpm install --prefer-offline
 **Problem:** `pnpm build` fails with TypeScript errors
 
 **Solution:**
+
 ```bash
 # Check all type errors
 pnpm type-check
@@ -126,6 +133,7 @@ pnpm add -D typescript@latest
 **Problem:** Build crashes with "JavaScript heap out of memory"
 
 **Solution:**
+
 ```bash
 # Increase Node.js memory limit
 export NODE_OPTIONS="--max-old-space-size=4096"
@@ -147,6 +155,7 @@ pnpm -r --workspace-concurrency=1 build
 **Problem:** Some packages not building
 
 **Solution:**
+
 ```bash
 # Clean and rebuild
 pnpm clean
@@ -169,6 +178,7 @@ pnpm list --depth=Infinity | grep -E "circular"
 **Problem:** Vite build fails or produces errors
 
 **Solution:**
+
 ```bash
 # Clear Vite cache
 rm -rf node_modules/.vite
@@ -191,6 +201,7 @@ pnpm build --debug
 **Problem:** "Port 5173 is already in use"
 
 **Solution:**
+
 ```bash
 # Find and kill process
 lsof -ti:5173 | xargs kill -9
@@ -209,6 +220,7 @@ export default defineConfig({
 **Problem:** Changes not reflected in browser
 
 **Solution:**
+
 ```bash
 # Check if files are being watched
 # Ensure not too many files (inotify limit on Linux)
@@ -229,6 +241,7 @@ pnpm dev
 **Problem:** "Cannot find module '@vhvplatform/...'"
 
 **Solution:**
+
 ```bash
 # Ensure packages are built
 pnpm build
@@ -248,6 +261,7 @@ pnpm install
 **Problem:** Commit blocked by pre-commit hook
 
 **Solution:**
+
 ```bash
 # Fix issues reported by hooks
 pnpm lint:fix
@@ -267,6 +281,7 @@ pnpm prepare
 **Problem:** Too many ESLint errors
 
 **Solution:**
+
 ```bash
 # Auto-fix what can be fixed
 pnpm lint:fix
@@ -288,6 +303,7 @@ pnpm lint src/your-file.ts
 **Problem:** Tests fail unexpectedly
 
 **Solution:**
+
 ```bash
 # Run tests with verbose output
 pnpm test --reporter=verbose
@@ -310,6 +326,7 @@ pnpm add -D vitest@latest @testing-library/react@latest
 **Problem:** Coverage reports are incorrect
 
 **Solution:**
+
 ```bash
 # Run with coverage
 pnpm test:coverage
@@ -333,6 +350,7 @@ export default defineConfig({
 **Problem:** Tests timeout
 
 **Solution:**
+
 ```bash
 # Increase timeout in test file
 test('something', async () => {
@@ -354,6 +372,7 @@ export default defineConfig({
 **Problem:** Docker image build fails
 
 **Solution:**
+
 ```bash
 # Check Dockerfile syntax
 docker build --no-cache -t react-framework .
@@ -373,6 +392,7 @@ cat .dockerignore
 **Problem:** Pods not starting
 
 **Solution:**
+
 ```bash
 # Check pod status
 kubectl get pods -l app=react-framework
@@ -396,6 +416,7 @@ kubectl get secrets
 **Problem:** Nginx not serving app correctly
 
 **Solution:**
+
 ```bash
 # Test Nginx configuration
 sudo nginx -t
@@ -418,6 +439,7 @@ sudo systemctl reload nginx
 **Problem:** PM2 process keeps restarting
 
 **Solution:**
+
 ```bash
 # Check PM2 logs
 pm2 logs react-framework
@@ -441,6 +463,7 @@ pm2 update
 **Problem:** SSL/TLS certificate errors
 
 **Solution:**
+
 ```bash
 # Renew certificate with Certbot
 sudo certbot renew
@@ -465,6 +488,7 @@ sudo ufw status
 **Problem:** Builds take too long
 
 **Solution:**
+
 ```bash
 # Use parallel builds (default with pnpm)
 pnpm build
@@ -487,6 +511,7 @@ export NODE_OPTIONS="--max-old-space-size=4096"
 **Problem:** Dev server is slow
 
 **Solution:**
+
 ```bash
 # Reduce watched files
 # Add to vite.config.ts:
@@ -513,6 +538,7 @@ export default defineConfig({
 **Problem:** Production bundle is too large
 
 **Solution:**
+
 ```bash
 # Analyze bundle
 pnpm build
@@ -537,6 +563,7 @@ NODE_ENV=production pnpm build
 **Problem:** Application memory usage keeps growing
 
 **Solution:**
+
 ```bash
 # Profile with Chrome DevTools
 # Use Memory tab to find leaks
@@ -574,6 +601,7 @@ pnpm --version     # pnpm
 When reporting issues, include:
 
 1. **System Information**
+
    ```bash
    uname -a                    # OS
    node --version              # Node.js
@@ -607,6 +635,7 @@ When reporting issues, include:
 ---
 
 **Still need help?** Open an issue with:
+
 - Output from `./scripts/verify-installation.sh`
 - Relevant error messages
 - Steps to reproduce

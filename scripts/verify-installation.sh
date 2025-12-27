@@ -83,8 +83,8 @@ echo -e "${BLUE}=== Dependencies ===${NC}\n"
 if [ -d "node_modules" ]; then
   echo -e "${GREEN}✓ node_modules directory exists${NC}"
   
-  # Count packages
-  PKG_COUNT=$(find node_modules -maxdepth 2 -type d | wc -l)
+  # Count packages more accurately (top-level only)
+  PKG_COUNT=$(find node_modules -maxdepth 1 -type d ! -name node_modules | wc -l)
   echo -e "${GREEN}✓ $PKG_COUNT packages installed${NC}"
 else
   echo -e "${RED}✗ node_modules not found${NC}"
@@ -201,7 +201,8 @@ fi
 
 # Check kubectl
 if command_exists kubectl; then
-  echo -e "${GREEN}✓ kubectl $(kubectl version --client -o json 2>/dev/null | grep -o '"gitVersion":"[^"]*"' | cut -d '"' -f 4)${NC}"
+  KUBECTL_VERSION=$(kubectl version --client --short 2>/dev/null | cut -d ' ' -f 3 || echo "installed")
+  echo -e "${GREEN}✓ kubectl $KUBECTL_VERSION${NC}"
 else
   echo -e "${YELLOW}⊘ kubectl not installed (optional)${NC}"
 fi

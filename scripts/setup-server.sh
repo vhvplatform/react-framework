@@ -75,8 +75,8 @@ fi
 # Confirm before proceeding
 if [ "$SKIP_CONFIRM" = false ]; then
     echo -e "${YELLOW}This script will install:${NC}"
-    [ "$INSTALL_NGINX" = true ] && echo "  • Node.js 18.x"
-    [ "$INSTALL_NGINX" = true ] && echo "  • pnpm package manager"
+    echo "  • Node.js 18.x"
+    echo "  • pnpm package manager"
     [ "$INSTALL_NGINX" = true ] && echo "  • Nginx web server"
     [ "$INSTALL_PM2" = true ] && echo "  • PM2 process manager"
     [ "$INSTALL_CERTBOT" = true ] && echo "  • Certbot for SSL/TLS"
@@ -133,7 +133,9 @@ if [ "$INSTALL_PM2" = true ]; then
     echo -e "${YELLOW}→ Installing PM2...${NC}"
     if ! command -v pm2 &> /dev/null; then
         npm install -g pm2
-        pm2 startup systemd -u $SUDO_USER --hp /home/$SUDO_USER
+        # Get actual home directory for the sudo user
+        USER_HOME=$(eval echo ~$SUDO_USER)
+        pm2 startup systemd -u $SUDO_USER --hp $USER_HOME
         echo -e "${GREEN}✓ PM2 installed${NC}"
     else
         echo -e "${GREEN}✓ PM2 already installed${NC}"

@@ -125,6 +125,7 @@ PUBLIC_URL=http://localhost:5173
 LOG_LEVEL=debug
 EOF
     echo -e "${GREEN}✓ .env created${NC}"
+    echo -e "${YELLOW}  Note: Update VITE_API_URL to match your backend server${NC}"
 else
     echo -e "${YELLOW}⊘ .env already exists${NC}"
 fi
