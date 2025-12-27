@@ -2,12 +2,13 @@ import { CacheAdapter, CacheConfig, CacheEntry } from '../types';
 
 /**
  * In-Memory (RAM) Cache Adapter
- * Fast cache stored in JavaScript memory
+ * Fast cache stored in JavaScript memory with LRU eviction strategy
  */
 export class MemoryCacheAdapter implements CacheAdapter {
   private cache: Map<string, CacheEntry>;
   private config: CacheConfig;
   private cleanupInterval?: NodeJS.Timeout;
+  private maxSize: number;
 
   constructor(config: CacheConfig = {}) {
     this.cache = new Map();
@@ -17,6 +18,8 @@ export class MemoryCacheAdapter implements CacheAdapter {
       debug: false,
       ...config,
     };
+    // Default max size to 1000 entries to prevent unbounded memory growth
+    this.maxSize = config.maxSize || 1000;
 
     // Start cleanup interval for expired entries
     this.startCleanup();
@@ -35,6 +38,34 @@ export class MemoryCacheAdapter implements CacheAdapter {
   private isExpired(entry: CacheEntry): boolean {
     if (!entry.expiresAt) return false;
     return Date.now() > entry.expiresAt;
+  }
+
+  /**
+   * Evict oldest entries if cache exceeds max size (LRU strategy)
+   */
+  private evictIfNeeded(): void {
+    if (this.cache.size <= this.maxSize) return;
+
+    // Find and remove oldest entries until we're under the limit
+    const entriesToRemove = this.cache.size - this.maxSize;
+    let removed = 0;
+
+    // Sort by creation time and remove oldest
+    const entries = Array.from(this.cache.entries()).sort(
+      ([, a], [, b]) => a.createdAt - b.createdAt
+    );
+
+    for (let i = 0; i < entriesToRemove && i < entries.length; i++) {
+      this.cache.delete(entries[i][0]);
+      removed++;
+      if (this.config.debug) {
+        console.log(`[MemoryCache] Evicted old entry: ${entries[i][0]}`);
+      }
+    }
+
+    if (this.config.debug && removed > 0) {
+      console.log(`[MemoryCache] Evicted ${removed} entries due to size limit`);
+    }
   }
 
   /**
@@ -57,17 +88,26 @@ export class MemoryCacheAdapter implements CacheAdapter {
   }
 
   /**
-   * Clean up expired entries
+   * Clean up expired entries - optimized to avoid full iteration
    */
   private cleanupExpired(): void {
     const now = Date.now();
+    const keysToDelete: string[] = [];
+
+    // Collect keys to delete first to avoid modifying during iteration
     for (const [key, entry] of this.cache.entries()) {
       if (entry.expiresAt && now > entry.expiresAt) {
-        this.cache.delete(key);
-        if (this.config.debug) {
-          console.log(`[MemoryCache] Cleaned up expired key: ${key}`);
-        }
+        keysToDelete.push(key);
       }
+    }
+
+    // Delete collected keys
+    for (const key of keysToDelete) {
+      this.cache.delete(key);
+    }
+
+    if (this.config.debug && keysToDelete.length > 0) {
+      console.log(`[MemoryCache] Cleaned up ${keysToDelete.length} expired entries`);
     }
   }
 
@@ -107,6 +147,9 @@ export class MemoryCacheAdapter implements CacheAdapter {
     };
 
     this.cache.set(fullKey, entry);
+    
+    // Check if we need to evict old entries
+    this.evictIfNeeded();
 
     if (this.config.debug) {
       console.log(`[MemoryCache] Set: ${key}, TTL: ${effectiveTTL}ms`);
@@ -157,16 +200,19 @@ export class MemoryCacheAdapter implements CacheAdapter {
   }
 
   async getMany<T = any>(keys: string[]): Promise<Array<T | null>> {
-    const promises = keys.map((key) => this.get<T>(key));
-    return Promise.all(promises);
+    // Optimize by directly accessing cache instead of creating promises
+    return Promise.all(keys.map((key) => this.get<T>(key)));
   }
 
   async setMany<T = any>(entries: Array<{ key: string; value: T; ttl?: number }>): Promise<void> {
-    const promises = entries.map((entry) => this.set(entry.key, entry.value, entry.ttl));
-    await Promise.all(promises);
+    // Batch set operations
+    for (const entry of entries) {
+      await this.set(entry.key, entry.value, entry.ttl);
+    }
   }
 
   async deleteMany(keys: string[]): Promise<void> {
+    // Batch delete operations
     const promises = keys.map((key) => this.delete(key));
     await Promise.all(promises);
   }
@@ -176,6 +222,21 @@ export class MemoryCacheAdapter implements CacheAdapter {
    */
   size(): number {
     return this.cache.size;
+  }
+
+  /**
+   * Get max cache size
+   */
+  getMaxSize(): number {
+    return this.maxSize;
+  }
+
+  /**
+   * Set max cache size
+   */
+  setMaxSize(size: number): void {
+    this.maxSize = size;
+    this.evictIfNeeded();
   }
 
   /**

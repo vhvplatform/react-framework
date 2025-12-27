@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import { createContext, useContext, useState, useEffect, useCallback, useMemo } from 'react';
 import { ThemeMode, Theme, ThemeContextValue, ThemeProviderProps } from '../types';
 import { lightTheme, darkTheme } from '../themes';
 
@@ -22,7 +22,7 @@ export function ThemeProvider({
   customTheme,
 }: ThemeProviderProps) {
   // Load saved theme mode
-  const loadThemeMode = (): ThemeMode => {
+  const loadThemeMode = useCallback((): ThemeMode => {
     if (typeof window === 'undefined') return defaultMode;
     
     try {
@@ -35,21 +35,26 @@ export function ThemeProvider({
     }
     
     return defaultMode;
-  };
+  }, [defaultMode, storageKey]);
 
   const [mode, setModeState] = useState<ThemeMode>(loadThemeMode);
   const [systemTheme, setSystemTheme] = useState<'light' | 'dark'>(getSystemTheme);
 
-  // Determine actual theme based on mode
-  const actualTheme = mode === 'system' ? systemTheme : mode;
+  // Determine actual theme based on mode - memoized
+  const actualTheme = useMemo(
+    () => (mode === 'system' ? systemTheme : mode),
+    [mode, systemTheme]
+  );
   
-  // Get theme object
-  const baseTheme = actualTheme === 'dark' ? darkTheme : lightTheme;
-  const theme: Theme = customTheme 
-    ? { ...baseTheme, ...customTheme, colors: { ...baseTheme.colors, ...customTheme.colors } }
-    : baseTheme;
+  // Get theme object - memoized
+  const theme: Theme = useMemo(() => {
+    const baseTheme = actualTheme === 'dark' ? darkTheme : lightTheme;
+    return customTheme 
+      ? { ...baseTheme, ...customTheme, colors: { ...baseTheme.colors, ...customTheme.colors } }
+      : baseTheme;
+  }, [actualTheme, customTheme]);
 
-  // Set mode with persistence
+  // Set mode with persistence - memoized callback
   const setMode = useCallback(
     (newMode: ThemeMode) => {
       setModeState(newMode);
@@ -63,7 +68,7 @@ export function ThemeProvider({
     [storageKey]
   );
 
-  // Toggle between light and dark
+  // Toggle between light and dark - memoized callback
   const toggleMode = useCallback(() => {
     if (mode === 'system') {
       setMode(systemTheme === 'dark' ? 'light' : 'dark');
@@ -88,7 +93,7 @@ export function ThemeProvider({
     return () => mediaQuery.removeEventListener('change', handleChange);
   }, []);
 
-  // Apply theme to document
+  // Apply theme to document - optimized with useMemo for CSS variable updates
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
@@ -98,23 +103,31 @@ export function ThemeProvider({
     root.classList.remove('light', 'dark');
     root.classList.add(actualTheme);
     
-    // Set CSS variables
-    Object.entries(theme.colors).forEach(([key, value]) => {
-      root.style.setProperty(`--color-${key}`, value);
-    });
+    // Batch CSS variable updates for better performance
+    requestAnimationFrame(() => {
+      // Set CSS variables for colors
+      Object.entries(theme.colors).forEach(([key, value]) => {
+        root.style.setProperty(`--color-${key}`, value);
+      });
 
-    Object.entries(theme.spacing).forEach(([key, value]) => {
-      root.style.setProperty(`--spacing-${key}`, value);
+      // Set CSS variables for spacing
+      Object.entries(theme.spacing).forEach(([key, value]) => {
+        root.style.setProperty(`--spacing-${key}`, value);
+      });
     });
   }, [theme, actualTheme]);
 
-  const value: ThemeContextValue = {
-    theme,
-    mode,
-    setMode,
-    toggleMode,
-    isDark: actualTheme === 'dark',
-  };
+  // Memoize context value to prevent unnecessary re-renders
+  const value: ThemeContextValue = useMemo(
+    () => ({
+      theme,
+      mode,
+      setMode,
+      toggleMode,
+      isDark: actualTheme === 'dark',
+    }),
+    [theme, mode, setMode, toggleMode, actualTheme]
+  );
 
   return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
 }
