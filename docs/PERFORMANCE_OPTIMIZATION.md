@@ -110,9 +110,9 @@ export function useTranslation() {
 
 ## Memory Management
 
-### 1. Cache with LRU Eviction
+### 1. Cache with True O(1) LRU Eviction
 
-The `MemoryCacheAdapter` implements a Least Recently Used (LRU) eviction strategy:
+The `MemoryCacheAdapter` implements a **true O(1) LRU** eviction strategy by leveraging JavaScript Map's insertion order:
 
 ```typescript
 const cache = new MemoryCacheAdapter({
@@ -122,10 +122,40 @@ const cache = new MemoryCacheAdapter({
 });
 ```
 
+**How True O(1) LRU Works:**
+
+```typescript
+// No separate array needed - Map maintains insertion order
+private updateAccessOrder(key: string, entry: CacheEntry): void {
+  // Delete and re-insert moves entry to end (most recently used)
+  // Both operations are O(1)
+  this.cache.delete(key);
+  this.cache.set(key, entry);
+}
+
+// Eviction is O(1) per item
+private evictIfNeeded(): void {
+  if (this.cache.size <= this.maxSize) return;
+
+  const entriesToRemove = this.cache.size - this.maxSize;
+  const iterator = this.cache.keys();
+
+  // First entries are least recently used
+  for (let i = 0; i < entriesToRemove; i++) {
+    const keyToRemove = iterator.next().value;
+    if (keyToRemove) {
+      this.cache.delete(keyToRemove); // O(1)
+    }
+  }
+}
+```
+
 **Features:**
 
+- **True O(1)** get/set operations including LRU update
 - Automatic eviction when cache exceeds `maxSize`
-- Oldest entries are removed first
+- No separate data structure for tracking access order
+- Leverages ES2015+ Map insertion order guarantee
 - Prevents unbounded memory growth
 - Configurable size limits
 
@@ -137,6 +167,10 @@ const cache = new MemoryCacheAdapter({ maxSize: 500 });
 
 // Or update dynamically
 cache.setMaxSize(1000);
+
+// Get current size
+const currentSize = cache.size();
+const maxSize = cache.getMaxSize();
 ```
 
 ### 2. Optimized Cleanup

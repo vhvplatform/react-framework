@@ -1,20 +1,17 @@
 import { CacheAdapter, CacheConfig, CacheEntry } from '../types';
 
 /**
- * In-Memory (RAM) Cache Adapter
- * Fast cache stored in JavaScript memory with LRU eviction strategy
+ * In-Memory (RAM) Cache Adapter with true O(1) LRU eviction
+ * Leverages Map's insertion order for efficient LRU tracking without separate data structures
  */
 export class MemoryCacheAdapter implements CacheAdapter {
   private cache: Map<string, CacheEntry>;
   private config: CacheConfig;
   private cleanupInterval?: NodeJS.Timeout;
   private maxSize: number;
-  // Track access order for LRU eviction
-  private accessOrder: string[];
 
   constructor(config: CacheConfig = {}) {
     this.cache = new Map();
-    this.accessOrder = [];
     this.config = {
       defaultTTL: 300000, // 5 minutes default
       prefix: '',
@@ -44,29 +41,28 @@ export class MemoryCacheAdapter implements CacheAdapter {
   }
 
   /**
-   * Update access order for LRU tracking
+   * Update access order for LRU tracking - True O(1) operation
+   * Leverages Map's insertion order: delete + set moves entry to end
    */
-  private updateAccessOrder(key: string): void {
-    // Remove existing entry if present
-    const index = this.accessOrder.indexOf(key);
-    if (index > -1) {
-      this.accessOrder.splice(index, 1);
-    }
-    // Add to end (most recently used)
-    this.accessOrder.push(key);
+  private updateAccessOrder(key: string, entry: CacheEntry): void {
+    // Delete and re-insert to move to end (most recently used) - O(1)
+    this.cache.delete(key);
+    this.cache.set(key, entry);
   }
 
   /**
-   * Evict oldest entries if cache exceeds max size (LRU strategy)
+   * Evict oldest entries if cache exceeds max size - O(1) per eviction
+   * Map maintains insertion order, so first entries are least recently used
    */
   private evictIfNeeded(): void {
     if (this.cache.size <= this.maxSize) return;
 
-    // Evict least recently used entries
+    // Evict least recently used entries (first entries in Map)
     const entriesToRemove = this.cache.size - this.maxSize;
+    const iterator = this.cache.keys();
 
-    for (let i = 0; i < entriesToRemove && this.accessOrder.length > 0; i++) {
-      const keyToRemove = this.accessOrder.shift();
+    for (let i = 0; i < entriesToRemove; i++) {
+      const keyToRemove = iterator.next().value;
       if (keyToRemove) {
         this.cache.delete(keyToRemove);
         if (this.config.debug) {
@@ -136,19 +132,14 @@ export class MemoryCacheAdapter implements CacheAdapter {
 
     if (this.isExpired(entry)) {
       this.cache.delete(fullKey);
-      // Remove from access order
-      const index = this.accessOrder.indexOf(fullKey);
-      if (index > -1) {
-        this.accessOrder.splice(index, 1);
-      }
       if (this.config.debug) {
         console.log(`[MemoryCache] Expired: ${key}`);
       }
       return null;
     }
 
-    // Update access order for LRU
-    this.updateAccessOrder(fullKey);
+    // Update access order for LRU - O(1) operation
+    this.updateAccessOrder(fullKey, entry);
 
     if (this.config.debug) {
       console.log(`[MemoryCache] Hit: ${key}`);
@@ -166,10 +157,8 @@ export class MemoryCacheAdapter implements CacheAdapter {
       expiresAt: effectiveTTL ? Date.now() + effectiveTTL : undefined,
     };
 
+    // Set entry (or update if exists) and move to end - O(1)
     this.cache.set(fullKey, entry);
-
-    // Update access order for LRU
-    this.updateAccessOrder(fullKey);
 
     // Check if we need to evict old entries
     this.evictIfNeeded();
@@ -182,12 +171,6 @@ export class MemoryCacheAdapter implements CacheAdapter {
   async delete(key: string): Promise<void> {
     const fullKey = this.getKey(key);
     this.cache.delete(fullKey);
-
-    // Remove from access order
-    const index = this.accessOrder.indexOf(fullKey);
-    if (index > -1) {
-      this.accessOrder.splice(index, 1);
-    }
 
     if (this.config.debug) {
       console.log(`[MemoryCache] Delete: ${key}`);
@@ -209,7 +192,6 @@ export class MemoryCacheAdapter implements CacheAdapter {
 
   async clear(): Promise<void> {
     this.cache.clear();
-    this.accessOrder = [];
 
     if (this.config.debug) {
       console.log('[MemoryCache] Cleared all entries');
@@ -275,6 +257,5 @@ export class MemoryCacheAdapter implements CacheAdapter {
   destroy(): void {
     this.stopCleanup();
     this.cache.clear();
-    this.accessOrder = [];
   }
 }

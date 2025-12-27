@@ -1,13 +1,14 @@
-import { createContext, useContext, useState, useCallback, useEffect, ReactNode } from 'react';
-import { useApi } from '@vhvplatform/api-client';
 import {
-  ContextValue,
-  ContextProviderConfig,
-  CurrentUser,
-  Tenant,
-  Site,
-  UserRole,
-} from '../types';
+  createContext,
+  useContext,
+  useState,
+  useCallback,
+  useEffect,
+  useMemo,
+  ReactNode,
+} from 'react';
+import { useApi } from '@vhvplatform/api-client';
+import { ContextValue, ContextProviderConfig, CurrentUser, Tenant, Site, UserRole } from '../types';
 
 const AppContext = createContext<ContextValue | null>(null);
 
@@ -252,14 +253,16 @@ export function AppContextProvider({ children, config }: AppContextProviderProps
   // Load from storage on mount
   useEffect(() => {
     loadFromStorage();
-  }, [loadFromStorage]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Only run once on mount
 
   // Auto-fetch on mount
   useEffect(() => {
     if (autoFetch) {
       refresh();
     }
-  }, [autoFetch]); // Only on mount
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Only run once on mount
 
   // Save to storage when state changes
   useEffect(() => {
@@ -268,22 +271,41 @@ export function AppContextProvider({ children, config }: AppContextProviderProps
     }
   }, [state.user, state.tenant, state.site, state.initialized, saveToStorage]);
 
-  const value: ContextValue = {
-    ...state,
-    application,
-    setUser,
-    setTenant,
-    setSite,
-    updateUser,
-    updateTenant,
-    updateSite,
-    refresh,
-    clear,
-    hasPermission,
-    hasRole,
-    switchTenant,
-    switchSite,
-  };
+  // Memoize context value to prevent unnecessary re-renders
+  const value: ContextValue = useMemo(
+    () => ({
+      ...state,
+      application,
+      setUser,
+      setTenant,
+      setSite,
+      updateUser,
+      updateTenant,
+      updateSite,
+      refresh,
+      clear,
+      hasPermission,
+      hasRole,
+      switchTenant,
+      switchSite,
+    }),
+    [
+      state,
+      application,
+      setUser,
+      setTenant,
+      setSite,
+      updateUser,
+      updateTenant,
+      updateSite,
+      refresh,
+      clear,
+      hasPermission,
+      hasRole,
+      switchTenant,
+      switchSite,
+    ]
+  );
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 }
