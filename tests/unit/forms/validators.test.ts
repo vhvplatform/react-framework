@@ -165,4 +165,182 @@ describe('Forms Package - Zod Validators', () => {
       });
     });
   });
+
+  // Additional edge case tests
+  describe('Edge Cases and Advanced Validation', () => {
+    describe('required', () => {
+      it('should handle whitespace-only strings', () => {
+        const rule = validators.required();
+        expect(rule('   ')).toBeNull(); // whitespace is considered a value
+      });
+
+      it('should handle zero as valid value', () => {
+        const rule = validators.required();
+        expect(rule(0)).toBeNull();
+      });
+
+      it('should handle false as valid value', () => {
+        const rule = validators.required();
+        expect(rule(false)).toBeNull();
+      });
+
+      it('should handle empty array as valid value', () => {
+        const rule = validators.required();
+        expect(rule([])).toBeNull();
+      });
+    });
+
+    describe('email', () => {
+      it('should reject email with multiple @ symbols', () => {
+        const rule = validators.email();
+        expect(rule('user@@example.com')).toBeTruthy();
+      });
+
+      it('should reject email without domain', () => {
+        const rule = validators.email();
+        expect(rule('user@')).toBeTruthy();
+      });
+
+      it('should reject email with spaces', () => {
+        const rule = validators.email();
+        expect(rule('user @example.com')).toBeTruthy();
+        expect(rule('user@ example.com')).toBeTruthy();
+      });
+
+      it('should handle email with plus sign', () => {
+        const rule = validators.email();
+        expect(rule('user+tag@example.com')).toBeNull();
+      });
+
+      it('should handle email with dots in local part', () => {
+        const rule = validators.email();
+        expect(rule('first.last@example.com')).toBeNull();
+      });
+
+      it('should handle email with subdomain', () => {
+        const rule = validators.email();
+        expect(rule('user@mail.example.com')).toBeNull();
+      });
+    });
+
+    describe('minLength and maxLength', () => {
+      it('should handle unicode characters correctly', () => {
+        const minRule = validators.minLength(3);
+        expect(minRule('😀😁😂')).toBeNull(); // 3 emoji chars
+      });
+
+      it('should handle empty string with minLength', () => {
+        const rule = validators.minLength(1);
+        expect(rule('')).toBeNull(); // returns null for empty (per implementation)
+      });
+
+      it('should handle boundary values for maxLength', () => {
+        const rule = validators.maxLength(10);
+        expect(rule('a'.repeat(10))).toBeNull();
+        expect(rule('a'.repeat(11))).toBeTruthy();
+      });
+    });
+
+    describe('pattern', () => {
+      it('should handle complex regex patterns', () => {
+        const rule = validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/);
+        expect(rule('Weak123')).toBeNull(); // meets criteria: uppercase, lowercase, number, 8+ chars
+        expect(rule('weak123')).toBeTruthy(); // no uppercase
+        expect(rule('WEAK123')).toBeTruthy(); // no lowercase
+        expect(rule('WeakAbc')).toBeTruthy(); // no number
+      });
+
+      it('should handle special character patterns', () => {
+        const rule = validators.pattern(/^[!@#$%^&*]+$/);
+        expect(rule('!@#$')).toBeNull();
+        expect(rule('abc')).toBeTruthy();
+      });
+
+      it('should handle phone number patterns', () => {
+        const rule = validators.pattern(/^\d{3}-\d{3}-\d{4}$/);
+        expect(rule('123-456-7890')).toBeNull();
+        expect(rule('1234567890')).toBeTruthy();
+      });
+    });
+
+    describe('min and max', () => {
+      it('should handle negative numbers', () => {
+        const minRule = validators.min(-10);
+        expect(minRule(-5)).toBeNull();
+        expect(minRule(-15)).toBeTruthy();
+
+        const maxRule = validators.max(-5);
+        expect(maxRule(-10)).toBeNull();
+        expect(maxRule(-3)).toBeTruthy();
+      });
+
+      it('should handle decimal numbers', () => {
+        const minRule = validators.min(1.5);
+        expect(minRule(1.6)).toBeNull();
+        expect(minRule(1.4)).toBeTruthy();
+      });
+
+      it('should handle zero boundary', () => {
+        const minRule = validators.min(0);
+        expect(minRule(0)).toBeNull();
+        expect(minRule(-1)).toBeTruthy();
+
+        const maxRule = validators.max(0);
+        expect(maxRule(0)).toBeNull();
+        expect(maxRule(1)).toBeTruthy();
+      });
+
+      it('should handle very large numbers', () => {
+        const minRule = validators.min(Number.MAX_SAFE_INTEGER - 1);
+        expect(minRule(Number.MAX_SAFE_INTEGER)).toBeNull();
+      });
+    });
+
+    describe('Combined validations', () => {
+      it('should work with multiple validators on same field', () => {
+        const requiredRule = validators.required();
+        const minLengthRule = validators.minLength(3);
+        const maxLengthRule = validators.maxLength(10);
+
+        const value = 'valid';
+        expect(requiredRule(value)).toBeNull();
+        expect(minLengthRule(value)).toBeNull();
+        expect(maxLengthRule(value)).toBeNull();
+      });
+
+      it('should validate email with length constraints', () => {
+        const emailRule = validators.email();
+        const maxLengthRule = validators.maxLength(50);
+
+        const validEmail = 'user@example.com';
+        expect(emailRule(validEmail)).toBeNull();
+        expect(maxLengthRule(validEmail)).toBeNull();
+
+        const tooLongEmail = 'a'.repeat(50) + '@example.com';
+        expect(maxLengthRule(tooLongEmail)).toBeTruthy();
+      });
+    });
+
+    describe('Custom error messages', () => {
+      it('should use custom message for required', () => {
+        const rule = validators.required('Please fill this field');
+        expect(rule('')).toBe('Please fill this field');
+      });
+
+      it('should use custom message for email', () => {
+        const rule = validators.email('Please enter a valid email');
+        expect(rule('invalid')).toBe('Please enter a valid email');
+      });
+
+      it('should use custom message for minLength', () => {
+        const rule = validators.minLength(5, 'Too short!');
+        expect(rule('abc')).toBe('Too short!');
+      });
+
+      it('should use custom message for pattern', () => {
+        const rule = validators.pattern(/^\d+$/, 'Only numbers allowed');
+        expect(rule('abc')).toBe('Only numbers allowed');
+      });
+    });
+  });
 });
